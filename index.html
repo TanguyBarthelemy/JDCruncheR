@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,6 +100,99 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
+<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/InseeFr/JDCruncheR" class="external-link">"JDCruncheR"</a></span><span class="op">)</span></span></code></pre></div>
+<p>Les seuils des tests du bilan qualité sont personnalisables. Pour cela, il faut modifier l’option <code>"jdc_thresholds"</code>.</p>
+<p>Pour récupérer les valeurs des tests par défault, il faut appeler la fonction <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> :</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"m7"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $qs_residual_sa_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $qs_residual_sa_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_sa_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_sa_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_td_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_td_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_independency</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_homoskedasticity</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_skewness</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_kurtosis</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_normality</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $oos_mean</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $oos_mse</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $m7</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $q</span></span>
+<span><span class="co">#&gt; Good  Bad </span></span>
+<span><span class="co">#&gt;    1  Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $q_m2</span></span>
+<span><span class="co">#&gt; Good  Bad </span></span>
+<span><span class="co">#&gt;    1  Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pct_outliers</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad </span></span>
+<span><span class="co">#&gt;         3         5       Inf</span></span></code></pre></div>
+<p>Pour changer la valeur de l’option, on peut utiliser la fonction <code><a href="reference/set_thresholds.html">set_thresholds()</a></code> :</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fixer les seuils à une certaine valeur</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Good <span class="op">=</span> <span class="fl">0.8</span>, Bad <span class="op">=</span> <span class="fl">1.4</span>, Severe <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;    0.8    1.4    Inf</span></span>
+<span></span>
+<span><span class="co"># Remettre tous les seuils à leur valeur par défaut</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf</span></span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="autres-informations">Autres informations<a class="anchor" aria-label="anchor" href="#autres-informations"></a>
 </h3>
 <p>Pour plus d’informations sur l’installation et la configuration du package <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a>, vous pouvez visiter la page <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a></p>
@@ -120,15 +213,108 @@
 </h3>
 <p><strong>🎉 <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> is now available on CRAN! 🎉</strong></p>
 <p>To install it, you have to launch the following command line:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
 <p>To get the current development version from GitHub:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If remotes packages is not installed</span></span>
 <span><span class="co"># install.packages("remotes")</span></span>
 <span></span>
 <span><span class="co"># Install development version from GitHub</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/InseeFr/JDCruncheR" class="external-link">"JDCruncheR"</a></span><span class="op">)</span></span></code></pre></div>
+<p>The thresholds of the QR tests can be customised You have to modify the option <code>"jdc_thresholds"</code>.</p>
+<p>To get the (default or not) values of the thresholds of the tests, you can call the fonction <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> :</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"m7"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $qs_residual_sa_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $qs_residual_sa_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_sa_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_sa_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_td_on_sa</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $f_residual_td_on_i</span></span>
+<span><span class="co">#&gt;    Severe       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;     0.001     0.010     0.050       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_independency</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_homoskedasticity</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_skewness</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_kurtosis</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $residuals_normality</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $oos_mean</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $oos_mse</span></span>
+<span><span class="co">#&gt;       Bad Uncertain      Good </span></span>
+<span><span class="co">#&gt;      0.01      0.10       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $m7</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $q</span></span>
+<span><span class="co">#&gt; Good  Bad </span></span>
+<span><span class="co">#&gt;    1  Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $q_m2</span></span>
+<span><span class="co">#&gt; Good  Bad </span></span>
+<span><span class="co">#&gt;    1  Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $pct_outliers</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad </span></span>
+<span><span class="co">#&gt;         3         5       Inf</span></span></code></pre></div>
+<p>To change the value of the option, you can use the fonction <code><a href="reference/set_thresholds.html">set_thresholds()</a></code>:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set threshold to imposed value</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Good <span class="op">=</span> <span class="fl">0.8</span>, Bad <span class="op">=</span> <span class="fl">1.4</span>, Severe <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;    0.8    1.4    Inf</span></span>
+<span></span>
+<span><span class="co"># Reset all thresholds to default</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Good    Bad Severe </span></span>
+<span><span class="co">#&gt;      1      2    Inf</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-informations">Other informations<a class="anchor" aria-label="anchor" href="#other-informations"></a>
