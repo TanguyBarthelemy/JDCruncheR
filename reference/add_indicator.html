@@ -73,17 +73,24 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>This function returns the same object, enhanced with the chosen indicator.
-So if the input <code>x</code> is a QR_matrix, an object of class QR_matrix is returned.
-If the input <code>x</code> is a mQR_matrix, an object of class mQR_matrix is returned.</p>
+    <p>This function returns the same object, enhanced with the chosen
+indicator. So if the input <code>x</code> is a QR_matrix, an object of class
+<code>QR_matrix</code> is returned. If the input <code>x</code> is a mQR_matrix, an
+object of class <code>mQR_matrix</code> is returned.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function <code>add_indicator()</code> adds the chosen indicator to the values matrix of a quality report.
-Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
-Before using the added variable for score calculation, it will have to be coded with the function <code><a href="recode_indicator_num.html">recode_indicator_num</a></code>.</p>
-<p>The new indicator can be a <code>vector</code> or a <code>data.frame</code>. In both cases, its format must allow for pairing:</p><ul><li><p>a <code>vector</code>'s elements must be named and these names must match those of the quality report (variable "series");</p></li>
-<li><p>a <code>data.frame</code> must contain a "series" column that matches with the quality report's series.</p></li>
+    <p>The function <code>add_indicator()</code> adds the chosen indicator to the
+values matrix of a quality report. Therefore, because said indicator isn't
+added in the modalities matrix, it cannot be used to calculate a score
+(except for weighting). Before using the added variable for score
+calculation, it will have to be coded with the function
+<code><a href="recode_indicator_num.html">recode_indicator_num</a></code>.</p>
+<p>The new indicator can be a <code>vector</code> or a <code>data.frame</code>. In both
+cases, its format must allow for pairing:</p><ul><li><p>a <code>vector</code>'s elements must be named and these names must match those
+of the quality report (variable "series");</p></li>
+<li><p>a <code>data.frame</code> must contain a "series" column that matches with the
+quality report's series.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
