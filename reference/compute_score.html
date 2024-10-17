@@ -60,6 +60,7 @@
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">n_contrib_score</span>,</span>
 <span>  <span class="va">conditional_indicator</span>,</span>
+<span>  thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"jdc_thresholds"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -106,6 +107,15 @@ variable is created.</p></dd>
 "indicator", "conditions" and "condition_modalities". To reduce down to 1 the
 weight of chosen indicators depending on other variables' values (cf.
 details).</p></dd>
+
+
+<dt id="arg-thresholds">thresholds<a class="anchor" aria-label="anchor" href="#arg-thresholds"></a></dt>
+<dd><p><code>list</code> of numerical vectors. Thresholds applied to the
+various tests in order to classify into modalities <code>Good</code>,
+<code>Uncertain</code>, <code>Bad</code> and <code>Severe</code>.
+By default, the value of the <code>"jdc_threshold"</code> option is used.
+You can call the <code><a href="get_thresholds.html">get_thresholds</a></code> function to see what the
+<code>thresholds</code> object should look like.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

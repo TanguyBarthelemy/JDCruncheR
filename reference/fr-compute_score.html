@@ -52,7 +52,7 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>objet de type <code><a href="QR_matrix.html">QR_matrix</a></code> ou <code><a href="QR_matrix.html">mQR_matrix</a></code>.</p></dd>
+<dd><p>Objet de type <code><a href="QR_matrix.html">QR_matrix</a></code> ou <code><a href="QR_matrix.html">mQR_matrix</a></code>.</p></dd>
 
 
 <dt id="arg-score-pond">score_pond<a class="anchor" aria-label="anchor" href="#arg-score-pond"></a></dt>
@@ -65,32 +65,41 @@ score (voir détails).</p></dd>
 
 
 <dt id="arg-normalize-score-value">normalize_score_value<a class="anchor" aria-label="anchor" href="#arg-normalize-score-value"></a></dt>
-<dd><p>chiffre indiquant la valeur de référence pour la
+<dd><p>Chiffre indiquant la valeur de référence pour la
 normalisation des pondérations utilisées lors du calcul du score. Si le
 paramètre n'est pas renseigné, les poids ne seront pas normalisés.</p></dd>
 
 
 <dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
-<dd><p>booléen indiquant si les valeurs manquantes doivent être
+<dd><p>Booléen indiquant si les valeurs manquantes doivent être
 enlevées pour le calcul du score.</p></dd>
 
 
 <dt id="arg-n-contrib-score">n_contrib_score<a class="anchor" aria-label="anchor" href="#arg-n-contrib-score"></a></dt>
-<dd><p>entier indiquant le nombre de variables à créer dans
+<dd><p>Entier indiquant le nombre de variables à créer dans
 la matrice des valeurs du bilan qualité contenant les <code>n_contrib_score</code>
 plus grandes contributrices au score (voir détails). S'il n'est pas spécifié,
 aucune variable n'est créée.</p></dd>
 
 
 <dt id="arg-conditional-indicator">conditional_indicator<a class="anchor" aria-label="anchor" href="#arg-conditional-indicator"></a></dt>
-<dd><p>une <code>list</code> contenant des listes ayant 3
+<dd><p><code>list</code> contenant des listes ayant 3
 éléments : "indicator", "conditions" et "condition_modalities". Permet de
 réduire à 1 le poids de certains indicateurs en fonction des valeurs d'autres
 variables (voir détails).</p></dd>
 
 
+<dt id="arg-thresholds">thresholds<a class="anchor" aria-label="anchor" href="#arg-thresholds"></a></dt>
+<dd><p><code>list</code> de vecteurs numériques. Seuils appliqués aux
+différents tests afin de classer en modalités <code>Good</code>, <code>Uncertain</code>,
+<code>Bad</code> et <code>Severe</code>.
+Par défault, la valeur de l'option <code>"jdc_threshold"</code> est utilisée.
+Vous pouvez appeler la fonction <code><a href="get_thresholds.html">get_thresholds</a></code> pour voir à quoi
+doit ressemble l'objet <code>thresholds</code>.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>autres paramètres non utilisés.</p></dd>
+<dd><p>Autres paramètres non utilisés.</p></dd>
 
 </dl></div>
     <div class="section level2">
