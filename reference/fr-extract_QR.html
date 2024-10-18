@@ -55,7 +55,14 @@ matrice des diagnostics.</p>
 
 
 <dl><dt id="arg-matrix-output-file">matrix_output_file<a class="anchor" aria-label="anchor" href="#arg-matrix-output-file"></a></dt>
-<dd><p>fichier CSV contenant la matrice des diagnostics.</p></dd>
+<dd><p>Chaîne de caracère. Chemin vers le fichier CSV
+contenant la matrice des diagnostics.</p></dd>
+
+
+<dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
+<dd><p>Chaîne de caracère. Chemin vers le fichier CSV contenant la
+matrice des diagnostics. Cet argument remplace l'argument
+<code>matrix_output_file</code>.</p></dd>
 
 
 <dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
@@ -104,7 +111,12 @@ p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas de
 modalité (fréquence de la série et modèle ARIMA).</p></li>
 <li><p>le paramètre <code>score_formula</code> est initié à <code>NULL</code> : il contiendra
 la formule utilisée pour calculer le score (si le calcul est fait).</p></li>
-</ul></div>
+</ul><p>Si <code>x</code> est fourni, les arguments <code>fichier</code> et
+<code>matrix_output_file</code> sont ignorés. L'argument <code>fichier</code> désigne
+également le chemin vers le fichier qui contient la matrice de diagnostic
+(qui peut être importée en parallèle dans R et utilisée avec l'argument
+<code>x</code>).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -116,7 +128,7 @@ la formule utilisée pour calculer le score (si le calcul est fait).</p></li>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extraire le bilan qualité à partir du fichier demetra_m.csv</span></span></span>
-<span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">demetra_path</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix has 13 observations</span>
