@@ -16,6 +16,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   now colored in its entirety, not just part of it.
   [\#44](https://github.com/InseeFr/JDCruncheR/issues/44)
 - `sa_on_sa` statistics are renamed in `s_on_sa`
+- QR produced if missing values
 
 ### [0.3.6](https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...v0.3.6) - 2025-07-24
 
