@@ -179,9 +179,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 #### Fixed
 
-Bug fixed in the functions
-[`retain_indicators()`](https://inseefr.github.io/JDCruncheR/reference/QR_var_manipulation.md)
-and `remove_indicator()`.
+- Bug fixed in the functions
+  [`retain_indicators()`](https://inseefr.github.io/JDCruncheR/reference/QR_var_manipulation.md)
+  and `remove_indicator()`.
 
 ### [0.2.0](https://github.com/InseeFr/JDCruncheR/releases/tag/v0.2.0) - 2017-11-18
 
