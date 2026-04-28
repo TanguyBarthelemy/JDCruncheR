@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. #44
 * `sa_on_sa` statistics are renamed in `s_on_sa`
 * QR produced if missing values
+* compute_score works now with `conditional_indicator`
 
 
 ## [0.3.6] - 2025-07-24

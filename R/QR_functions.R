@@ -13,8 +13,9 @@ recode_vec <- function(x, recode_variable) {
     return(x)
 }
 
-#' Calcul d'un score global
+#' @title Calcul d'un score global
 #'
+#' @description
 #' Permet de calculer un score global à partir d'un bilan qualité
 #'
 #' @param x Objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
@@ -124,8 +125,9 @@ recode_vec <- function(x, recode_variable) {
 NULL
 #> NULL
 
-#' Score calculation
+#' @title Score calculation
 #'
+#' @description
 #' To calculate a score for each series from a quality report
 #'
 #' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
@@ -312,7 +314,7 @@ compute_score.QR_matrix <- function(
                         x[["modalities"]][, name] %in%
                             indicator_condition[["conditions_modalities"]]
                     },
-                    FUN.VALUE = logical(1L)
+                    FUN.VALUE = logical(nrow(x[["modalities"]]))
                 ),
                 na.rm = TRUE
             )
