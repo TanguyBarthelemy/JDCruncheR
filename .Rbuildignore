@@ -47,3 +47,5 @@ LICENSE
 ^cran-comments\.md$
 
 ^air\.toml$
+^\.positai$
+^\.claude$

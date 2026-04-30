@@ -1,14 +1,14 @@
 create_NA_type <- function(
-    type = c(
-        "character",
-        "integer",
-        "double",
-        "logical",
-        "complex",
-        "raw",
-        "Date"
-    ),
-    len = 1L
+        type = c(
+            "character",
+            "integer",
+            "double",
+            "logical",
+            "complex",
+            "raw",
+            "Date"
+        ),
+        len = 1L
 ) {
     type <- match.arg(type)
     output <- rep(
@@ -28,12 +28,12 @@ create_NA_type <- function(
 }
 
 find_variable <- function(
-    demetra_m,
-    pattern,
-    type = c("double", "integer", "character", "logical"),
-    p_value = FALSE,
-    variable = "",
-    exact = FALSE
+        demetra_m,
+        pattern,
+        type = c("double", "integer", "character", "logical"),
+        p_value = FALSE,
+        variable = "",
+        exact = FALSE
 ) {
     if (!exact) {
         pattern <- gsub(
@@ -73,10 +73,12 @@ find_variable <- function(
     cols <- cols[type_cols]
 
     if (p_value && length(cols) > 0L) {
-        p_cols <- which(unlist(lapply(
-            X = demetra_m[, cols, drop = FALSE],
-            FUN = function(x) all(x >= 0L & x <= 1L)
-        )))
+        y <- demetra_m[, cols, drop = FALSE]
+        p_cols <- apply(
+            X = is.na(y) | (y >= 0L & y <= 1L),
+            FUN = all,
+            MARGIN = 2L
+        )
         cols <- cols[p_cols]
     }
 
@@ -281,12 +283,12 @@ NULL
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(
-    file,
-    x,
-    matrix_output_file,
-    sep = ";",
-    dec = ",",
-    thresholds = getOption("jdc_thresholds")
+        file,
+        x,
+        matrix_output_file,
+        sep = ";",
+        dec = ",",
+        thresholds = getOption("jdc_thresholds")
 ) {
     if (!missing(matrix_output_file)) {
         warning(
@@ -311,8 +313,8 @@ extract_QR <- function(
     } else if (missing(x)) {
         if (
             length(file) == 0L ||
-                !file.exists(file) ||
-                !endsWith(x = file, suffix = ".csv")
+            !file.exists(file) ||
+            !endsWith(x = file, suffix = ".csv")
         ) {
             stop(
                 "The chosen file desn't exist or isn't a csv file",
@@ -441,6 +443,7 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
+                if (is.na(n[i])) return(NA_integer_)
                 freq[which(
                     (nobs_compute[i, ] == n[i]) |
                         (nobs_compute[i, ] + 1L == n[i]) |
@@ -587,8 +590,8 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 }
 
 extractOOS_test <- function(
-    demetra_m,
-    thresholds = getOption("jdc_thresholds")
+        demetra_m,
+        thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -656,8 +659,8 @@ extractOOS_test <- function(
 }
 
 extractDistributionTests <- function(
-    demetra_m,
-    thresholds = getOption("jdc_thresholds")
+        demetra_m,
+        thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -777,8 +780,8 @@ extractDistributionTests <- function(
 }
 
 extractOutliers <- function(
-    demetra_m,
-    thresholds = getOption("jdc_thresholds")
+        demetra_m,
+        thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -839,8 +842,8 @@ extractOutliers <- function(
 }
 
 extractSeasTest <- function(
-    demetra_m,
-    thresholds = getOption("jdc_thresholds")
+        demetra_m,
+        thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
