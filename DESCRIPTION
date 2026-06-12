@@ -1,7 +1,7 @@
 Type: Package
 Package: JDCruncheR
 Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality
-    Report Generator
+    Report Generato
 Version: 0.3.6.9000
 Authors@R: c(
     person(given = "Tanguy", 
