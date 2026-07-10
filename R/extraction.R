@@ -243,6 +243,16 @@ extractTrendFilter <- function(demetra_m) {
     return(trend_filters)
 }
 
+extractStage2TrendFilter <- function(demetra_m) {
+    trend_filters <- find_variable(
+        demetra_m,
+        pattern = "(^decomposition\\.d7\\.trend\\.filter$)|(^d7\\.trend\\.filter$)",
+        type = "integer",
+        variable = "decomposition.d7-trend-filter"
+    )
+    return(trend_filters)
+}
+
 extractQuality <- function(demetra_m) {
     quality <- find_variable(
         demetra_m,

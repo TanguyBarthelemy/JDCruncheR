@@ -126,6 +126,7 @@ extract_JVS <- function(
     res_td_effect <- extractResidualsTDEffect(demetra_m = demetra_m)
     stat_Q <- extractStatQ(demetra_m)
     trend_filter <- extractTrendFilter(demetra_m)
+    d7_trend_filter <- extractStage2TrendFilter(demetra_m)
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
@@ -141,6 +142,11 @@ extract_JVS <- function(
         test = is.na(trend_filter$values),
         yes = "",
         no = paste0("H", trend_filter$values)
+    )
+    d7_trend_filter$values <- ifelse(
+        test = is.na(d7_trend_filter$values),
+        yes = "",
+        no = paste0("H", d7_trend_filter$values)
     )
 
     stat_Q$values$q <- ifelse(!is.na(stat_Q$values$q) & stat_Q$values$q > 0.05, "Good", stat_Q$values$q)
@@ -176,13 +182,16 @@ extract_JVS <- function(
         Residual_TD_Effect = ifelse(res_td_effect$values > 0.05, "No", "Yes"),
         Q_Stat = stat_Q$values$q,
         Final_Henderson_Filter = trend_filter$values,
-        Stage_2_Henderson_Filter = trend_filter$values,
+        Stage_2_Henderson_Filter = d7_trend_filter$values,
         Seasonal_Filter = seas_filter$values,
         Quality = ifelse(quality$values == "Severe", "Poor", quality$values),
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Ljung_Box_test = lb_test$values,
         Autocorrelation_negative_and_significant = ifelse(
-            auto_corr$values < 0 & lb_test$values < 0.05,
+            !is.na(auto_corr$values)
+            & !is.na(lb_test$values)
+            & auto_corr$values < 0
+            & lb_test$values < 0.05,
             "Warning",
             ""
         ),
@@ -208,6 +217,7 @@ extract_JVS <- function(
         res_sa_effect$missing,
         res_td_effect$missing,
         stat_Q$missing,
+        d7_trend_filter$missing,
         trend_filter$missing,
         seas_filter$missing,
         quality$missing,
