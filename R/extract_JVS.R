@@ -99,7 +99,7 @@ extract_JVS <- function(
     s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s", ...)
 
     # Lecture de i
-    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i", ...)
+    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i_cmp", ...)
 
     series <- gsub(
         "(^ *)|(* $)",
@@ -133,6 +133,20 @@ extract_JVS <- function(
     standard_deviation <- extractStandardDeviation(i)
     max_adj <- extractMaxAdj_allseries(y, sa)
 
+    leap_year$values <- ifelse(leap_year$values == "Leap year", "Yes", "No")
+    leap_year$values <- ifelse(is.na(leap_year$values), "No", leap_year$values)
+    leaster$values <- ifelse(leaster$values > 0, "Yes", "No")
+
+    trend_filter$values <- ifelse(
+        test = is.na(trend_filter$values),
+        yes = "",
+        no = paste0("H", trend_filter$values)
+    )
+
+    stat_Q$values$q <- ifelse(!is.na(stat_Q$values$q) & stat_Q$values$q > 0.05, "Good", stat_Q$values$q)
+    stat_Q$values$q <- ifelse(!is.na(stat_Q$values$q) & stat_Q$values$q <= 0.05, "Bad", stat_Q$values$q)
+    stat_Q$values$q <- ifelse(is.na(stat_Q$values$q), "", stat_Q$values$q)
+
     JVS_output <- data.frame(
         Series = series,
         Method = method$values,
@@ -153,7 +167,7 @@ extract_JVS <- function(
         ),
         Log_Transformation = ifelse(log_transform$values == 1, "Yes", "No"),
         ARIMA_model = arima_model$values,
-        LeapYear = leap_year$values,
+        LeapYear = ifelse(is.na(leap_year$values), "No", leap_year$values),
         MovingHoliday = leaster$values,
         NbTD = ntd$values,
         Noutliers = nout$values,
@@ -164,7 +178,7 @@ extract_JVS <- function(
         Final_Henderson_Filter = trend_filter$values,
         Stage_2_Henderson_Filter = trend_filter$values,
         Seasonal_Filter = seas_filter$values,
-        Quality = quality$values,
+        Quality = ifelse(quality$values == "Severe", "Poor", quality$values),
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Ljung_Box_test = lb_test$values,
         Autocorrelation_negative_and_significant = ifelse(
