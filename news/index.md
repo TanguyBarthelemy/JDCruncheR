@@ -1,6 +1,6 @@
 # Changelog
 
-## JDCruncheR 0.3.6.9000
+## JDCruncheR 0.4.0.9000
 
 All notable changes to this project will be documented in this file.
 
@@ -8,7 +8,19 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### [Unreleased](https://github.com/InseeFr/JDCruncheR/compare/v0.3.6...HEAD)
+### [Unreleased](https://github.com/InseeFr/JDCruncheR/compare/v0.4.0...HEAD)
+
+### [0.4.0](https://github.com/InseeFr/JDCruncheR/compare/v0.3.6...v0.4.0) - 2026-06-15
+
+#### Added
+
+- New classes for JVS objects
+- New function `extract_JVS` to extract the JVS plug-in
+- New function to export QR, mQR and JVS matrix object:
+  [`write()`](https://inseefr.github.io/JDCruncheR/reference/write.md)
+- New vignette to explain how to use `extract_JVS` and the whole
+  process.
+- New contributor: Eulalie Delaune
 
 #### Fixed
 
@@ -17,7 +29,24 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   [\#44](https://github.com/InseeFr/JDCruncheR/issues/44)
 - `sa_on_sa` statistics are renamed in `s_on_sa`
 - QR produced if missing values
-- compute_score works now with `conditional_indicator`
+- [`compute_score()`](https://inseefr.github.io/JDCruncheR/reference/compute_score.md)
+  works now with `conditional_indicator`
+
+#### Changed
+
+- The arguments `sep` and `dec` to specify the import specification are
+  now in `...` in the function `extractQR()`.
+
+#### Removed
+
+- The argument `matrix_output_file` is removed and replaced by `file` in
+  the function `extractQR()`.
+
+#### Deprecated
+
+- The function
+  [`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/deprecated-JDCruncheR.md)
+  is deprecated in favour of `write`.
 
 ### [0.3.6](https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...v0.3.6) - 2025-07-24
 
@@ -78,7 +107,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 #### Fixed
 
 - bug in
-  [`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.md)
+  [`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/deprecated-JDCruncheR.md)
   with [`ifelse()`](https://rdrr.io/r/base/ifelse.html)
 
 ### [0.3.0](https://github.com/InseeFr/JDCruncheR/compare/v0.2.4...v0.3.0) - 2024-10-09
