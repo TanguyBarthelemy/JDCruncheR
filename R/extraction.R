@@ -71,9 +71,29 @@ find_variable <- function(
             ))
         }
     ))
-    cols <- cols[type_cols]
+    na_cols <- unlist(lapply(
+        X = demetra_m[, cols, drop = FALSE],
+        FUN = function(x) {
+            all(is.na(x))
+        }
+    ))
+    if (any(type_cols)) {
+        cols <- cols[type_cols]
+    } else if (any(na_cols)) {
+        # Que des NA
+        return(list(
+            values = create_NA_type(type = type, len = nrow(demetra_m)),
+            missing = NULL
+        ))
+    } else {
+        # Aucune colonne
+        return(list(
+            values = create_NA_type(type = type, len = nrow(demetra_m)),
+            missing = variable
+        ))
+    }
 
-    if (p_value && length(cols) > 0L) {
+    if (p_value) {
         y <- demetra_m[, cols, drop = FALSE]
         p_cols <- apply(
             X = is.na(y) | (y >= 0L & y <= 1L),
