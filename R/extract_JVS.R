@@ -251,12 +251,12 @@ extract_JVS <- function(
         "Final Henderson Filter",
         "Stage 2 Henderson Filter",
         "Seasonal Filter",
-        "Quality",
+        "Irregular Standard-Deviation",
+        "Quality (for TS)",
+        "Max-Adj",
         "Autocorrelation of order 1 of the SA series",
         "Normal Test (P-value)",
-        "Autocorrelation negative and significant",
-        "Irregular Standard-Deviation",
-        "Max-Adj"
+        "Autocorrelation negative and significant"
     )
 
     if (length(missing_items) > 0L) {
