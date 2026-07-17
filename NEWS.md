@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* In JVS, Trend filters are now displayed with a "H"
+* In JVS, Leap year and easter variable are displayed as "Yes" or "No" variable
+* In JVS, We apply a threshold of 0.05 to stat_Q between Good and Bad
+* In JVS, Quality SEVERE is renamed in POOR
+
+### Fixed
+
+* Fix difference with v3 plug-in JVS with new normal test, series with component, stage2 henderson filters
+
+
 ## [0.4.0] - 2026-06-15
 
 ### Added
