@@ -357,6 +357,16 @@ extractTDFTest <- function(demetra_m) {
     return(td_f_test)
 }
 
+extractNormal <- function(demetra_m) {
+    ac1 <- extractAutoCorr(demetra_m)
+    nobs <- extractNobs(demetra_m)
+    val <- pnorm(ac1$values * sqrt(nobs$values))
+    return(list(
+        values = val,
+        missing = c(ac1$missing, nobs$missing)
+    ))
+}
+
 extractIndependence <- function(
     demetra_m,
     thresholds = getOption("jdc_thresholds")

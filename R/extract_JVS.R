@@ -130,7 +130,7 @@ extract_JVS <- function(
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
-    lb_test <- extractIndependence(demetra_m)
+    normal_test <- extractNormal(demetra_m)
     standard_deviation <- extractStandardDeviation(i)
     max_adj <- extractMaxAdj_allseries(y, sa)
 
@@ -186,12 +186,12 @@ extract_JVS <- function(
         Seasonal_Filter = seas_filter$values,
         Quality = ifelse(quality$values == "Severe", "Poor", quality$values),
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
-        Ljung_Box_test = lb_test$values,
+        Normal_test = normal_test$values,
         Autocorrelation_negative_and_significant = ifelse(
             !is.na(auto_corr$values)
-            & !is.na(lb_test$values)
+            & !is.na(normal_test$values)
             & auto_corr$values < 0
-            & lb_test$values < 0.05,
+            & normal_test$values < 0.05,
             "Warning",
             ""
         ),
@@ -222,7 +222,7 @@ extract_JVS <- function(
         seas_filter$missing,
         quality$missing,
         auto_corr$missing,
-        lb_test$missing
+        normal_test$missing
     ) |>
         unique()
 
@@ -253,7 +253,7 @@ extract_JVS <- function(
         "Seasonal Filter",
         "Quality",
         "Autocorrelation of order 1 of the SA series",
-        "Ljung-Box Test (P-value)",
+        "Normal Test (P-value)",
         "Autocorrelation negative and significant",
         "Irregular Standard-Deviation",
         "Max-Adj"
