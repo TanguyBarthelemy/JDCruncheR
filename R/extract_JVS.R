@@ -71,7 +71,7 @@ extract_JVS <- function(
     y = NULL,
     sa = NULL,
     s = NULL,
-    i = NULL,
+    t = NULL,
     ...
 ) {
     # Lecture de demetra_m
@@ -84,22 +84,22 @@ extract_JVS <- function(
     )
 
     # Lecture de y
-    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y", ...)
+    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y_cmp", ...)
 
     # Lecture de sa
     sa <- check_obj(
         dir = dir,
         x = sa,
         reading_fun = read_series,
-        name = "sa",
+        name = "sa_cmp",
         ...
     )
 
     # Lecture de s
-    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s", ...)
+    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s_cmp", ...)
 
     # Lecture de i
-    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i_cmp", ...)
+    t <- check_obj(dir = dir, x = t, reading_fun = read_series, name = "t_cmp", ...)
 
     series <- gsub(
         "(^ *)|(* $)",
@@ -131,7 +131,7 @@ extract_JVS <- function(
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
     normal_test <- extractNormal(demetra_m)
-    standard_deviation <- extractStandardDeviation(i)
+    standard_deviation <- extractStandardDeviation(sa - t)
     max_adj <- extractMaxAdj_allseries(y, sa)
 
     leap_year$values <- ifelse(leap_year$values == "Leap year", "Yes", "No")
