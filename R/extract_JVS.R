@@ -184,7 +184,9 @@ extract_JVS <- function(
         Final_Henderson_Filter = trend_filter$values,
         Stage_2_Henderson_Filter = d7_trend_filter$values,
         Seasonal_Filter = seas_filter$values,
+        Irregular_standard_deviation = standard_deviation$values,
         Quality = ifelse(quality$values == "Severe", "Poor", quality$values),
+        Max_Adj = max_adj$values,
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Normal_test = normal_test$values,
         Autocorrelation_negative_and_significant = ifelse(
@@ -194,9 +196,7 @@ extract_JVS <- function(
             & normal_test$values < 0.05,
             "Warning",
             ""
-        ),
-        Irregular_standard_deviation = standard_deviation$values,
-        Max_Adj = max_adj$values
+        )
     )
 
     missing_items <- c(
@@ -251,12 +251,12 @@ extract_JVS <- function(
         "Final Henderson Filter",
         "Stage 2 Henderson Filter",
         "Seasonal Filter",
-        "Quality",
+        "Irregular Standard-Deviation",
+        "Quality (for TS)",
+        "Max-Adj",
         "Autocorrelation of order 1 of the SA series",
         "Normal Test (P-value)",
-        "Autocorrelation negative and significant",
-        "Irregular Standard-Deviation",
-        "Max-Adj"
+        "Autocorrelation negative and significant"
     )
 
     if (length(missing_items) > 0L) {
