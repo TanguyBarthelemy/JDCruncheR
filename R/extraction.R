@@ -947,8 +947,8 @@ extractMaxAdj_allseries <- function(y, sa) {
 
     list_max_adj <- mapply(
         FUN = extractMaxAdj_oneseries,
-        y = y[, -1],
-        sa = sa[, -1],
+        y = y[, -1, drop = FALSE],
+        sa = sa[, -1, drop = FALSE],
         SIMPLIFY = TRUE
     )
 
