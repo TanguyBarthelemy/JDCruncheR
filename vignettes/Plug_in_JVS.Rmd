@@ -15,8 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(JDCruncheR)
-library(rjwsacruncher)
+library("JDCruncheR")
 ```
 
 
@@ -36,7 +35,9 @@ The goal of this step is to generate a demetra_m file containing a lot of inform
 
 To generate those files, you need to use the cruncher with the following options:
 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo = TRUE, eval = FALSE}
+library("rjwsacruncher")
+
 options(
     is_cruncher_v3 = TRUE,
     default_matrix_item = c(
@@ -90,17 +91,18 @@ At this step, you should have generated 5 files.
 
 ## Creation of report JVS
 
-Once the cruncher has generated the right outputs, the JVS Quality Report can be generated.
+Once the cruncher has generated the correct outputs, the JVS Quality Report can be generated.
 
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo = TRUE, eval = TRUE}
 # Path leading to the directory containing the needed files:
 dir_path <- system.file(
-"extdata",
-"WS/WS_world/Output/SAProcessing-1",
-package = "JDCruncheR"
+    "extdata",
+    "WS/WS_world/Output/SAProcessing-1",
+    package = "JDCruncheR"
 )
 
 JVS <- extract_JVS(dir = dir_path)
+JVS
 ```
 
 The JVS object is a dataframe containing the quality report. To save it, you need to export it.
@@ -110,12 +112,12 @@ The JVS object is a dataframe containing the quality report. To save it, you nee
 
 To export the JVS Quality Report, you need to use the writing function. The report can be exported as a .csv file:
 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo = TRUE, eval = FALSE}
 write(JVS, format = "csv", export_dir = "path/to/the/export/directory", overwrite = TRUE)
 ```
 
 The report can be exported as a .xlsx file:
 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo = TRUE, eval = FALSE}
 write(JVS, format = "xlsx", export_dir = "path/to/the/export/directory", overwrite = TRUE)
 ```
