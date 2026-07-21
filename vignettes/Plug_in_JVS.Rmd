@@ -57,7 +57,7 @@ options(
         "diagnostics.td-sa-last:2",
         "diagnostics.seas-sa-f:2",
         "arima.p", "arima.d", "arima.q", "arima.bp", "arima.bd", "arima.bq",
-        "m-statistics.q", "m-statistics.q-m2",
+        "m-statistics.q", "m-statistics.q-m2"
      ),
     default_tsmatrix_series = c(
         "decomposition.y_cmp",
