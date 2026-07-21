@@ -21,7 +21,7 @@ library(rjwsacruncher)
 
 ## Introduction
 
-This vignette explains how to create a JVS Quality Report with the rjd3qr package. 
+This vignette explains how to create a JVS Quality Report with the rjd3qr package. This only works for v3.
 
 ## Creation of demetra_m.csv
 
@@ -68,8 +68,8 @@ options(
 )
 
 rjwsacruncher::cruncher_and_param(
-    workspace = "path/to/the/workspace/WS/WS_world.xml",
-    cruncher_bin_directory = "path/to/the/cruncher/jwsacruncher-3.7.1/bin",
+    workspace = "path/to/the/workspace/file.xml",
+    cruncher_bin_directory = "path/to/the/cruncher/v3/bin_directory",
     csv_layout = 'vtable',
     short_column_headers = FALSE,
     refreshall = FALSE,
@@ -80,7 +80,7 @@ rjwsacruncher::cruncher_and_param(
 
 ```
 
-At this step, you should have generated 11 files.
+At this step, you should have generated 5 files.
 
 ## Creation of report JVS
 
@@ -104,5 +104,5 @@ The JVS object is a dataframe containing the quality report. To save it, you nee
 To export the JVS Quality Report, you need to use the writing function. The report can be exported as a csv or an xlsx file.
 
 ```{r}
-write(JVS, format = "csv", export_dir = "...", overwrite = TRUE) # or format = "xlsx"
+write(JVS, format = "csv", export_dir = "path/to/the/export/directory", overwrite = TRUE) # or format = "xlsx"
 ```
