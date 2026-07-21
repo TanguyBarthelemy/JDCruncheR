@@ -31,7 +31,7 @@ The goal of this step is to generate a demetra_m file containing a lot of inform
 
 To generate those files, you need to use the Cruncher with the following options:
 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 options(
     is_cruncher_v3 = TRUE,
     default_matrix_item = c(
@@ -86,7 +86,7 @@ At this step, you should have generated 5 files.
 
 Once the Cruncher has generated the right outputs, the JVS Quality Report can be generated.
 
-```{r}
+```{r, echo=TRUE, eval=TRUE}
 # Path leading to the directory containing the needed files:
 dir_path <- system.file(
 "extdata",
@@ -101,8 +101,15 @@ The JVS object is a dataframe containing the quality report. To save it, you nee
 
 ## Export
 
-To export the JVS Quality Report, you need to use the writing function. The report can be exported as a csv or an xlsx file.
+To export the JVS Quality Report, you need to use the writing function. The report can be exported as a csv file:
 
-```{r}
-write(JVS, format = "csv", export_dir = "path/to/the/export/directory", overwrite = TRUE) # or format = "xlsx"
+```{r, echo=TRUE, eval=FALSE}
+write(JVS, format = "csv", export_dir = "path/to/the/export/directory", overwrite = TRUE)
+```
+
+
+The report can be exported as a xlsx file:
+
+```{r, echo=TRUE, eval=FALSE}
+write(JVS, format = "xlsx", export_dir = "path/to/the/export/directory", overwrite = TRUE)
 ```
