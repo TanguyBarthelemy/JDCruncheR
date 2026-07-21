@@ -6,7 +6,7 @@
                 <string>Siachen Glacier (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="Siachen Glacier (frozen)" source="" identifier="2b61404e-c138-4c68-92e2-1cc023798021">
+                <ts name="Siachen Glacier (frozen)" source="" identifier="ed802c85-c75c-4d5f-ba5c-a600d5abc8d3">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
@@ -727,7 +727,7 @@
                 <string>Nagorno-Karabakh (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="Nagorno-Karabakh (frozen)" source="" identifier="7879928f-e1ac-4530-97c8-9a9b494bb149">
+                <ts name="Nagorno-Karabakh (frozen)" source="" identifier="dc4bf98e-fbe4-4713-9a39-1a406a30fc42">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
@@ -1444,7 +1444,7 @@
                 <string>Mongolia (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="Mongolia (frozen)" source="" identifier="99112cb6-efeb-4cdd-be44-b3065075e56f">
+                <ts name="Mongolia (frozen)" source="" identifier="f3b88086-d652-4827-8ff2-05c8362b806c">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
@@ -1692,7 +1692,7 @@
                 <string>India (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="India (frozen)" source="" identifier="38d22265-7d13-497f-8b58-f80c54b6f10e">
+                <ts name="India (frozen)" source="" identifier="b4f3ad7b-02e6-4fdd-8ce9-d893d81e08a9">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
@@ -2486,7 +2486,7 @@
                 <string>Nepal (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="Nepal (frozen)" source="" identifier="1ad310ad-4abb-47c7-83e9-3e114e571a3f">
+                <ts name="Nepal (frozen)" source="" identifier="315a8040-e45a-42b8-af69-e68d956b8ce7">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
@@ -3088,7 +3088,7 @@
                 <string>Philippines (frozen)</string>
             </item>
             <item name="ts">
-                <ts name="Philippines (frozen)" source="" identifier="f31f5666-a563-4c3f-8c73-ebcc2f89ae48">
+                <ts name="Philippines (frozen)" source="" identifier="c2bb5a77-560b-4d74-ae25-12b91ad8a502">
                     <freq>12</freq>
                     <firstYear>2000</firstYear>
                     <firstPeriod>1</firstPeriod>
