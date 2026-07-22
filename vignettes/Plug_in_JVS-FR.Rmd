@@ -118,15 +118,15 @@ options(
     default_tsmatrix_series = c(
         "decomposition.y_cmp",
         "decomposition.s_cmp",
-        "decomposition.sa_cmp", 
+        "decomposition.sa_cmp",
         "decomposition.t_cmp"
     )
 )
 
-rjwsacruncher::cruncher_and_param(
+cruncher_and_param(
     workspace = "path/to/the/workspace/file.xml",
     cruncher_bin_directory = "path/to/the/cruncher/v3/bin/directory",
-    csv_layout = 'vtable',
+    csv_layout = "vtable",
     short_column_headers = FALSE,
     refreshall = FALSE,
     v3 = TRUE,

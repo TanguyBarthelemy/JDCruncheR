@@ -3,6 +3,8 @@ linters: lintr::all_linters(
         #line_length_linter = lintr::line_length_linter(80L),
         line_length_linter = lintr::line_length_linter(100L),
         cyclocomp_linter = lintr::cyclocomp_linter(complexity_limit = 35L),
+        library_call_linter = NULL,
+        namespace_linter = NULL,
         return_linter = NULL,
         object_name_linter = NULL,
         nonportable_path_linter = NULL,

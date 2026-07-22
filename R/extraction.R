@@ -308,15 +308,16 @@ extract3Outliers <- function(demetra_m) {
     outliers <- data.frame(
         out1 = character(nrow(demetra_m)),
         out2 = character(nrow(demetra_m)),
-        out3 = character(nrow(demetra_m))
+        out3 = character(nrow(demetra_m)),
+        stringsAsFactors = FALSE
     )
     nout <- extractNout(demetra_m)
     if (is.null(nout$missing) && all(nout$values == 0L)) {
         return(list(values = outliers))
     }
 
-    pattern <- "(^regression\\.out$)|(^out$)" |>
-        gsub(
+    pattern <- gsub(
+            x = "(^regression\\.out$)|(^out$)",
             pattern = "$",
             replacement = "(\\.(\\d){1,}\\.)?$",
             fixed = TRUE
@@ -330,7 +331,7 @@ extract3Outliers <- function(demetra_m) {
 
     for (id_series in seq_len(nrow(demetra_m))) {
         outs <- demetra_m[id_series, id_cols]
-        id_cols_out_series <- id_cols[!(is.na(outs) | outs == "")]
+        id_cols_out_series <- id_cols[!is.na(outs) & nzchar(outs, keepNA = FALSE)]
         outs <- as.character(demetra_m[id_series, id_cols_out_series])
         if (length(id_cols_out_series) > 1L) {
             t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2L])
@@ -940,11 +941,11 @@ extractMaxAdj_oneseries <- function(y, sa) {
 
 extractMaxAdj_allseries <- function(y, sa) {
     if (ncol(y) != ncol(sa)) {
-        stop("The files Y and SA do not have the same number of columns.")
+        stop("The files Y and SA do not have the same number of columns.", call. = FALSE)
     }
 
     if (nrow(y) != nrow(sa)) {
-        stop("The files Y and SA do not have the same number of rows.")
+        stop("The files Y and SA do not have the same number of rows.", call. = FALSE)
     }
 
     list_max_adj <- mapply(

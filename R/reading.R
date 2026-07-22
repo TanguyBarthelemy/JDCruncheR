@@ -8,7 +8,7 @@ check_obj <- function(
     if (!is.null(x)) {
         return(x)
     }
-    if (is.null(x) & is.null(dir)) {
+    if (is.null(x) && is.null(dir)) {
         stop(
             "Please call the function on a directory",
             " (using the `dir` argument)",
@@ -26,7 +26,7 @@ check_obj <- function(
         !dir.exists(dir) & file.exists(dir) & endsWith(x = dir, suffix = ".csv")
     ]
     dir <- dir[dir.exists(dir)]
-    if (length(dir) == 0L & length(list_files) == 0L) {
+    if (length(dir) == 0L && length(list_files) == 0L) {
         stop(
             "The chosen dir doesn't exist.",
             call. = FALSE
@@ -58,7 +58,7 @@ check_obj <- function(
             "No files with ",
             name,
             ".csv form have been found in the directory :",
-            paste(dir, collapse = "\n")
+            paste(dir, collapse = "\n"), call. = FALSE
         )
     }
 
@@ -104,7 +104,7 @@ read_series <- function(file, sep = ";", dec = ",") {
     test_date <- as.Date(series_df[, 1L], format = "%Y-%m-%d")
 
     if (all(is.na(test_date))) {
-        warning("Incorrect table format: use csv_layout = 'vtable'")
+        warning("Incorrect table format: use csv_layout = 'vtable'", call. = FALSE)
     } else {
         series_df[, 1L] <- test_date
         series_df <- series_df[order(series_df[, 1L]), ]
