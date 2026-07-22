@@ -53,7 +53,7 @@ test_that("extract_JVS returns a dataframe with the right structure", {
 
     expect_named(result, names(expected_types))
 
-    actual_types <- vapply(X = result, FUN = class, FUN.VALUE = character(1))
+    actual_types <- vapply(X = result, FUN = class, FUN.VALUE = character(1L))
 
     expect_identical(actual_types, expected_types)
 })

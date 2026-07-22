@@ -311,7 +311,7 @@ extract3Outliers <- function(demetra_m) {
         out3 = character(nrow(demetra_m))
     )
     nout <- extractNout(demetra_m)
-    if (is.null(nout$missing) && all(nout$values == 0)) {
+    if (is.null(nout$missing) && all(nout$values == 0L)) {
         return(list(values = outliers))
     }
 
@@ -332,14 +332,14 @@ extract3Outliers <- function(demetra_m) {
         outs <- demetra_m[id_series, id_cols]
         id_cols_out_series <- id_cols[!(is.na(outs) | outs == "")]
         outs <- as.character(demetra_m[id_series, id_cols_out_series])
-        if (length(id_cols_out_series) > 1) {
-            t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2])
+        if (length(id_cols_out_series) > 1L) {
+            t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2L])
             outs <- outs[order(abs(t_stat), decreasing = TRUE)[seq_len(min(
-                3,
+                3L,
                 length(id_cols_out_series)
             ))]]
         }
-        outs <- c(outs, rep("", 3 - length(outs)))
+        outs <- c(outs, rep("", 3L - length(outs)))
         outliers[id_series, ] <- outs
     }
 
@@ -926,14 +926,14 @@ extractStandardDeviation <- function(i) {
 }
 
 extractMaxAdj_oneseries <- function(y, sa) {
-    valid <- y != 0 & !is.na(y) & !is.na(sa)
+    valid <- y != 0L & !is.na(y) & !is.na(sa)
 
     if (!any(valid)) {
         return(Inf)
     }
 
     adj <- abs((y[valid] - sa[valid]) / y[valid])
-    max_adj <- 100 * max(adj)
+    max_adj <- 100.0 * max(adj)
 
     return(max_adj)
 }
@@ -949,8 +949,8 @@ extractMaxAdj_allseries <- function(y, sa) {
 
     list_max_adj <- mapply(
         FUN = extractMaxAdj_oneseries,
-        y = y[, -1, drop = FALSE],
-        sa = sa[, -1, drop = FALSE],
+        y = y[, -1L, drop = FALSE],
+        sa = sa[, -1L, drop = FALSE],
         SIMPLIFY = TRUE
     )
 
@@ -966,8 +966,8 @@ extractAdjustment <- function(demetra_m, s) {
     ly <- extractLeapYear(demetra_m)
     ly$values[is.na(ly$values)] <- ""
 
-    cond_sa <- apply(X = s[, -1, drop = FALSE], MARGIN = 2L, FUN = stats::sd, na.rm = TRUE) != 0L
-    cond_ca <- leaster$values > 0 | ntd$values > 0 | ly$values == "Leap year"
+    cond_sa <- apply(X = s[, -1L, drop = FALSE], MARGIN = 2L, FUN = stats::sd, na.rm = TRUE) != 0L
+    cond_ca <- leaster$values > 0L | ntd$values > 0L | ly$values == "Leap year"
 
     adjustment <- paste0(
         ifelse(

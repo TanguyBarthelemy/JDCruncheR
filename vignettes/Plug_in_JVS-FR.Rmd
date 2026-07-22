@@ -155,7 +155,7 @@ JVS <- extract_JVS(dir = dir_path)
 
 ```{r, echo = FALSE, eval = TRUE}
 rownames(JVS) <- NULL
-knitr::kable(JVS[, 1:7])
+knitr::kable(JVS[, 1L:7L])
 ```
 
 L'objet JVS est un dataframe contenant notre rapport JVS. pour l'enregistrer il faut l'écrire dans un fichier.

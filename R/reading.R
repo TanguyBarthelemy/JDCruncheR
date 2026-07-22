@@ -101,14 +101,14 @@ read_series <- function(file, sep = ";", dec = ",") {
         quote = ""
     )
 
-    test_date <- as.Date(series_df[, 1], format = "%Y-%m-%d")
+    test_date <- as.Date(series_df[, 1L], format = "%Y-%m-%d")
 
     if (all(is.na(test_date))) {
         warning("Incorrect table format: use csv_layout = 'vtable'")
     } else {
-        series_df[, 1] <- test_date
-        series_df <- series_df[order(series_df[, 1]), ]
-        colnames(series_df)[1] <- "date"
+        series_df[, 1L] <- test_date
+        series_df <- series_df[order(series_df[, 1L]), ]
+        colnames(series_df)[1L] <- "date"
     }
 
     return(series_df)

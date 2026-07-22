@@ -157,7 +157,7 @@ JVS <- extract_JVS(dir = dir_path)
 
 ```{r, echo = FALSE, eval = TRUE}
 rownames(JVS) <- NULL
-knitr::kable(JVS[, 1:7])
+knitr::kable(JVS[, 1L:7L])
 ```
 
 The JVS object is a dataframe containing the quality report. To save it, you need to export it.

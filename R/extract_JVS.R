@@ -204,7 +204,7 @@ extract_JVS <- function(
 
     leap_year$values <- ifelse(leap_year$values == "Leap year", "Yes", "No")
     leap_year$values <- ifelse(is.na(leap_year$values), "No", leap_year$values)
-    leaster$values <- ifelse(leaster$values > 0, "Yes", "No")
+    leaster$values <- ifelse(leaster$values > 0L, "Yes", "No")
 
     trend_filter$values <- ifelse(
         test = is.na(trend_filter$values),
@@ -239,7 +239,7 @@ extract_JVS <- function(
             "No",
             "Yes"
         ),
-        Log_Transformation = ifelse(log_transform$values == 1, "Yes", "No"),
+        Log_Transformation = ifelse(log_transform$values == 1L, "Yes", "No"),
         ARIMA_model = arima_model$values,
         LeapYear = ifelse(is.na(leap_year$values), "No", leap_year$values),
         MovingHoliday = leaster$values,
@@ -260,7 +260,7 @@ extract_JVS <- function(
         Autocorrelation_negative_and_significant = ifelse(
             !is.na(auto_corr$values)
             & !is.na(normal_test$values)
-            & auto_corr$values < 0
+            & auto_corr$values < 0.0
             & normal_test$values < 0.05,
             "Warning",
             ""
