@@ -11,7 +11,7 @@ extract_JVS(
   y = NULL,
   sa = NULL,
   s = NULL,
-  i = NULL,
+  t = NULL,
   ...
 )
 }
@@ -31,12 +31,12 @@ If missing, the file is searched for in \code{dir}.}
 \item{s}{dataframe containing the seasonal component of the series.
 If missing, the file is searched for in \code{dir}.}
 
-\item{i}{dataframe containing the irregular component series.
-If missing, the file is searched for in \code{dir}.}
-
 \item{...}{Other parameters to pass to \code{read_demetra_m} such as \code{sep} (the
 separator used in the csv file. By default, \code{sep = ";"}) and \code{dec} (the
 decimal separator used in the csv file. By default, \code{dec = ","})}
+
+\item{i}{dataframe containing the irregular component series.
+If missing, the file is searched for in \code{dir}.}
 }
 \value{
 a \code{\link{JVS_matrix}} object.
