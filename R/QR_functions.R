@@ -503,6 +503,9 @@ NULL
 weighted_score <- function(x, pond = 1L) {
     UseMethod("weighted_score", x)
 }
+
+#' @exportS3Method weighted_score default
+#' @method weighted_score default
 #' @export
 weighted_score.default <- function(x, pond = 1L) {
     stop(
@@ -510,6 +513,9 @@ weighted_score.default <- function(x, pond = 1L) {
         call. = FALSE
     )
 }
+
+#' @exportS3Method weighted_score QR_matrix
+#' @method weighted_score QR_matrix
 #' @export
 weighted_score.QR_matrix <- function(x, pond = 1L) {
     if (is.character(pond)) {
@@ -526,6 +532,9 @@ weighted_score.QR_matrix <- function(x, pond = 1L) {
     }
     return(x)
 }
+
+#' @exportS3Method weighted_score mQR_matrix
+#' @method weighted_score mQR_matrix
 #' @export
 weighted_score.mQR_matrix <- function(x, pond = 1L) {
     if (is.list(pond)) {
@@ -551,7 +560,6 @@ weighted_score.mQR_matrix <- function(x, pond = 1L) {
     result <- mQR_matrix(result)
     return(result)
 }
-
 
 #' @title Tri des objets QR_matrix et mQR_matrix
 #'
@@ -630,6 +638,8 @@ NULL
 #' @family QR_matrix functions
 #' @name sort
 #' @rdname sort
+#' @exportS3Method sort QR_matrix
+#' @method sort QR_matrix
 #' @seealso [Traduction française][fr-sort.QR_matrix()]
 #' @export
 sort.QR_matrix <- function(
@@ -648,6 +658,9 @@ sort.QR_matrix <- function(
     x[["values"]] <- x[["values"]][ordered_matrixBQ, ]
     return(x)
 }
+
+#' @exportS3Method sort mQR_matrix
+#' @method sort mQR_matrix
 #' @rdname sort
 #' @export
 sort.mQR_matrix <- function(
@@ -666,7 +679,6 @@ sort.mQR_matrix <- function(
     result <- mQR_matrix(result)
     return(result)
 }
-
 
 #' @title Extraction du score
 #'
@@ -774,6 +786,8 @@ extract_score <- function(
     UseMethod("extract_score", x)
 }
 
+#' @exportS3Method extract_score default
+#' @method extract_score default
 #' @export
 extract_score.default <- function(x, format_output, weighted_score) {
     stop(
@@ -781,6 +795,9 @@ extract_score.default <- function(x, format_output, weighted_score) {
         call. = FALSE
     )
 }
+
+#' @exportS3Method extract_score QR_matrix
+#' @method extract_score QR_matrix
 #' @export
 extract_score.QR_matrix <- function(
     x,
@@ -815,6 +832,9 @@ extract_score.QR_matrix <- function(
     )
     return(res)
 }
+
+#' @exportS3Method extract_score mQR_matrix
+#' @method extract_score mQR_matrix
 #' @export
 extract_score.mQR_matrix <- function(
     x,
@@ -920,6 +940,9 @@ NULL
 remove_indicators <- function(x, ...) {
     UseMethod("remove_indicators", x)
 }
+
+#' @exportS3Method remove_indicators default
+#' @method remove_indicators default
 #' @export
 remove_indicators.default <- function(x, ...) {
     stop(
@@ -927,6 +950,9 @@ remove_indicators.default <- function(x, ...) {
         call. = FALSE
     )
 }
+
+#' @exportS3Method remove_indicators QR_matrix
+#' @method remove_indicators QR_matrix
 #' @export
 remove_indicators.QR_matrix <- function(x, ...) {
     indicators <- c(...)
@@ -942,15 +968,22 @@ remove_indicators.QR_matrix <- function(x, ...) {
     }
     return(x)
 }
+
+#' @exportS3Method remove_indicators mQR_matrix
+#' @method remove_indicators mQR_matrix
 #' @export
 remove_indicators.mQR_matrix <- function(x, ...) {
     return(mQR_matrix(lapply(x, remove_indicators, ...)))
 }
+
 #' @rdname QR_var_manipulation
 #' @export
 retain_indicators <- function(x, ...) {
     UseMethod("retain_indicators", x)
 }
+
+#' @exportS3Method retain_indicators default
+#' @method retain_indicators default
 #' @export
 retain_indicators.default <- function(x, ...) {
     stop(
@@ -958,6 +991,9 @@ retain_indicators.default <- function(x, ...) {
         call. = FALSE
     )
 }
+
+#' @exportS3Method retain_indicators QR_matrix
+#' @method retain_indicators QR_matrix
 #' @export
 retain_indicators.QR_matrix <- function(x, ...) {
     indicators <- c(...)
@@ -973,6 +1009,9 @@ retain_indicators.QR_matrix <- function(x, ...) {
     }
     return(x)
 }
+
+#' @exportS3Method retain_indicators mQR_matrix
+#' @method retain_indicators mQR_matrix
 #' @export
 retain_indicators.mQR_matrix <- function(x, ...) {
     return(mQR_matrix(lapply(x, retain_indicators, ...)))
@@ -1185,6 +1224,9 @@ NULL
 add_indicator <- function(x, indicator, variable_name, ...) {
     UseMethod("add_indicator", x)
 }
+
+#' @exportS3Method add_indicator default
+#' @method add_indicator default
 #' @export
 add_indicator.default <- function(x, indicator, variable_name, ...) {
     stop(
@@ -1192,6 +1234,9 @@ add_indicator.default <- function(x, indicator, variable_name, ...) {
         call. = FALSE
     )
 }
+
+#' @exportS3Method add_indicator QR_matrix
+#' @method add_indicator QR_matrix
 #' @export
 add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
     if (is.vector(indicator)) {
@@ -1249,6 +1294,9 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
 
     return(x)
 }
+
+#' @exportS3Method add_indicator mQR_matrix
+#' @method add_indicator mQR_matrix
 #' @export
 add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
     output <- lapply(
@@ -1312,6 +1360,9 @@ recode_indicator_num <- function(
 ) {
     UseMethod("recode_indicator_num", x)
 }
+
+#' @exportS3Method recode_indicator_num default
+#' @method recode_indicator_num default
 #' @export
 recode_indicator_num.default <- function(
     x,
@@ -1325,6 +1376,9 @@ recode_indicator_num.default <- function(
         call. = FALSE
     )
 }
+
+#' @exportS3Method recode_indicator_num QR_matrix
+#' @method recode_indicator_num QR_matrix
 #' @export
 recode_indicator_num.QR_matrix <- function(
     x,
@@ -1351,6 +1405,9 @@ recode_indicator_num.QR_matrix <- function(
 
     return(x)
 }
+
+#' @exportS3Method recode_indicator_num mQR_matrix
+#' @method recode_indicator_num mQR_matrix
 #' @export
 recode_indicator_num.mQR_matrix <- function(
     x,
