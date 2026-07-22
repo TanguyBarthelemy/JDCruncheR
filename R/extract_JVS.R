@@ -152,7 +152,13 @@ extract_JVS <- function(
     )
 
     # Lecture de y
-    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y_cmp", ...)
+    y <- check_obj(
+        dir = dir,
+        x = y,
+        reading_fun = read_series,
+        name = "y_cmp",
+        ...
+    )
 
     # Lecture de sa
     sa <- check_obj(
@@ -164,10 +170,22 @@ extract_JVS <- function(
     )
 
     # Lecture de s
-    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s_cmp", ...)
+    s <- check_obj(
+        dir = dir,
+        x = s,
+        reading_fun = read_series,
+        name = "s_cmp",
+        ...
+    )
 
     # Lecture de i
-    t <- check_obj(dir = dir, x = t, reading_fun = read_series, name = "t_cmp", ...)
+    t <- check_obj(
+        dir = dir,
+        x = t,
+        reading_fun = read_series,
+        name = "t_cmp",
+        ...
+    )
 
     series <- gsub(
         "(^ *)|(* $)",
@@ -217,8 +235,16 @@ extract_JVS <- function(
         no = paste0("H", d7_trend_filter$values)
     )
 
-    stat_Q$values$q <- ifelse(!is.na(stat_Q$values$q) & stat_Q$values$q > 0.05, "Good", stat_Q$values$q)
-    stat_Q$values$q <- ifelse(!is.na(stat_Q$values$q) & stat_Q$values$q <= 0.05, "Bad", stat_Q$values$q)
+    stat_Q$values$q <- ifelse(
+        !is.na(stat_Q$values$q) & stat_Q$values$q > 0.05,
+        "Good",
+        stat_Q$values$q
+    )
+    stat_Q$values$q <- ifelse(
+        !is.na(stat_Q$values$q) & stat_Q$values$q <= 0.05,
+        "Bad",
+        stat_Q$values$q
+    )
     stat_Q$values$q <- ifelse(is.na(stat_Q$values$q), "", stat_Q$values$q)
 
     JVS_output <- data.frame(
@@ -258,10 +284,10 @@ extract_JVS <- function(
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Normal_test = normal_test$values,
         Autocorrelation_negative_and_significant = ifelse(
-            !is.na(auto_corr$values)
-            & !is.na(normal_test$values)
-            & auto_corr$values < 0.0
-            & normal_test$values < 0.05,
+            !is.na(auto_corr$values) &
+                !is.na(normal_test$values) &
+                auto_corr$values < 0.0 &
+                normal_test$values < 0.05,
             "Warning",
             ""
         )

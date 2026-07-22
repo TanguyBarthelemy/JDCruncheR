@@ -48,10 +48,10 @@ NULL
 #' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
 print.QR_matrix <- function(
-        x,
-        print_variables = TRUE,
-        print_score_formula = TRUE,
-        ...
+    x,
+    print_variables = TRUE,
+    print_score_formula = TRUE,
+    ...
 ) {
     nb_var <- nrow(x[["modalities"]])
     nb_var_modalities <- ncol(x[["modalities"]])
@@ -59,9 +59,9 @@ print.QR_matrix <- function(
 
     if (
         is.null(nb_var) ||
-        is.null(nb_var_modalities) ||
-        is.null(nb_var_values) ||
-        nb_var * nb_var_modalities * nb_var_values == 0L
+            is.null(nb_var_modalities) ||
+            is.null(nb_var_values) ||
+            nb_var * nb_var_modalities * nb_var_values == 0L
     ) {
         cat("The quality report matrix is empty")
         return(invisible(x))

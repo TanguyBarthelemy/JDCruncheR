@@ -1,5 +1,4 @@
 test_that("extract_JVS returns a dataframe with the right structure", {
-
     test_dir <- testthat::test_path("data", "JVS")
 
     result <- extract_JVS(

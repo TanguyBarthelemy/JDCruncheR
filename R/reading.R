@@ -58,7 +58,8 @@ check_obj <- function(
             "No files with ",
             name,
             ".csv form have been found in the directory :",
-            paste(dir, collapse = "\n"), call. = FALSE
+            paste(dir, collapse = "\n"),
+            call. = FALSE
         )
     }
 
@@ -104,7 +105,10 @@ read_series <- function(file, sep = ";", dec = ",") {
     test_date <- as.Date(series_df[, 1L], format = "%Y-%m-%d")
 
     if (all(is.na(test_date))) {
-        warning("Incorrect table format: use csv_layout = 'vtable'", call. = FALSE)
+        warning(
+            "Incorrect table format: use csv_layout = 'vtable'",
+            call. = FALSE
+        )
     } else {
         series_df[, 1L] <- test_date
         series_df <- series_df[order(series_df[, 1L]), ]

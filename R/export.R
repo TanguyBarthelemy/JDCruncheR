@@ -319,8 +319,10 @@ write <- function(x, ...) {
 #' @method write default
 #' @export
 write.default <- function(x, ...) {
-    stop("A JVS_matrix, QR_matrix or mQR_matrix object is required!",
-         call. = FALSE)
+    stop(
+        "A JVS_matrix, QR_matrix or mQR_matrix object is required!",
+        call. = FALSE
+    )
 }
 
 #' @title Exporter un bilan qualité JVS
