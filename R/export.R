@@ -1,10 +1,12 @@
-
+#' @importFrom openxlsx createStyle
 header_style <- openxlsx::createStyle(
     fontColour = "#ffffff",
     fgFill = "#4F80BD",
     textDecoration = "Bold",
     borderColour = "grey30"
 )
+
+#' @importFrom openxlsx createStyle
 severe_style <- openxlsx::createStyle(
     fontColour = "#ffffff",
     fgFill = "black",
@@ -12,6 +14,8 @@ severe_style <- openxlsx::createStyle(
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
+
+#' @importFrom openxlsx createStyle
 bad_style <- openxlsx::createStyle(
     fontColour = "#9C0006",
     fgFill = "#FFC7CE",
@@ -19,6 +23,8 @@ bad_style <- openxlsx::createStyle(
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
+
+#' @importFrom openxlsx createStyle
 good_style <- openxlsx::createStyle(
     fontColour = "#006100",
     fgFill = "#C6EFCE",
@@ -26,6 +32,8 @@ good_style <- openxlsx::createStyle(
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
+
+#' @importFrom openxlsx createStyle
 uncertain_style <- openxlsx::createStyle(
     fontColour = "#9c6a00",
     fgFill = "#ffeec7",
@@ -33,16 +41,22 @@ uncertain_style <- openxlsx::createStyle(
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
+
+#' @importFrom openxlsx createStyle
 border_style <- openxlsx::createStyle(
     border = "TopBottomLeftRight",
     borderColour = "grey30"
 )
+
+#' @importFrom openxlsx createStyle
 rowname_style <- openxlsx::createStyle(
     fontColour = "black",
     fgFill = "orange",
     textDecoration = "bold"
 )
 
+#' @importFrom openxlsx conditionalFormatting
+#' @importFrom openxlsx addStyle
 apply_BQ_style <- function(
     wb,
     x,
@@ -200,7 +214,11 @@ NULL
 #' @returns Returns invisibly (via \code{invisible()}) a workbook object
 #' created by \code{openxlsx::loadWorkbook()} for further manipulation.
 #'
-#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#' @importFrom openxlsx addWorksheet
+#' @importFrom openxlsx createWorkbook
+#' @importFrom openxlsx saveWorkbook
+#' @importFrom openxlsx writeData
+#' @importFrom tools file_ext
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-write.QR_matrix()]
@@ -351,7 +369,10 @@ NULL
 #' - csv files will be exported with the package 'utils'.
 #'
 #' @importFrom utils write.table
-#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#' @importFrom openxlsx addWorksheet
+#' @importFrom openxlsx createWorkbook
+#' @importFrom openxlsx saveWorkbook
+#' @importFrom openxlsx writeData
 #'
 #' @family JVS_matrix functions
 #' @exportS3Method write JVS_matrix
@@ -460,7 +481,10 @@ NULL
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
 #' \code{\link{mQR_matrix}} object as \code{x}.
 #'
-#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#' @importFrom openxlsx addWorksheet
+#' @importFrom openxlsx createWorkbook
+#' @importFrom openxlsx saveWorkbook
+#' @importFrom openxlsx writeData
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-write.mQR_matrix()]

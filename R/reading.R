@@ -75,8 +75,9 @@ check_obj <- function(
     return(x)
 }
 
+#' @importFrom utils read.csv
 read_demetra_m <- function(file, sep = ";", dec = ",") {
-    demetra_m <- read.csv(
+    demetra_m <- utils::read.csv(
         file = file,
         sep = sep,
         dec = dec,
@@ -88,8 +89,9 @@ read_demetra_m <- function(file, sep = ";", dec = ",") {
     return(demetra_m)
 }
 
+#' @importFrom utils read.csv
 read_series <- function(file, sep = ";", dec = ",") {
-    series_df <- read.csv(
+    series_df <- utils::read.csv(
         file = file,
         sep = sep,
         dec = dec,

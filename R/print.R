@@ -38,6 +38,8 @@ NULL
 #' \code{\link{mQR_matrix}} object and returns it invisibly (via
 #' \code{invisible(x)}).
 #'
+#' @importFrom stats sd
+#'
 #' @encoding UTF-8
 #' @family QR_matrix functions
 #' @exportS3Method print QR_matrix
@@ -140,7 +142,7 @@ print.QR_matrix <- function(
         cat(sprintf(
             "The average score is %1g and its standard deviation is %2g",
             mean(score_value, na.rm = TRUE),
-            sd(score_value, na.rm = TRUE)
+            stats::sd(score_value, na.rm = TRUE)
         ))
     }
     if (print_score_formula && !is.null(x[["score_formula"]])) {

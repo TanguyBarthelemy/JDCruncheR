@@ -131,8 +131,6 @@ NULL
 #' # Extract the JVS report from the directory
 #' JVS <- extract_JVS(dir = dir_path)
 #' @family JVS_matrix functions
-#' @importFrom stats sd
-#' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_JVS()]
 #' @export
 extract_JVS <- function(

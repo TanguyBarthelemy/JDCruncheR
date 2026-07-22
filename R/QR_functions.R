@@ -332,7 +332,7 @@ compute_score.QR_matrix <- function(
         QR_modalities[, nom_var] <- QR_modalities[, nom_var] *
             score_pond[nom_var]
     }
-    score <- base::rowSums(
+    score <- rowSums(
         QR_modalities,
         na.rm = na.rm
     )

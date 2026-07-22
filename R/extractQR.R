@@ -147,8 +147,6 @@ NULL
 #' # Or:
 #' QR[["modalities"]]
 #'
-#' @importFrom stats sd
-#' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(
