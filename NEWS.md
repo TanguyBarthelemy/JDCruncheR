@@ -9,25 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* In JVS, Trend filters are now displayed with a "H"
+* In JVS, Trend filters and D7 filters are now displayed starting with a "H"
 * In JVS, Leap year and Easter variables are displayed as "Yes" or "No" variables
 * In JVS, we apply a threshold of 0.05 to stat_Q between Good and Bad
 * In JVS, Quality SEVERE is renamed in POOR
-* In JVS, the final series are no longer used and replaced by  the final series before applying the effects of preadjustment
-* In JVS, the irregular standard deviation is now based on the series sa_cmp - t_cmp
-* In example data, we changed the input files to match JVS and QR
+* In JVS, the final series are no longer used and replaced by the decomposition series before applying the effects of preadjustment
+* In JVS, the irregular standard deviation is now based on the computation sa_cmp - t_cmp
+* In example data, we updated the generated output csv files to match JVS and QR creation
+* The column follows now the same order as the plug-in
 
 ### Fixed
 
-* Fix difference with v3 plug-in JVS with new normal test (replacing the Ljung-Box test) and new column order
-* Fix stage2 Henderson filters with values from table D6
-* Fix dependencies
+* Fix difference with v3 plug-in JVS with new normal test (replacing the Ljung-Box test)
+* Fix stage2 Henderson filters with values from the previsional Henderson filter from table D6
+* Fix dependencies declaration
+* When reading demetra_m, the column with only `NA`s are no more considered as missing.
+* Fix JVS creation when a WS contains only one series
 
 ### Added
 
 * New vignette (in English and in French) to illustrate the JVS plug-in functionnalities
-* New documentation, now also available in French: write functions (generic and specific), JVS classes, get_thresholds, set_thresholds
-* New documentation, available in French and in English: extractJVS
+* New documentation, now also available in French: write functions (generic and specific), JVS classes, `get_thresholds`, `set_thresholds`
+* New documentation, available in French and in English: `extract_JVS`
 
 
 ## [0.4.0] - 2026-06-15
