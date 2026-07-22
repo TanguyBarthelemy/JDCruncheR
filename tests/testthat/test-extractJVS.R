@@ -1,6 +1,6 @@
 test_that("extract_JVS returns a dataframe with the right structure", {
 
-    test_dir <- "C:/Users/SHT3RT/Documents/Packages/JDCruncheR/tests/testthat/data/JVS"
+    test_dir <- testthat::test_path("data", "JVS")
 
     result <- extract_JVS(
         dir = test_dir,
@@ -12,12 +12,12 @@ test_that("extract_JVS returns a dataframe with the right structure", {
     )
 
     # Dataframe:
-    expect_s3_class(result, "data.frame")
+    expect_s3_class(result, "JVS_matrix")
 
     # Number of columns:
-    expect_equal(
+    expect_identical(
         ncol(result),
-        30
+        30L
     )
 
     # Column names and types:
@@ -65,5 +65,5 @@ test_that("extract_JVS returns a dataframe with the right structure", {
         character(1)
     )
 
-    expect_equal(actual_types, expected_types)
+    expect_identical(actual_types, expected_types)
 })
