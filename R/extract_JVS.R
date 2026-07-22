@@ -177,7 +177,7 @@ extract_JVS <- function(
 
     method <- extractMethod(demetra_m)
     frequency_series <- extractFrequency(demetra_m)
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
     start_date <- extractStart(demetra_m)
     end_date <- extractEnd(demetra_m)
     adjustment <- extractAdjustment(demetra_m, s)
@@ -225,7 +225,7 @@ extract_JVS <- function(
         Series = series,
         Method = method$values,
         Period = frequency_series$values,
-        Nobs = nobs$values,
+        Nobs = nb_obs$values,
         Start = start_date$values,
         End = end_date$values,
         Adjustment = adjustment$values,
@@ -270,7 +270,7 @@ extract_JVS <- function(
     missing_items <- c(
         method$missing,
         frequency_series$missing,
-        nobs$missing,
+        nb_obs$missing,
         start_date$missing,
         end_date$missing,
         adjustment$missing,
