@@ -2,7 +2,7 @@
 title: "Plug-in JVS - EN"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Plug_in_JVS}
+  %\VignetteIndexEntry{Plug_in_JVS_EN}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
