@@ -40,5 +40,7 @@ set_thresholds(test_name = "oos_mean")
 
 # Set all thresholds to default
 set_thresholds()
-
+}
+\seealso{
+\link[=fr-set_thresholds]{Traduction française}
 }

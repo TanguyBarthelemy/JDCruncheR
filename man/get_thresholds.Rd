@@ -29,5 +29,7 @@ get_thresholds(default = FALSE)
 
 # Get all current thresholds
 get_thresholds(test_name = "oos_mean", default = FALSE)
-
+}
+\seealso{
+\link[=fr-get_thresholds]{Traduction française}
 }
