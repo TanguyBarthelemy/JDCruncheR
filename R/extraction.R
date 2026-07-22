@@ -178,13 +178,13 @@ extractLog <- function(demetra_m) {
 }
 
 extractNobs <- function(demetra_m) {
-    nobs <- find_variable(
+    nb_obs <- find_variable(
         demetra_m,
         pattern = "(^span\\.n$)|(^n$)",
         type = "integer",
         variable = "span.n"
     )
-    return(nobs)
+    return(nb_obs)
 }
 
 extractNout <- function(demetra_m) {
@@ -360,11 +360,11 @@ extractTDFTest <- function(demetra_m) {
 #' @importFrom stats pnorm
 extractNormal <- function(demetra_m) {
     ac1 <- extractAutoCorr(demetra_m)
-    nobs <- extractNobs(demetra_m)
-    val <- stats::pnorm(ac1$values * sqrt(nobs$values))
+    nb_obs <- extractNobs(demetra_m)
+    val <- stats::pnorm(ac1$values * sqrt(nb_obs$values))
     return(list(
         values = val,
-        missing = c(ac1$missing, nobs$missing)
+        missing = c(ac1$missing, nb_obs$missing)
     ))
 }
 
@@ -455,7 +455,7 @@ extractResidualsSeasEffect <- function(
 extractFrequency <- function(demetra_m) {
     start_date <- extractStart(demetra_m)
     end_date <- extractEnd(demetra_m)
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
 
     if (!all(is.na(start_date$values)) && !all(is.na(end_date$values))) {
         start_date$values <- as.Date(start_date$values, format = "%Y-%m-%d")
@@ -485,13 +485,13 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
-                if (is.na(nobs$values[i])) {
+                if (is.na(nb_obs$values[i])) {
                     return(NA_integer_)
                 }
                 freq[which(
-                    (nobs_compute[i, ] == nobs$values[i]) |
-                        (nobs_compute[i, ] + 1L == nobs$values[i]) |
-                        (nobs_compute[i, ] - 1L == nobs$values[i])
+                    (nobs_compute[i, ] == nb_obs$values[i]) |
+                        (nobs_compute[i, ] + 1L == nb_obs$values[i]) |
+                        (nobs_compute[i, ] - 1L == nb_obs$values[i])
                 )[[1L]]]
             },
             FUN.VALUE = integer(1L)
@@ -501,7 +501,7 @@ extractFrequency <- function(demetra_m) {
     }
     return(list(
         values = output,
-        missing = c(nobs$missing, end_date$missing, start_date$missing)
+        missing = c(nb_obs$missing, end_date$missing, start_date$missing)
     ))
 }
 
@@ -795,10 +795,10 @@ extractOutliers <- function(
     demetra_m,
     thresholds = getOption("jdc_thresholds")
 ) {
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
     nout <- extractNout(demetra_m)
     m7 <- extractM7(demetra_m)
-    pct_outliers_value <- 100.0 * nout$values / nobs$values
+    pct_outliers_value <- 100.0 * nout$values / nb_obs$values
 
     outliers_modalities <- data.frame(
         m7 = cut(
@@ -827,7 +827,7 @@ extractOutliers <- function(
         modalities = outliers_modalities,
         values = outliers_values,
         missing = c(
-            nobs$missing,
+            nb_obs$missing,
             nout$missing,
             m7$missing
         )
