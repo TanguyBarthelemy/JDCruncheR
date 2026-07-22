@@ -15,10 +15,7 @@ test_that("extract_JVS returns a dataframe with the right structure", {
     expect_s3_class(result, "JVS_matrix")
 
     # Number of columns:
-    expect_identical(
-        ncol(result),
-        30L
-    )
+    expect_identical(ncol(result), 30L)
 
     # Column names and types:
     expected_types <- c(
@@ -54,16 +51,9 @@ test_that("extract_JVS returns a dataframe with the right structure", {
         `Autocorrelation negative and significant` = "character"
     )
 
-    expect_named(
-        result,
-        names(expected_types)
-    )
+    expect_named(result, names(expected_types))
 
-    actual_types <- vapply(
-        result,
-        class,
-        character(1)
-    )
+    actual_types <- vapply(X = result, FUN = class, FUN.VALUE = character(1))
 
     expect_identical(actual_types, expected_types)
 })
