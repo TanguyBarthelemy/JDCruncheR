@@ -21,9 +21,9 @@ mQR_matrix(x = list(), ...)
 
 \method{mQR_matrix}{default}(x = list(), ...)
 
-\method{is}{QR_matrix}(x)
+is.QR_matrix(x)
 
-\method{is}{mQR_matrix}(x)
+is.mQR_matrix(x)
 }
 \arguments{
 \item{modalities}{a \code{data.frame} containing the output variables'

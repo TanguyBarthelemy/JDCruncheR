@@ -50,3 +50,10 @@ LICENSE
 ^\.positai$
 ^\.claude$
 ^CRAN-SUBMISSION$
+
+^lychee\.toml$
+^\.lycheeignore$
+^\.positai$
+^\.claude$
+
+^heylogs\.properties$

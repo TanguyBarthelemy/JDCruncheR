@@ -357,10 +357,11 @@ extractTDFTest <- function(demetra_m) {
     return(td_f_test)
 }
 
+#' @importFrom stats pnorm
 extractNormal <- function(demetra_m) {
     ac1 <- extractAutoCorr(demetra_m)
     nobs <- extractNobs(demetra_m)
-    val <- pnorm(ac1$values * sqrt(nobs$values))
+    val <- stats::pnorm(ac1$values * sqrt(nobs$values))
     return(list(
         values = val,
         missing = c(ac1$missing, nobs$missing)
@@ -911,11 +912,12 @@ extractSeasTest <- function(
     ))
 }
 
+#' @importFrom stats sd
 extractStandardDeviation <- function(i) {
     list_sd <- apply(
         X = i[, -1L, drop = FALSE],
         MARGIN = 2L,
-        FUN = sd,
+        FUN = stats::sd,
         na.rm = TRUE
     )
     return(list(
@@ -957,13 +959,14 @@ extractMaxAdj_allseries <- function(y, sa) {
     ))
 }
 
+#' @importFrom stats sd
 extractAdjustment <- function(demetra_m, s) {
     leaster <- extractLeaster(demetra_m)
     ntd <- extractNtd(demetra_m)
     ly <- extractLeapYear(demetra_m)
     ly$values[is.na(ly$values)] <- ""
 
-    cond_sa <- apply(X = s[, -1, drop = FALSE], MARGIN = 2L, FUN = sd, na.rm = TRUE) != 0L
+    cond_sa <- apply(X = s[, -1, drop = FALSE], MARGIN = 2L, FUN = stats::sd, na.rm = TRUE) != 0L
     cond_ca <- leaster$values > 0 | ntd$values > 0 | ly$values == "Leap year"
 
     adjustment <- paste0(

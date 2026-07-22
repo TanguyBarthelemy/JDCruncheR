@@ -132,16 +132,12 @@ mQR_matrix.default <- function(x = list(), ...) {
     return(mQR)
 }
 
-#' @exportS3Method is QR_matrix
-#' @method is QR_matrix
 #' @rdname QR_matrix
 #' @export
 is.QR_matrix <- function(x) {
     return(inherits(x, "QR_matrix"))
 }
 
-#' @exportS3Method is mQR_matrix
-#' @method is mQR_matrix
 #' @rdname QR_matrix
 #' @export
 is.mQR_matrix <- function(x) {
