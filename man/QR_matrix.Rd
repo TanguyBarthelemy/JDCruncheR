@@ -4,6 +4,9 @@
 \name{QR_matrix}
 \alias{QR_matrix}
 \alias{mQR_matrix}
+\alias{mQR_matrix.QR_matrix}
+\alias{mQR_matrix.mQR_matrix}
+\alias{mQR_matrix.default}
 \alias{is.QR_matrix}
 \alias{is.mQR_matrix}
 \title{Quality report objects}
@@ -12,9 +15,15 @@ QR_matrix(modalities = NULL, values = NULL, score_formula = NULL)
 
 mQR_matrix(x = list(), ...)
 
-is.QR_matrix(x)
+\method{mQR_matrix}{QR_matrix}(x = QR_matrix(), ...)
 
-is.mQR_matrix(x)
+\method{mQR_matrix}{mQR_matrix}(x = mQR_matrix.default(), ...)
+
+\method{mQR_matrix}{default}(x = list(), ...)
+
+\method{is}{QR_matrix}(x)
+
+\method{is}{mQR_matrix}(x)
 }
 \arguments{
 \item{modalities}{a \code{data.frame} containing the output variables'
@@ -59,4 +68,14 @@ score (once the calculus is done).
 }
 \seealso{
 \link[=fr-QR_matrix]{Traduction française}
+
+Other QR_matrix functions:
+\code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link{sort}},
+\code{\link[=weighted_score]{weighted_score()}},
+\code{\link[=write.QR_matrix]{write.QR_matrix()}},
+\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
+\concept{QR_matrix functions}

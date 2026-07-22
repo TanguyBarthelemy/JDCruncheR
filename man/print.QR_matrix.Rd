@@ -34,4 +34,14 @@ To print information on a QR_matrix or mQR_matrix object.
 }
 \seealso{
 \link[=fr-print.QR_matrix]{Traduction française}
+
+Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
+\code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link{sort}},
+\code{\link[=weighted_score]{weighted_score()}},
+\code{\link[=write.QR_matrix]{write.QR_matrix()}},
+\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
+\concept{QR_matrix functions}

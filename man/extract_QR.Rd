@@ -84,6 +84,8 @@ QR[["modalities"]]
 \link[=fr-extract_QR]{Traduction française}
 
 Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
 \code{\link{sort}},
 \code{\link[=weighted_score]{weighted_score()}},

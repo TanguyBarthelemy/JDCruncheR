@@ -54,7 +54,9 @@ print(QR[["modalities"]][["score"]])
 \link[=fr-sort.QR_matrix]{Traduction française}
 
 Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
 \code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
 \code{\link[=weighted_score]{weighted_score()}},
 \code{\link[=write.QR_matrix]{write.QR_matrix()}},

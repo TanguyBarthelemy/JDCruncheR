@@ -1,5 +1,6 @@
-#' Objets bilan qualité
+#' @title Objets bilan qualité
 #'
+#' @description
 #' \code{QR_matrix()} permet de créer un objet de type \code{\link{QR_matrix}}
 #' contenant un bilan qualité.
 #'
@@ -81,6 +82,7 @@ NULL
 #' \code{is.mQR_matrix()} return Boolean values (\code{TRUE} or \code{FALSE}).
 #'
 #' @encoding UTF-8
+#' @family QR_matrix functions
 #' @name QR_matrix
 #' @seealso [Traduction française][fr-QR_matrix()]
 #' @export
@@ -93,34 +95,53 @@ QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL) {
     class(QR) <- "QR_matrix"
     QR
 }
+
 #' @export
 #' @rdname QR_matrix
 mQR_matrix <- function(x = list(), ...) {
     UseMethod("mQR_matrix", x)
 }
+
+#' @exportS3Method mQR_matrix QR_matrix
+#' @method mQR_matrix QR_matrix
 #' @rdname QR_matrix
-#' @export
-is.QR_matrix <- function(x) {
-    return(inherits(x, "QR_matrix"))
-}
 #' @export
 mQR_matrix.QR_matrix <- function(x = QR_matrix(), ...) {
     mQR <- c(list(x), list(...))
     class(mQR) <- "mQR_matrix"
     return(mQR)
 }
-#' @export
-mQR_matrix.default <- function(x = list(), ...) {
-    mQR <- c(x, list(...))
-    class(mQR) <- "mQR_matrix"
-    return(mQR)
-}
+
+#' @exportS3Method mQR_matrix mQR_matrix
+#' @method mQR_matrix mQR_matrix
+#' @rdname QR_matrix
 #' @export
 mQR_matrix.mQR_matrix <- function(x = mQR_matrix.default(), ...) {
     mQR <- c(x, ...)
     class(mQR) <- "mQR_matrix"
     return(mQR)
 }
+
+#' @exportS3Method mQR_matrix default
+#' @method mQR_matrix default
+#' @rdname QR_matrix
+#' @export
+mQR_matrix.default <- function(x = list(), ...) {
+    mQR <- c(x, list(...))
+    class(mQR) <- "mQR_matrix"
+    return(mQR)
+}
+
+#' @exportS3Method is QR_matrix
+#' @method is QR_matrix
+#' @rdname QR_matrix
+#' @export
+is.QR_matrix <- function(x) {
+    return(inherits(x, "QR_matrix"))
+}
+
+#' @exportS3Method is mQR_matrix
+#' @method is mQR_matrix
 #' @rdname QR_matrix
 #' @export
 is.mQR_matrix <- function(x) {
@@ -169,6 +190,9 @@ NULL
 #' \code{invisible(x)}).
 #'
 #' @encoding UTF-8
+#' @family QR_matrix functions
+#' @exportS3Method print QR_matrix
+#' @method print QR_matrix
 #' @name print.QR_matrix
 #' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
@@ -280,6 +304,8 @@ print.QR_matrix <- function(
     return(invisible(x))
 }
 
+#' @exportS3Method print mQR_matrix
+#' @method print mQR_matrix
 #' @rdname print.QR_matrix
 #' @export
 print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
