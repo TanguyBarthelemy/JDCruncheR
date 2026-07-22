@@ -9,8 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>"
 )
 ```
 
@@ -116,7 +116,7 @@ options(
         "diagnostics.seas-sa-f:2",
         "arima.p", "arima.d", "arima.q", "arima.bp", "arima.bd", "arima.bq",
         "m-statistics.q", "m-statistics.q-m2"
-     ),
+    ),
     default_tsmatrix_series = c(
         "decomposition.y_cmp",
         "decomposition.s_cmp",

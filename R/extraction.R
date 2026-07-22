@@ -226,7 +226,14 @@ extractMethod <- function(demetra_m) {
 extractSeasonalFilter <- function(demetra_m) {
     seasonal_filters <- find_variable(
         demetra_m,
-        pattern = "(^decomposition\\.seasonal\\.filters$)|(^seasonal\\.filters$)|(^decomposition\\.d9filter$)|(^decomposition\\.seasfilter$)|(^seasfilter$)",
+        pattern = paste(
+            "(^decomposition\\.seasonal\\.filters$)",
+            "(^seasonal\\.filters$)",
+            "(^decomposition\\.d9filter$)",
+            "(^decomposition\\.seasfilter$)",
+            "(^seasfilter$)",
+            sep = "|"
+        ),
         type = "character",
         variable = "decomposition.seasonal-filters"
     )
@@ -236,7 +243,14 @@ extractSeasonalFilter <- function(demetra_m) {
 extractTrendFilter <- function(demetra_m) {
     trend_filters <- find_variable(
         demetra_m,
-        pattern = "(^decomposition\\.trend\\.filter$)|(^trend\\.filter$)|(^decomposition\\.d12filter$)|(^decomposition\\.trendfilter$)|(^trendfilter$)",
+        pattern = paste(
+            "(^decomposition\\.trend\\.filter$)",
+            "(^trend\\.filter$)",
+            "(^decomposition\\.d12filter$)",
+            "(^decomposition\\.trendfilter$)",
+            "(^trendfilter$)",
+            sep = "|"
+        ),
         type = "integer",
         variable = "decomposition.trend-filter"
     )
