@@ -22,7 +22,7 @@ fichier avec 2 feuilles par bilan qualité (\code{Values} et
 (\code{auto_format = TRUE} par défaut).}
 
 \item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
-s'il existe déjà (\code{create = TRUE} par défaut)}
+s'il existe déjà (\code{overwrite = TRUE} par défaut)}
 
 \item{...}{autres argument non utilisés}
 }

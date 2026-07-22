@@ -13,14 +13,13 @@ fichier que l'on veut créer}
 (\code{auto_format = TRUE} par défaut).}
 
 \item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
-s'il existe déjà (\code{create = TRUE} par défaut)}
+s'il existe déjà (\code{overwrite = TRUE} par défaut)}
 
 \item{...}{autres argument non utilisés}
 }
 \value{
-Renvoie de manière invisible (via \code{invisible(x)}) un objet de
-classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation
-ultérieure.
+Renvoie de manière invisible (via \code{invisible()}) un classeur
+créé par \code{openxlsx::loadWorkbook()} pour une manipulation ultérieure.
 }
 \description{
 Permet d'exporter un bilan qualité dans un fichier Excel.

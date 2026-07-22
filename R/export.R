@@ -172,12 +172,11 @@ apply_BQ_style <- function(
 #' @param auto_format booléen indiquant s'il faut formatter la sortie
 #' (\code{auto_format = TRUE} par défaut).
 #' @param overwrite booléen indiquant s'il faut ré-écrire créer le fichier Excel
-#' s'il existe déjà (\code{create = TRUE} par défaut)
+#' s'il existe déjà (\code{overwrite = TRUE} par défaut)
 #' @param ... autres argument non utilisés
 #'
-#' @returns Renvoie de manière invisible (via \code{invisible(x)}) un objet de
-#' classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation
-#' ultérieure.
+#' @returns Renvoie de manière invisible (via \code{invisible()}) un classeur
+#' créé par \code{openxlsx::loadWorkbook()} pour une manipulation ultérieure.
 #'
 #' @keywords internal
 #' @name fr-write.QR_matrix
@@ -195,11 +194,11 @@ NULL
 #' @param auto_format logical indicating whether to format the output
 #' (\code{auto_format = TRUE} by default).
 #' @param overwrite logical indicating whether to create an Excel file if it
-#' doesn't exist yet (\code{create = TRUE} by default)
+#' doesn't exist yet (\code{overwrite = TRUE} by default)
 #' @param ... other unused arguments
 #'
-#' @returns Returns invisibly (via \code{invisible(x)}) a workbook object
-#' created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#' @returns Returns invisibly (via \code{invisible()}) a workbook object
+#' created by \code{openxlsx::loadWorkbook()} for further manipulation.
 #'
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #'
@@ -257,21 +256,43 @@ write.QR_matrix <- function(
     return(invisible(wb_qr))
 }
 
-#' @title Exporting QR_matrix or mQR_matrix objects in an Excel file
+#' @title Ecriture de bilans qualités dans des fichiers
 #'
-#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
-#' @param ... other parameters of the function
-#' \code{\link{write.QR_matrix}}.
+#' @param x un objet \code{\link{JVS_matrix}}, \code{\link{QR_matrix}} ou
+#'   \code{\link{mQR_matrix}}
+#' @param ... d'autres paramètres utilisées par les fonctions
+#'   \code{\link{write.QR_matrix}} ou \code{\link{write.JVS_matrix}}.
 #'
 #' @returns
-#' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly
-#' (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as
+#' Si \code{x} est de classe \code{\link{JVS_matrix}} ou
+#' \code{\link{mQR_matrix}}, la fonction retourne de manière invisible (avec
+#' `invisible()`) l'objet x.
+#' Si \code{x} est de classe \code{\link{QR_matrix}}, la fonction retourne de
+#' manière invisible (avec `invisible()`) l'objet un classeur créé par
+#' \code{openxlsx::loadWorkbook()} pour une manipulation ultérieure.
+#'
+#' @keywords internal
+#' @name fr-write
+NULL
+#> NULL
+
+#' @title Writing QR to files
+#'
+#' @param x a \code{\link{JVS_matrix}}, a \code{\link{QR_matrix}} or
+#'   \code{\link{mQR_matrix}} object.
+#' @param ... other parameters of the function
+#'   \code{\link{write.QR_matrix}} or \code{\link{write.JVS_matrix}}.
+#'
+#' @returns
+#' If \code{x} is a \code{\link{JVS_matrix}} or a \code{\link{mQR_matrix}}, the
+#' function returns invisibly (via \code{invisible(x)}) the same object as
 #' \code{x}.
 #' Else if \code{x} is a \code{\link{QR_matrix}}, the function returns
-#' invisibly (via \code{invisible(x)}) a workbook object created by
-#' \code{XLConnect::loadWorkbook()} for further manipulation.
+#' invisibly (via \code{invisible()}) a workbook object created by
+#' \code{openxlsx::loadWorkbook()} for further manipulation.
 #'
 #' @family QR_matrix functions
+#' @seealso [Traduction française][fr-write()]
 #' @export
 write <- function(x, ...) {
     UseMethod("write", x)
@@ -281,19 +302,46 @@ write <- function(x, ...) {
 #' @method write default
 #' @export
 write.default <- function(x, ...) {
-    stop("A QR_matrix or mQR_matrix object is required!", call. = FALSE)
+    stop("A JVS_matrix, QR_matrix or mQR_matrix object is required!",
+         call. = FALSE)
 }
 
-
-#' Exporting JVS_matrix objects in CSV or Excel files
+#' @title Exporter un bilan qualité JVS
 #'
+#' @description
+#' La fonction permet d'écrire le bilan qualité JVS dans un fichier csv ou
+#' Excel.
+#'
+#' @param x un objet \code{\link{JVS_matrix}} à exporter.
+#' @param format Chaîne de caractère qui défini le format d'output. Les choix
+#'   possibles sont `"csv"` (par défault) ou `"xlsx"`.
+#' @param export_dir Chemin vers le dossier qui contiendra les exports.
+#' @param overwrite Booleen. Est ce qu'un fichier existant doit être ré-écrit ?
+#'   Par défaut, `overwrite = TRUE`.
+#' @param ... autres argument non utilisés
+#'
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même
+#' bilan qualité \code{\link{JVS_matrix}} que \code{x}.
+#'
+#' @details
+#' - les fichiers xlsx seront exportées avec le package 'openxlsx'.
+#' - les fichiers csv seront exportées avec le package 'utils'.
+#'
+#' @keywords internal
+#' @name fr-write.JVS_matrix
+NULL
+#> NULL
+
+#' @title Exporting JVS_matrix objects in CSV or Excel files
+#'
+#' @description
 #' To export several quality reports in CSV or Excel files
 #'
 #' @param x a \code{\link{JVS_matrix}} object to export.
 #' @param format output format. One of `"csv"` or `"xlsx"`. The default is `"csv"`.
 #' @param export_dir export directory.
 #' @param overwrite logical indicating whether to create a CSV or Excel file if it
-#' doesn't exist yet (\code{create = TRUE} by default)
+#' doesn't exist yet (\code{overwrite = TRUE} by default)
 #' @param ... other unused arguments
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
@@ -309,6 +357,7 @@ write.default <- function(x, ...) {
 #' @family QR_matrix functions
 #' @exportS3Method write JVS_matrix
 #' @method write JVS_matrix
+#' @seealso [Traduction française][fr-write.JVS_matrix()]
 #' @export
 write.JVS_matrix <- function(
     x,
@@ -360,8 +409,9 @@ write.JVS_matrix <- function(
 }
 
 
-#' Export des objets mQR_matrix dans des fichiers Excel
+#' @title Export des objets mQR_matrix dans des fichiers Excel
 #'
+#' @description
 #' Permet d'exporter dans des fichiers Excel une liste de bilan qualité
 #'
 #' @param x objet de type \code{\link{mQR_matrix}} à exporter.
@@ -378,7 +428,7 @@ write.JVS_matrix <- function(
 #' @param auto_format booléen indiquant s'il faut formatter la sortie
 #' (\code{auto_format = TRUE} par défaut).
 #' @param overwrite booléen indiquant s'il faut ré-écrire créer le fichier Excel
-#' s'il existe déjà (\code{create = TRUE} par défaut)
+#' s'il existe déjà (\code{overwrite = TRUE} par défaut)
 #' @param ... autres argument non utilisés
 #'
 #' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet
@@ -389,21 +439,23 @@ write.JVS_matrix <- function(
 NULL
 #> NULL
 
-#' Exporting mQR_matrix objects in Excel files
+#' @title Exporting mQR_matrix objects in Excel files
 #'
+#' @description
 #' To export several quality reports in Excel files
 #'
 #' @param x a \code{\link{mQR_matrix}} object to export.
 #' @param export_dir export directory.
-#' @param layout_file export parameter. By default,
-#' (\code{layout_file = "ByComponent"}) and an Excel file is exported for each
-#' part of the quality report matrix (modalities and values matrices). To group
-#' both modalities and values reports/sheets into a single Excel file, use the
-#' option \code{layout_file = "ByQRMatrix"}.
+#' @param layout_file export parameter. By default, (\code{layout_file =
+#'   "ByComponent"}) and an Excel file is exported for each part of the quality
+#'   report matrix (modalities and values matrices). To group both modalities
+#'   and values reports/sheets into a single Excel file, use the option
+#'   \code{layout_file = "ByQRMatrix"}. With `AllTogether`, all the QR and
+#'   components are in the same file.
 #' @param auto_format logical indicating whether to format the output
-#' (\code{auto_format = TRUE} by default).
+#'   (\code{auto_format = TRUE} by default).
 #' @param overwrite logical indicating whether to create an Excel file if it
-#' doesn't exist yet (\code{create = TRUE} by default)
+#'   doesn't exist yet (\code{overwrite = TRUE} by default)
 #' @param ... other unused arguments
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same

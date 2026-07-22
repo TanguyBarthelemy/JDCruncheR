@@ -18,17 +18,18 @@
 
 \item{export_dir}{export directory.}
 
-\item{layout_file}{export parameter. By default,
-(\code{layout_file = "ByComponent"}) and an Excel file is exported for each
-part of the quality report matrix (modalities and values matrices). To group
-both modalities and values reports/sheets into a single Excel file, use the
-option \code{layout_file = "ByQRMatrix"}.}
+\item{layout_file}{export parameter. By default, (\code{layout_file =
+"ByComponent"}) and an Excel file is exported for each part of the quality
+report matrix (modalities and values matrices). To group both modalities
+and values reports/sheets into a single Excel file, use the option
+\code{layout_file = "ByQRMatrix"}. With \code{AllTogether}, all the QR and
+components are in the same file.}
 
 \item{auto_format}{logical indicating whether to format the output
 (\code{auto_format = TRUE} by default).}
 
 \item{overwrite}{logical indicating whether to create an Excel file if it
-doesn't exist yet (\code{create = TRUE} by default)}
+doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }

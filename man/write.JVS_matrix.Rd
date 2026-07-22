@@ -20,7 +20,7 @@
 \item{export_dir}{export directory.}
 
 \item{overwrite}{logical indicating whether to create a CSV or Excel file if it
-doesn't exist yet (\code{create = TRUE} by default)}
+doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }
@@ -38,6 +38,8 @@ To export several quality reports in CSV or Excel files
 }
 }
 \seealso{
+\link[=fr-write.JVS_matrix]{Traduction française}
+
 Other QR_matrix functions:
 \code{\link[=extract_QR]{extract_QR()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},

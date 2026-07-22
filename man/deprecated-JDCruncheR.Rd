@@ -8,10 +8,11 @@
 export_xlsx(x, ...)
 }
 \arguments{
-\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
+\item{x}{a \code{\link{JVS_matrix}}, a \code{\link{QR_matrix}} or
+\code{\link{mQR_matrix}} object.}
 
 \item{...}{other parameters of the function
-\code{\link{write.QR_matrix}}.}
+\code{\link{write.QR_matrix}} or \code{\link{write.JVS_matrix}}.}
 }
 \value{
 \code{"QR_matrix"}, \code{"mQR_matrix"} or \code{"JVS_matrix"} object invisibly.

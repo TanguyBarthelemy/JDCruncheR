@@ -16,13 +16,13 @@ que l'on veut créer}
 (\code{auto_format = TRUE} by default).}
 
 \item{overwrite}{logical indicating whether to create an Excel file if it
-doesn't exist yet (\code{create = TRUE} by default)}
+doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }
 \value{
-Returns invisibly (via \code{invisible(x)}) a workbook object
-created by \code{XLConnect::loadWorkbook()} for further manipulation.
+Returns invisibly (via \code{invisible()}) a workbook object
+created by \code{openxlsx::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.

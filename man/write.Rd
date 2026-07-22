@@ -2,28 +2,31 @@
 % Please edit documentation in R/export.R
 \name{write}
 \alias{write}
-\title{Exporting QR_matrix or mQR_matrix objects in an Excel file}
+\title{Writing QR to files}
 \usage{
 write(x, ...)
 }
 \arguments{
-\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
+\item{x}{a \code{\link{JVS_matrix}}, a \code{\link{QR_matrix}} or
+\code{\link{mQR_matrix}} object.}
 
 \item{...}{other parameters of the function
-\code{\link{write.QR_matrix}}.}
+\code{\link{write.QR_matrix}} or \code{\link{write.JVS_matrix}}.}
 }
 \value{
-If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly
-(via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as
+If \code{x} is a \code{\link{JVS_matrix}} or a \code{\link{mQR_matrix}}, the
+function returns invisibly (via \code{invisible(x)}) the same object as
 \code{x}.
 Else if \code{x} is a \code{\link{QR_matrix}}, the function returns
-invisibly (via \code{invisible(x)}) a workbook object created by
-\code{XLConnect::loadWorkbook()} for further manipulation.
+invisibly (via \code{invisible()}) a workbook object created by
+\code{openxlsx::loadWorkbook()} for further manipulation.
 }
 \description{
-Exporting QR_matrix or mQR_matrix objects in an Excel file
+Writing QR to files
 }
 \seealso{
+\link[=fr-write]{Traduction française}
+
 Other QR_matrix functions:
 \code{\link[=extract_QR]{extract_QR()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
