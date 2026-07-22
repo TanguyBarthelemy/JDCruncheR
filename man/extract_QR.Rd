@@ -87,8 +87,6 @@ Other QR_matrix functions:
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
 \code{\link{sort}},
 \code{\link[=weighted_score]{weighted_score()}},
-\code{\link[=write]{write()}},
-\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
 \code{\link[=write.QR_matrix]{write.QR_matrix()}},
 \code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }

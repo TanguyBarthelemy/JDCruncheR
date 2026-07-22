@@ -291,7 +291,6 @@ NULL
 #' invisibly (via \code{invisible()}) a workbook object created by
 #' \code{openxlsx::loadWorkbook()} for further manipulation.
 #'
-#' @family QR_matrix functions
 #' @seealso [Traduction française][fr-write()]
 #' @export
 write <- function(x, ...) {
@@ -354,7 +353,7 @@ NULL
 #' @importFrom utils write.table
 #' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #'
-#' @family QR_matrix functions
+#' @family JVS_matrix functions
 #' @exportS3Method write JVS_matrix
 #' @method write JVS_matrix
 #' @seealso [Traduction française][fr-write.JVS_matrix()]

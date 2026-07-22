@@ -40,13 +40,7 @@ To export several quality reports in CSV or Excel files
 \seealso{
 \link[=fr-write.JVS_matrix]{Traduction française}
 
-Other QR_matrix functions:
-\code{\link[=extract_QR]{extract_QR()}},
-\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
-\code{\link{sort}},
-\code{\link[=weighted_score]{weighted_score()}},
-\code{\link[=write]{write()}},
-\code{\link[=write.QR_matrix]{write.QR_matrix()}},
-\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
+Other JVS_matrix functions:
+\code{\link[=extract_JVS]{extract_JVS()}}
 }
-\concept{QR_matrix functions}
+\concept{JVS_matrix functions}

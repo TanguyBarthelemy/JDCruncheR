@@ -84,4 +84,8 @@ package = "JDCruncheR"
 JVS <- extract_JVS(dir = dir_path)
 
 }
+\seealso{
+Other JVS_matrix functions:
+\code{\link[=write.JVS_matrix]{write.JVS_matrix()}}
+}
 \concept{JVS_matrix functions}
