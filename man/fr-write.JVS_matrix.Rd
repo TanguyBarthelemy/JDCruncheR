@@ -30,4 +30,19 @@ Excel.
 \item les fichiers csv seront exportées avec le package 'utils'.
 }
 }
+\examples{
+# Chemin menant au répertoire contenant le fichier demetra_m et les séries nécessaires
+dir_path <- system.file("extdata", "WS/WS_world/Output/SAProcessing-1", package = "JDCruncheR")
+
+# Extraire le rapport JVS à partir des fichiers CSV
+JVS <- extract_JVS(dir = dir_path)
+
+# Export du rapport JVS dans un fichier Excel
+write(JVS, format = "xlsx", export_dir = tempdir(), overwrite = TRUE)
+
+# Export du rapport JVS dans un fichier CSV
+write(JVS, format = "csv", export_dir = tempdir(), overwrite = TRUE)
+
+
+}
 \keyword{internal}

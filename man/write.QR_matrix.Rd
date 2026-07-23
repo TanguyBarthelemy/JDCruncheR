@@ -9,8 +9,7 @@
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} object.}
 
-\item{file}{a \code{character} object with the path to the file to export
-que l'on veut créer}
+\item{file}{a \code{character} object with the path to the file to export}
 
 \item{auto_format}{logical indicating whether to format the output
 (\code{auto_format = TRUE} by default).}
@@ -26,6 +25,21 @@ created by \code{openxlsx::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.
+}
+\examples{
+# Path leading to a demetra_m matrix
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Export the Quality Report to an Excel file
+write(x = QR, file = tempfile(fileext = ".xlsx"))
+
 }
 \seealso{
 \link[=fr-write.QR_matrix]{Traduction française}
