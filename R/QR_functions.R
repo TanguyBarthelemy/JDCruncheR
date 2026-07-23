@@ -986,7 +986,7 @@ NULL
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Ajouter un nouvel indicateur
-#' my_alea <- rnorm(nrow(demetra_m))
+#' my_alea <- rnorm(nrow(QR$modalities))
 #' names(my_alea) <- demetra_m$X
 #' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 #'
