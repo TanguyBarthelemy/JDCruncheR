@@ -1,15 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# **{JDCruncheR}** <a href="https://inseefr.github.io/JDCruncheR/"><img src="man/figures/logo.png" align="right" height="150" style="float:right; height:150px;"/></a>
+# **{JDCruncheR}** <a href="https://inseefr.github.io/rjd3qr/"><img src="man/figures/logo.png" align="right" height="150" style="float:right; height:150px;"/></a>
 
 <!-- badges: start -->
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
 [![Linting
-code](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml)
-[![R-CMD-check](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml)
+code](https://github.com/InseeFr/rjd3qr/actions/workflows/lint.yaml/badge.svg)](https://github.com/InseeFr/rjd3qr/actions/workflows/lint.yaml)
+[![R-CMD-check](https://github.com/InseeFr/rjd3qr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InseeFr/rjd3qr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 <div align="center">
@@ -51,7 +51,7 @@ Pour obtenir la version en cours de développement depuis GitHub :
 # install.packages("remotes")
 
 # Installer la version en cours de développement depuis GitHub
-remotes::install_github("InseeFr/JDCruncheR")
+remotes::install_github("InseeFr/rjd3qr")
 ```
 
 ### Usage
@@ -288,7 +288,7 @@ To get the current development version from GitHub:
 # install.packages("remotes")
 
 # Install development version from GitHub
-remotes::install_github("InseeFr/JDCruncheR")
+remotes::install_github("InseeFr/rjd3qr")
 ```
 
 ### Usage

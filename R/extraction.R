@@ -71,9 +71,29 @@ find_variable <- function(
             ))
         }
     ))
-    cols <- cols[type_cols]
+    na_cols <- unlist(lapply(
+        X = demetra_m[, cols, drop = FALSE],
+        FUN = function(x) {
+            all(is.na(x))
+        }
+    ))
+    if (any(type_cols)) {
+        cols <- cols[type_cols]
+    } else if (any(na_cols)) {
+        # Que des NA
+        return(list(
+            values = create_NA_type(type = type, len = nrow(demetra_m)),
+            missing = NULL
+        ))
+    } else {
+        # Aucune colonne
+        return(list(
+            values = create_NA_type(type = type, len = nrow(demetra_m)),
+            missing = variable
+        ))
+    }
 
-    if (p_value && length(cols) > 0L) {
+    if (p_value) {
         y <- demetra_m[, cols, drop = FALSE]
         p_cols <- apply(
             X = is.na(y) | (y >= 0L & y <= 1L),
@@ -158,13 +178,13 @@ extractLog <- function(demetra_m) {
 }
 
 extractNobs <- function(demetra_m) {
-    nobs <- find_variable(
+    nb_obs <- find_variable(
         demetra_m,
         pattern = "(^span\\.n$)|(^n$)",
         type = "integer",
         variable = "span.n"
     )
-    return(nobs)
+    return(nb_obs)
 }
 
 extractNout <- function(demetra_m) {
@@ -206,7 +226,14 @@ extractMethod <- function(demetra_m) {
 extractSeasonalFilter <- function(demetra_m) {
     seasonal_filters <- find_variable(
         demetra_m,
-        pattern = "(^decomposition\\.seasonal\\.filters$)|(^seasonal\\.filters$)|(^decomposition\\.d9filter$)|(^decomposition\\.seasfilter$)|(^seasfilter$)",
+        pattern = paste(
+            "(^decomposition\\.seasonal\\.filters$)",
+            "(^seasonal\\.filters$)",
+            "(^decomposition\\.d9filter$)",
+            "(^decomposition\\.seasfilter$)",
+            "(^seasfilter$)",
+            sep = "|"
+        ),
         type = "character",
         variable = "decomposition.seasonal-filters"
     )
@@ -216,9 +243,30 @@ extractSeasonalFilter <- function(demetra_m) {
 extractTrendFilter <- function(demetra_m) {
     trend_filters <- find_variable(
         demetra_m,
-        pattern = "(^decomposition\\.trend\\.filter$)|(^trend\\.filter$)|(^decomposition\\.d12filter$)|(^decomposition\\.trendfilter$)|(^trendfilter$)",
+        pattern = paste(
+            "(^decomposition\\.trend\\.filter$)",
+            "(^trend\\.filter$)",
+            "(^decomposition\\.d12filter$)",
+            "(^decomposition\\.trendfilter$)",
+            "(^trendfilter$)",
+            sep = "|"
+        ),
         type = "integer",
         variable = "decomposition.trend-filter"
+    )
+    return(trend_filters)
+}
+
+extractStage2TrendFilter <- function(demetra_m) {
+    trend_filters <- find_variable(
+        demetra_m,
+        pattern = paste(
+            "(^decomposition\\.d7\\.trend\\.filter$)",
+            "(^d7\\.trend\\.filter$)",
+            sep = "|"
+        ),
+        type = "integer",
+        variable = "decomposition.d7-trend-filter"
     )
     return(trend_filters)
 }
@@ -266,7 +314,11 @@ extractAutoCorr <- function(demetra_m) {
 extractSeasCombined <- function(demetra_m) {
     presence_seasonality <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.seas\\.lin\\.combined$)|(^seas\\.lin\\.combined$)",
+        pattern = paste(
+            "(^diagnostics\\.seas\\.lin\\.combined$)",
+            "(^seas\\.lin\\.combined$)",
+            sep = "|"
+        ),
         type = "character",
         variable = "diagnostics.seas-lin-combined"
     )
@@ -274,42 +326,47 @@ extractSeasCombined <- function(demetra_m) {
 }
 
 extract3Outliers <- function(demetra_m) {
-
     outliers <- data.frame(
         out1 = character(nrow(demetra_m)),
         out2 = character(nrow(demetra_m)),
-        out3 = character(nrow(demetra_m))
+        out3 = character(nrow(demetra_m)),
+        stringsAsFactors = FALSE
     )
     nout <- extractNout(demetra_m)
-    if (is.null(nout$missing) && all(nout$values == 0)) {
+    if (is.null(nout$missing) && all(nout$values == 0L)) {
         return(list(values = outliers))
     }
 
-    pattern <- "(^regression\\.out$)|(^out$)" |>
-        gsub(
-            pattern = "$",
-            replacement = "(\\.(\\d){1,}\\.)?$",
-            fixed = TRUE
-        )
+    pattern <- gsub(
+        x = "(^regression\\.out$)|(^out$)",
+        pattern = "$",
+        replacement = "(\\.(\\d){1,}\\.)?$",
+        fixed = TRUE
+    )
 
     id_cols <- grep(pattern = pattern, colnames(demetra_m))
 
     if (length(id_cols) == 0L) {
-        return(list(values = outliers, missing = c(nout$missing, "regression.out(*)")))
+        return(list(
+            values = outliers,
+            missing = c(nout$missing, "regression.out(*)")
+        ))
     }
 
     for (id_series in seq_len(nrow(demetra_m))) {
         outs <- demetra_m[id_series, id_cols]
-        id_cols_out_series <- id_cols[!(is.na(outs) | outs == "")]
+        id_cols_out_series <- id_cols[
+            !is.na(outs) & nzchar(outs, keepNA = FALSE)
+        ]
         outs <- as.character(demetra_m[id_series, id_cols_out_series])
-        if (length(id_cols_out_series) > 1) {
-            t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2])
+        if (length(id_cols_out_series) > 1L) {
+            t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2L])
             outs <- outs[order(abs(t_stat), decreasing = TRUE)[seq_len(min(
-                3,
+                3L,
                 length(id_cols_out_series)
             ))]]
         }
-        outs <- c(outs, rep("", 3 - length(outs)))
+        outs <- c(outs, rep("", 3L - length(outs)))
         outliers[id_series, ] <- outs
     }
 
@@ -325,6 +382,17 @@ extractTDFTest <- function(demetra_m) {
         p_value = TRUE
     )
     return(td_f_test)
+}
+
+#' @importFrom stats pnorm
+extractNormal <- function(demetra_m) {
+    ac1 <- extractAutoCorr(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
+    val <- stats::pnorm(ac1$values * sqrt(nb_obs$values))
+    return(list(
+        values = val,
+        missing = c(ac1$missing, nb_obs$missing)
+    ))
 }
 
 extractIndependence <- function(
@@ -414,7 +482,7 @@ extractResidualsSeasEffect <- function(
 extractFrequency <- function(demetra_m) {
     start_date <- extractStart(demetra_m)
     end_date <- extractEnd(demetra_m)
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
 
     if (!all(is.na(start_date$values)) && !all(is.na(end_date$values))) {
         start_date$values <- as.Date(start_date$values, format = "%Y-%m-%d")
@@ -435,7 +503,8 @@ extractFrequency <- function(demetra_m) {
                 FUN = function(x) {
                     x *
                         (end_date$values[, 1L] - start_date$values[, 1L]) +
-                        (end_date$values[, 2L] - start_date$values[, 2L]) / (12L / x)
+                        (end_date$values[, 2L] - start_date$values[, 2L]) /
+                            (12L / x)
                 },
                 FUN.VALUE = double(nrow(demetra_m))
             ),
@@ -444,13 +513,13 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
-                if (is.na(nobs$values[i])) {
+                if (is.na(nb_obs$values[i])) {
                     return(NA_integer_)
                 }
                 freq[which(
-                    (nobs_compute[i, ] == nobs$values[i]) |
-                        (nobs_compute[i, ] + 1L == nobs$values[i]) |
-                        (nobs_compute[i, ] - 1L == nobs$values[i])
+                    (nobs_compute[i, ] == nb_obs$values[i]) |
+                        (nobs_compute[i, ] + 1L == nb_obs$values[i]) |
+                        (nobs_compute[i, ] - 1L == nb_obs$values[i])
                 )[[1L]]]
             },
             FUN.VALUE = integer(1L)
@@ -460,7 +529,7 @@ extractFrequency <- function(demetra_m) {
     }
     return(list(
         values = output,
-        missing = c(nobs$missing, end_date$missing, start_date$missing)
+        missing = c(nb_obs$missing, end_date$missing, start_date$missing)
     ))
 }
 
@@ -688,7 +757,13 @@ extractDistributionTests <- function(
 
     normality_test <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)|(^normality$)",
+        pattern = paste(
+            "(^residuals\\.doornikhansen$)",
+            "(^doornikhansen$)",
+            "(^dh$)",
+            "(^normality$)",
+            sep = "|"
+        ),
         type = "double",
         variable = c("residuals.dh:3", "residuals.doornikhansen:3"),
         p_value = TRUE
@@ -754,10 +829,10 @@ extractOutliers <- function(
     demetra_m,
     thresholds = getOption("jdc_thresholds")
 ) {
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
     nout <- extractNout(demetra_m)
     m7 <- extractM7(demetra_m)
-    pct_outliers_value <- 100.0 * nout$values / nobs$values
+    pct_outliers_value <- 100.0 * nout$values / nb_obs$values
 
     outliers_modalities <- data.frame(
         m7 = cut(
@@ -786,7 +861,7 @@ extractOutliers <- function(
         modalities = outliers_modalities,
         values = outliers_values,
         missing = c(
-            nobs$missing,
+            nb_obs$missing,
             nout$missing,
             m7$missing
         )
@@ -871,11 +946,12 @@ extractSeasTest <- function(
     ))
 }
 
+#' @importFrom stats sd
 extractStandardDeviation <- function(i) {
     list_sd <- apply(
         X = i[, -1L, drop = FALSE],
         MARGIN = 2L,
-        FUN = sd,
+        FUN = stats::sd,
         na.rm = TRUE
     )
     return(list(
@@ -884,47 +960,60 @@ extractStandardDeviation <- function(i) {
 }
 
 extractMaxAdj_oneseries <- function(y, sa) {
-    valid <- y != 0 & !is.na(y) & !is.na(sa)
+    valid <- y != 0L & !is.na(y) & !is.na(sa)
 
     if (!any(valid)) {
         return(Inf)
     }
 
     adj <- abs((y[valid] - sa[valid]) / y[valid])
-    max_adj <- 100 * max(adj)
+    max_adj <- 100.0 * max(adj)
 
     return(max_adj)
 }
 
 extractMaxAdj_allseries <- function(y, sa) {
     if (ncol(y) != ncol(sa)) {
-        stop("The files Y and SA do not have the same number of columns.")
+        stop(
+            "The files Y and SA do not have the same number of columns.",
+            call. = FALSE
+        )
     }
 
     if (nrow(y) != nrow(sa)) {
-        stop("The files Y and SA do not have the same number of rows.")
+        stop(
+            "The files Y and SA do not have the same number of rows.",
+            call. = FALSE
+        )
     }
 
-    list_max_adj <- mapply(
-        FUN = extractMaxAdj_oneseries,
-        y = y[, -1],
-        sa = sa[, -1],
-        SIMPLIFY = TRUE
-    )
+    list_max_adj <- Map(
+        f = extractMaxAdj_oneseries,
+        y = y[, -1L, drop = FALSE],
+        sa = sa[, -1L, drop = FALSE]
+    ) |>
+        do.call(what = rbind)
 
     return(list(
         values = list_max_adj
     ))
 }
 
+#' @importFrom stats sd
 extractAdjustment <- function(demetra_m, s) {
     leaster <- extractLeaster(demetra_m)
     ntd <- extractNtd(demetra_m)
     ly <- extractLeapYear(demetra_m)
     ly$values[is.na(ly$values)] <- ""
 
-    cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd, na.rm = TRUE) != 0L
-    cond_ca <- leaster$values > 0 | ntd$values > 0 | ly$values == "Leap year"
+    cond_sa <- apply(
+        X = s[, -1L, drop = FALSE],
+        MARGIN = 2L,
+        FUN = stats::sd,
+        na.rm = TRUE
+    ) !=
+        0L
+    cond_ca <- leaster$values > 0L | ntd$values > 0L | ly$values == "Leap year"
 
     adjustment <- paste0(
         ifelse(
@@ -942,5 +1031,6 @@ extractAdjustment <- function(demetra_m, s) {
 
     return(list(
         values = adjustment,
-        missing = c(leaster$missing, ntd$missing, ly$missing)))
+        missing = c(leaster$missing, ntd$missing, ly$missing)
+    ))
 }

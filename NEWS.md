@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* In JVS, Trend filters and D7 filters are now displayed starting with a "H"
+* In JVS, Leap year and Easter variables are displayed as "Yes" or "No" variables
+* In JVS, we apply a threshold of 0.05 to stat_Q between Good and Bad
+* In JVS, Quality SEVERE is renamed in POOR
+* In JVS, the final series are no longer used and replaced by the decomposition series before applying the effects of preadjustment
+* In JVS, the irregular standard deviation is now based on the computation sa_cmp - t_cmp
+* In example data, we updated the generated output csv files to match JVS and QR creation
+* The column follows now the same order as the plug-in
+
+### Fixed
+
+* Fix difference with v3 plug-in JVS with new normal test (replacing the Ljung-Box test)
+* Fix stage2 Henderson filters with values from the previsional Henderson filter from table D6
+* Fix dependencies declaration
+* When reading demetra_m, the column with only `NA`s are no more considered as missing.
+* Fix JVS creation when a WS contains only one series
+
+### Added
+
+* New vignette (in English and in French) to illustrate the JVS plug-in functionnalities
+* New documentation, now also available in French: write functions (generic and specific), JVS classes, `get_thresholds`, `set_thresholds`
+* New documentation, available in French and in English: `extract_JVS`
+
+
 ## [0.4.0] - 2026-06-15
 
 ### Added
@@ -19,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. [#44](https://github.com/InseeFr/JDCruncheR/issues/44)
+* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. [#44](https://github.com/InseeFr/rjd3qr/issues/44)
 * `sa_on_sa` statistics are renamed in `s_on_sa`
 * QR produced if missing values
 * `compute_score()` works now with `conditional_indicator`
@@ -54,7 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* `na.rm = TRUE` by default in `compute_score()` [#36](https://github.com/InseeFr/JDCruncheR/issues/36)
+* `na.rm = TRUE` by default in `compute_score()` [#36](https://github.com/InseeFr/rjd3qr/issues/36)
 * `extract_QR` accept demetra_m with duplicated columns
 
 ## [0.3.4] - 2025-03-27
@@ -164,17 +190,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
 * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
 
-[Unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.4.0...HEAD
-[0.4.0]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.6...v0.4.0
-[0.3.6]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...v0.3.6
-[0.3.5]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...v0.3.5
-[0.3.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...v0.3.4
-[0.3.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.2...v0.3.3
-[0.3.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...v0.3.2
-[0.3.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.0...v0.3.1
-[0.3.0]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.4...v0.3.0
-[0.2.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.3...v0.2.4
-[0.2.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.2...v0.2.3
-[0.2.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.1...v0.2.2
-[0.2.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/InseeFr/JDCruncheR/releases/tag/v0.2.0
+[Unreleased]: https://github.com/InseeFr/rjd3qr/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/InseeFr/rjd3qr/compare/v0.3.6...v0.4.0
+[0.3.6]: https://github.com/InseeFr/rjd3qr/compare/v0.3.5...v0.3.6
+[0.3.5]: https://github.com/InseeFr/rjd3qr/compare/v0.3.4...v0.3.5
+[0.3.4]: https://github.com/InseeFr/rjd3qr/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/InseeFr/rjd3qr/compare/v0.3.2...v0.3.3
+[0.3.2]: https://github.com/InseeFr/rjd3qr/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/InseeFr/rjd3qr/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/InseeFr/rjd3qr/compare/v0.2.4...v0.3.0
+[0.2.4]: https://github.com/InseeFr/rjd3qr/compare/v0.2.3...v0.2.4
+[0.2.3]: https://github.com/InseeFr/rjd3qr/compare/v0.2.2...v0.2.3
+[0.2.2]: https://github.com/InseeFr/rjd3qr/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/InseeFr/rjd3qr/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/InseeFr/rjd3qr/releases/tag/v0.2.0

@@ -46,11 +46,11 @@ rbind(QR1, QR2, check_formula = FALSE)
 \link[=fr-rbind.QR_matrix]{Traduction française}
 
 Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
 \code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link{sort}},
 \code{\link[=weighted_score]{weighted_score()}},
-\code{\link[=write]{write()}},
-\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
 \code{\link[=write.QR_matrix]{write.QR_matrix()}},
 \code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }

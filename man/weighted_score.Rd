@@ -2,9 +2,18 @@
 % Please edit documentation in R/QR_functions.R
 \name{weighted_score}
 \alias{weighted_score}
+\alias{weighted_score.default}
+\alias{weighted_score.QR_matrix}
+\alias{weighted_score.mQR_matrix}
 \title{Weighted score calculation}
 \usage{
 weighted_score(x, pond = 1L)
+
+\method{weighted_score}{default}(x, pond = 1L)
+
+\method{weighted_score}{QR_matrix}(x, pond = 1L)
+
+\method{weighted_score}{mQR_matrix}(x, pond = 1L)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
@@ -45,11 +54,11 @@ QR[["modalities"]][["score_pond"]]
 \link[=fr-weighted_score]{Traduction française}
 
 Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
 \code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
 \code{\link{sort}},
-\code{\link[=write]{write()}},
-\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
 \code{\link[=write.QR_matrix]{write.QR_matrix()}},
 \code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }

@@ -1,45 +1,114 @@
+#' @title Création d'un rapport JVS
+#'
+#' @description
+#' Créé un rapport JVS à partir des fichiers de sortie de JDemetra+.
+#' Les fichiers de sortie peuvent être générés avec l'interface graphique ou
+#' avec le cruncher et sont des fichiers CSV contenant la matrice de
+#' diagnostics et les séries de sortie.
+#'
+#' @param dir Chemin vers le dossier contenant les fichiers
+#'   demetra_m.csv, series_decomposition_y_cmp.csv,
+#'   series_decomposition_sa_cmp.csv, series_decomposition_s_cmp.csv et
+#'   series_decomposition_t_cmp.csv.
+#' @param demetra_m Un data.frame contenant la matrice de diagnostics.
+#'   Si manquant ou `NULL`, le fichier est recherché dans `dir`.
+#' @param y Un data.frame contenant la série initiale.
+#'   Si manquant ou `NULL`, le fichier est recherché dans `dir`.
+#' @param sa Un data.frame contenant la série CVS.
+#'   Si manquant ou `NULL`, le fichier est recherché dans `dir`.
+#' @param s Un data.frame contenant la composante saisonnière du modèle.
+#'   Si manquant ou `NULL`, le fichier est recherché dans `dir`.
+#' @param t Un data.frame contenant la composante de tendance du modèle.
+#'   Si manquant ou `NULL`, le fichier est recherché dans `dir`.
+#' @param ... Autres paramètres à passer à `read_demetra_m()` tels que `sep`
+#'   (le séparateur utilisé dans le fichier CSV. Par défaut, \code{sep = ";"})
+#'   et `dec` (le séparateur décimal utilisé dans le fichier CSV. Par défaut,
+#'   \code{dec = ","}).
+#'
+#' @details Cette fonction génère un rapport JVS à partir des outputs de
+#' JDemetra+. Les sorties nécessaires sont la matrice de diagnostics demetra_m
+#' (généralement issue du fichier \emph{demetra_m.csv}) et les séries y, sa, s
+#' et t (généralement lues depuis les fichiers CSV des séries).
+#'
+#' Tous ces fichiers peuvent être générés en lançant le cruncher (fonctions
+#' \code{\link[rjwsacruncher]{cruncher_and_param}}).
+#'
+#' Pour plus d'informations sur la génération des sorties, voir la vignette :
+#' `browseVignettes(package = "JDCruncheR")`
+#'
+#' Si les séries sont fournies, elles doivent être des \code{data.frame} avec
+#' les dates dans la première colonne et les valeurs des séries dans les autres
+#' colonnes.
+#'
+#' Cette fonction retourne un objet de type \code{\link{JVS_matrix}}, qui est un
+#' \code{data.frame} contenant plusieurs indications sur l'ajustement saisonnier
+#' de la série.
+#'
+#' Si tous les data.frames (`demetra_m`, `y`, `sa`, `s` et `t`) sont fournis,
+#' l'argument `dir` est ignoré. Sinon, `dir` doit pointer vers le
+#' répertoire contenant les fichiers CSV correspondants.
+#'
+#' @encoding UTF-8
+#'
+#' @returns Un objet de classe \code{\link{JVS_matrix}}.
+#'
+#' @examples
+#' # Chemin menant au dossier contenant les fichiers d'output :
+#' dir_path <- system.file(
+#'     "extdata",
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     package = "JDCruncheR"
+#' )
+#'
+#' # Extraction du rapport JVS :
+#' JVS <- extract_JVS(dir = dir_path)
+#'
+#' @keywords internal
+#' @name fr-extract_JVS
+NULL
+#> NULL
+
 #' @title Extraction of a JVS report
 #'
 #' @description
-#' Extract a JVS report from CSV files containing the diagnostics
-#' matrix and the output series.
+#' Extract a JVS report from the output files of JDemetra+.
+#' The output files can be generated with the GUI or with the cruncher and are
+#' CSV files containing the diagnostics matrix and the output series.
 #'
-#' @param dir path to the directory containing the `demetra_m`, `y`,
-#' `sa`, `s` and `i` files.
-#' @param demetra_m dataframe containing the diagnostics matrix.
-#' If missing, the file is searched for in `dir`.
-#' @param y dataframe containing the initial series.
-#' If missing, the file is searched for in `dir`.
-#' @param sa dataframe containing the seasonally adjusted series.
-#' If missing, the file is searched for in `dir`.
-#' @param s dataframe containing the seasonal component of the series.
-#' If missing, the file is searched for in `dir`.
-#' @param i dataframe containing the irregular component series.
-#' If missing, the file is searched for in `dir`.
-#' @param ... Other parameters to pass to `read_demetra_m` such as `sep` (the
-#' separator used in the csv file. By default, \code{sep = ";"}) and `dec` (the
-#' decimal separator used in the csv file. By default, \code{dec = ","})
+#' @param dir path to the directory containing the demetra_m.csv,
+#'   series_decomposition_y_cmp.csv, series_decomposition_sa_cmp.csv,
+#'   series_decomposition_s_cmp.csv and series_decomposition_t_cmp.csv files.
+#' @param demetra_m data.frame containing the diagnostics matrix.
+#'   If missing or `NULL`, the file is searched for in `dir`.
+#' @param y data.frame containing the initial series.
+#'   If missing or `NULL`, the file is searched for in `dir`.
+#' @param sa data.frame containing the seasonally adjusted series.
+#'   If missing or `NULL`, the file is searched for in `dir`.
+#' @param s data.frame containing the seasonal component of the series.
+#'   If missing or `NULL`, the file is searched for in `dir`.
+#' @param t data.frame containing the trend component series.
+#'   If missing or `NULL`, the file is searched for in `dir`.
+#' @param ... Other parameters to pass to `read_demetra_m()` such as `sep` (the
+#'   separator used in the csv file. By default, \code{sep = ";"}) and `dec`
+#'   (the decimal separator used in the csv file. By default, \code{dec = ","})
 #'
-#' @details This function generates a JVS report from a CSV file containing
-#' diagnostics (usually from the file \emph{demetra_m.csv}) and from the csv files
-#' containing the initial series (file \emph{series_y.csv}), the seasonally adjusted
-#' series (file \emph{series_sa.csv}), the seasonal component of the series (file
-#' \emph{series_s.csv}) and the irregular component of the series (file
-#' \emph{series_i.csv}).
-#' The \emph{demetra_m.csv} file can be generated by launching the cruncher
-#' (functions \code{\link[rjwsacruncher]{cruncher}} or
-#' \code{\link[rjwsacruncher]{cruncher_and_param}}) with the default export
-#' parameters, having used the default option \code{csv_layout = "vtable"} to
-#' format the output tables of the functions
-#' \code{\link[rjwsacruncher]{cruncher_and_param}} and
-#' \code{\link[rjwsacruncher]{create_param_file}} when creating the parameters
-#' file.
-#' The files \emph{series_y.csv}, \emph{series_sa.csv}, \emph{series_s.csv},
-#' \emph{series_i.csv} can be obtained from the associated GUI or R packages.
-#' Dates must appear in the first column.
+#' @details This function generates a JVS report from the output of JDemetra+.
+#' The output needed are the demetra_m diagnostics matrix (usually from the file
+#' \emph{demetra_m.csv}) and the series y, sa, s and t (usually read from the
+#' series CSV files).
 #'
-#' This function returns a \code{\link{JVS_matrix}} object, which is a \code{data.frame}
-#' containing several indications on the seasonal adjustment of the series.
+#' All this files can be generated by launching the cruncher (functions
+#' \code{\link[rjwsacruncher]{cruncher_and_param}}).
+#'
+#' For more information about the generation of the output, see the vignette:
+#' `browseVignettes(package = "JDCruncheR")`
+#'
+#' If the series are provided, they have to be `data.frame` with the dates in
+#' the first column and the values of the series in the other columns.
+#'
+#' This function returns a \code{\link{JVS_matrix}} object, which is a
+#' \code{data.frame} containing several indications on the seasonal adjustment
+#' of the series.
 #'
 #' If all data frames (`demetra_m`, `y`, `sa`, `s` and `i`) are supplied,
 #' the `dir` argument is ignored. Otherwise, `dir` should point to the
@@ -47,23 +116,21 @@
 #'
 #' @encoding UTF-8
 #'
-#' @return a \code{\link{JVS_matrix}} object.
+#' @returns a \code{\link{JVS_matrix}} object.
 #'
-#' @family JVS_matrix functions
 #' @examples
 #' # Path leading to the directory containing the needed files
 #'
 #' dir_path <- system.file(
-#' "extdata",
-#' "WS/WS_world/Output/SAProcessing-1",
-#' package = "JDCruncheR"
+#'     "extdata",
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     package = "JDCruncheR"
 #' )
 #'
 #' # Extract the JVS report from the directory
 #' JVS <- extract_JVS(dir = dir_path)
-#'
-#' @importFrom stats sd
-#' @importFrom utils read.csv
+#' @family JVS_matrix functions
+#' @seealso [Traduction française][fr-extract_JVS()]
 #' @export
 extract_JVS <- function(
     dir = NULL,
@@ -71,7 +138,7 @@ extract_JVS <- function(
     y = NULL,
     sa = NULL,
     s = NULL,
-    i = NULL,
+    t = NULL,
     ...
 ) {
     # Lecture de demetra_m
@@ -84,22 +151,40 @@ extract_JVS <- function(
     )
 
     # Lecture de y
-    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y", ...)
+    y <- check_obj(
+        dir = dir,
+        x = y,
+        reading_fun = read_series,
+        name = "y_cmp",
+        ...
+    )
 
     # Lecture de sa
     sa <- check_obj(
         dir = dir,
         x = sa,
         reading_fun = read_series,
-        name = "sa",
+        name = "sa_cmp",
         ...
     )
 
     # Lecture de s
-    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s", ...)
+    s <- check_obj(
+        dir = dir,
+        x = s,
+        reading_fun = read_series,
+        name = "s_cmp",
+        ...
+    )
 
     # Lecture de i
-    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i", ...)
+    t <- check_obj(
+        dir = dir,
+        x = t,
+        reading_fun = read_series,
+        name = "t_cmp",
+        ...
+    )
 
     series <- gsub(
         "(^ *)|(* $)",
@@ -109,7 +194,7 @@ extract_JVS <- function(
 
     method <- extractMethod(demetra_m)
     frequency_series <- extractFrequency(demetra_m)
-    nobs <- extractNobs(demetra_m)
+    nb_obs <- extractNobs(demetra_m)
     start_date <- extractStart(demetra_m)
     end_date <- extractEnd(demetra_m)
     adjustment <- extractAdjustment(demetra_m, s)
@@ -126,18 +211,46 @@ extract_JVS <- function(
     res_td_effect <- extractResidualsTDEffect(demetra_m = demetra_m)
     stat_Q <- extractStatQ(demetra_m)
     trend_filter <- extractTrendFilter(demetra_m)
+    d7_trend_filter <- extractStage2TrendFilter(demetra_m)
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
-    lb_test <- extractIndependence(demetra_m)
-    standard_deviation <- extractStandardDeviation(i)
+    normal_test <- extractNormal(demetra_m)
+    standard_deviation <- extractStandardDeviation(sa - t)
     max_adj <- extractMaxAdj_allseries(y, sa)
+
+    leap_year$values <- ifelse(leap_year$values == "Leap year", "Yes", "No")
+    leap_year$values <- ifelse(is.na(leap_year$values), "No", leap_year$values)
+    leaster$values <- ifelse(leaster$values > 0L, "Yes", "No")
+
+    trend_filter$values <- ifelse(
+        test = is.na(trend_filter$values),
+        yes = "",
+        no = paste0("H", trend_filter$values)
+    )
+    d7_trend_filter$values <- ifelse(
+        test = is.na(d7_trend_filter$values),
+        yes = "",
+        no = paste0("H", d7_trend_filter$values)
+    )
+
+    stat_Q$values$q <- ifelse(
+        !is.na(stat_Q$values$q) & stat_Q$values$q > 0.05,
+        "Good",
+        stat_Q$values$q
+    )
+    stat_Q$values$q <- ifelse(
+        !is.na(stat_Q$values$q) & stat_Q$values$q <= 0.05,
+        "Bad",
+        stat_Q$values$q
+    )
+    stat_Q$values$q <- ifelse(is.na(stat_Q$values$q), "", stat_Q$values$q)
 
     JVS_output <- data.frame(
         Series = series,
         Method = method$values,
         Period = frequency_series$values,
-        Nobs = nobs$values,
+        Nobs = nb_obs$values,
         Start = start_date$values,
         End = end_date$values,
         Adjustment = adjustment$values,
@@ -151,9 +264,9 @@ extract_JVS <- function(
             "No",
             "Yes"
         ),
-        Log_Transformation = ifelse(log_transform$values == 1, "Yes", "No"),
+        Log_Transformation = ifelse(log_transform$values == 1L, "Yes", "No"),
         ARIMA_model = arima_model$values,
-        LeapYear = leap_year$values,
+        LeapYear = ifelse(is.na(leap_year$values), "No", leap_year$values),
         MovingHoliday = leaster$values,
         NbTD = ntd$values,
         Noutliers = nout$values,
@@ -162,24 +275,27 @@ extract_JVS <- function(
         Residual_TD_Effect = ifelse(res_td_effect$values > 0.05, "No", "Yes"),
         Q_Stat = stat_Q$values$q,
         Final_Henderson_Filter = trend_filter$values,
-        Stage_2_Henderson_Filter = trend_filter$values,
+        Stage_2_Henderson_Filter = d7_trend_filter$values,
         Seasonal_Filter = seas_filter$values,
-        Quality = quality$values,
+        Irregular_standard_deviation = standard_deviation$values,
+        Quality = ifelse(quality$values == "Severe", "Poor", quality$values),
+        Max_Adj = max_adj$values,
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
-        Ljung_Box_test = lb_test$values,
+        Normal_test = normal_test$values,
         Autocorrelation_negative_and_significant = ifelse(
-            auto_corr$values < 0 & lb_test$values < 0.05,
+            !is.na(auto_corr$values) &
+                !is.na(normal_test$values) &
+                auto_corr$values < 0.0 &
+                normal_test$values < 0.05,
             "Warning",
             ""
-        ),
-        Irregular_standard_deviation = standard_deviation$values,
-        Max_Adj = max_adj$values
+        )
     )
 
     missing_items <- c(
         method$missing,
         frequency_series$missing,
-        nobs$missing,
+        nb_obs$missing,
         start_date$missing,
         end_date$missing,
         adjustment$missing,
@@ -194,11 +310,12 @@ extract_JVS <- function(
         res_sa_effect$missing,
         res_td_effect$missing,
         stat_Q$missing,
+        d7_trend_filter$missing,
         trend_filter$missing,
         seas_filter$missing,
         quality$missing,
         auto_corr$missing,
-        lb_test$missing
+        normal_test$missing
     ) |>
         unique()
 
@@ -227,12 +344,12 @@ extract_JVS <- function(
         "Final Henderson Filter",
         "Stage 2 Henderson Filter",
         "Seasonal Filter",
-        "Quality",
-        "Autocorrelation of order 1 of the SA series",
-        "Ljung-Box Test (P-value)",
-        "Autocorrelation negative and significant",
         "Irregular Standard-Deviation",
-        "Max-Adj"
+        "Quality (for TS)",
+        "Max-Adj",
+        "Autocorrelation of order 1 of the SA series",
+        "Normal Test (P-value)",
+        "Autocorrelation negative and significant"
     )
 
     if (length(missing_items) > 0L) {
@@ -242,7 +359,8 @@ extract_JVS <- function(
             toString(missing_items),
             "\n\n",
             "If you extract element with rjwsacruncher::cruncher_and_param(),",
-            " don't forget to put `short_column_headers = FALSE` and `v3 = TRUE`.",
+            " don't forget to put `short_column_headers = FALSE`",
+            " and `v3 = TRUE`.",
             call. = FALSE
         )
     }

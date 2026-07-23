@@ -9,34 +9,48 @@
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} object.}
 
-\item{file}{a \code{character} object with the path to the file to export
-que l'on veut créer}
+\item{file}{a \code{character} object with the path to the file to export}
 
 \item{auto_format}{logical indicating whether to format the output
 (\code{auto_format = TRUE} by default).}
 
 \item{overwrite}{logical indicating whether to create an Excel file if it
-doesn't exist yet (\code{create = TRUE} by default)}
+doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }
 \value{
-Returns invisibly (via \code{invisible(x)}) a workbook object
-created by \code{XLConnect::loadWorkbook()} for further manipulation.
+Returns invisibly (via \code{invisible()}) a workbook object
+created by \code{openxlsx::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.
+}
+\examples{
+# Path leading to a demetra_m matrix
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Export the Quality Report to an Excel file
+write(x = QR, file = tempfile(fileext = ".xlsx"))
+
 }
 \seealso{
 \link[=fr-write.QR_matrix]{Traduction française}
 
 Other QR_matrix functions:
+\code{\link[=QR_matrix]{QR_matrix()}},
 \code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
 \code{\link{sort}},
 \code{\link[=weighted_score]{weighted_score()}},
-\code{\link[=write]{write()}},
-\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
 \code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
 \concept{QR_matrix functions}

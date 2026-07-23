@@ -30,14 +30,14 @@ booléennes (\code{TRUE} ou \code{FALSE}).
 \description{
 \code{QR_matrix()} permet de créer un objet de type \code{\link{QR_matrix}}
 contenant un bilan qualité.
-}
-\details{
+
 \code{mQR_matrix()} permet de créer un objet de type \code{\link{mQR_matrix}}
 qui est une liste de bilans qualité (donc d'objets \code{\link{QR_matrix}}).
 
 \code{is.QR_matrix()} et \code{is.mQR_matrix()} permettent de tester si un
 objet est un bilan qualité ou une liste de bilans qualité.
-
+}
+\details{
 Un objet  de type \code{\link{QR_matrix}} est une liste de trois
 paramètres :
 \itemize{

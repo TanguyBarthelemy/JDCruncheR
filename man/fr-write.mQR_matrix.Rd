@@ -22,7 +22,7 @@ fichier avec 2 feuilles par bilan qualité (\code{Values} et
 (\code{auto_format = TRUE} par défaut).}
 
 \item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
-s'il existe déjà (\code{create = TRUE} par défaut)}
+s'il existe déjà (\code{overwrite = TRUE} par défaut)}
 
 \item{...}{autres argument non utilisés}
 }
@@ -32,5 +32,30 @@ Renvoie de manière invisible (via \code{invisible(x)}) le même objet
 }
 \description{
 Permet d'exporter dans des fichiers Excel une liste de bilan qualité
+}
+\examples{
+# Chemin menant au fichier demetra_m.csv
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
+QR <- extract_QR(demetra_path)
+
+# Calculer le score
+QR1 <- compute_score(x = QR, n_contrib_score = 5)
+QR2 <- compute_score(
+    x = QR,
+    score_pond = c(qs_residual_s_on_sa = 5, qs_residual_sa_on_i = 30,
+                   f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+                   oos_mean = 30, residuals_skewness = 15, m7 = 25)
+)
+mQR <- mQR_matrix(list(a = QR1, b = QR2))
+
+# Export du mQR dans un fichier Excel
+write(x = mQR, export_dir = tempdir())
+
 }
 \keyword{internal}

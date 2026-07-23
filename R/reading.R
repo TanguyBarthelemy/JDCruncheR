@@ -8,7 +8,7 @@ check_obj <- function(
     if (!is.null(x)) {
         return(x)
     }
-    if (is.null(x) & is.null(dir)) {
+    if (is.null(x) && is.null(dir)) {
         stop(
             "Please call the function on a directory",
             " (using the `dir` argument)",
@@ -26,7 +26,7 @@ check_obj <- function(
         !dir.exists(dir) & file.exists(dir) & endsWith(x = dir, suffix = ".csv")
     ]
     dir <- dir[dir.exists(dir)]
-    if (length(dir) == 0L & length(list_files) == 0L) {
+    if (length(dir) == 0L && length(list_files) == 0L) {
         stop(
             "The chosen dir doesn't exist.",
             call. = FALSE
@@ -58,7 +58,8 @@ check_obj <- function(
             "No files with ",
             name,
             ".csv form have been found in the directory :",
-            paste(dir, collapse = "\n")
+            paste(dir, collapse = "\n"),
+            call. = FALSE
         )
     }
 
@@ -75,8 +76,9 @@ check_obj <- function(
     return(x)
 }
 
+#' @importFrom utils read.csv
 read_demetra_m <- function(file, sep = ";", dec = ",") {
-    demetra_m <- read.csv(
+    demetra_m <- utils::read.csv(
         file = file,
         sep = sep,
         dec = dec,
@@ -88,8 +90,9 @@ read_demetra_m <- function(file, sep = ";", dec = ",") {
     return(demetra_m)
 }
 
+#' @importFrom utils read.csv
 read_series <- function(file, sep = ";", dec = ",") {
-    series_df <- read.csv(
+    series_df <- utils::read.csv(
         file = file,
         sep = sep,
         dec = dec,
@@ -99,14 +102,17 @@ read_series <- function(file, sep = ";", dec = ",") {
         quote = ""
     )
 
-    test_date <- as.Date(series_df[, 1], format = "%Y-%m-%d")
+    test_date <- as.Date(series_df[, 1L], format = "%Y-%m-%d")
 
     if (all(is.na(test_date))) {
-        warning("Incorrect table format: use csv_layout = 'vtable'")
+        warning(
+            "Incorrect table format: use csv_layout = 'vtable'",
+            call. = FALSE
+        )
     } else {
-        series_df[, 1] <- test_date
-        series_df <- series_df[order(series_df[, 1]), ]
-        colnames(series_df)[1] <- "date"
+        series_df[, 1L] <- test_date
+        series_df <- series_df[order(series_df[, 1L]), ]
+        colnames(series_df)[1L] <- "date"
     }
 
     return(series_df)

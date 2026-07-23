@@ -3,29 +3,93 @@
 \name{QR_var_manipulation}
 \alias{QR_var_manipulation}
 \alias{remove_indicators}
+\alias{remove_indicators.default}
+\alias{remove_indicators.QR_matrix}
+\alias{remove_indicators.mQR_matrix}
 \alias{retain_indicators}
+\alias{retain_indicators.default}
+\alias{retain_indicators.QR_matrix}
+\alias{retain_indicators.mQR_matrix}
+\alias{add_indicator}
+\alias{add_indicator.default}
+\alias{add_indicator.QR_matrix}
+\alias{add_indicator.mQR_matrix}
 \title{Editing the indicators list}
 \usage{
 remove_indicators(x, ...)
 
+\method{remove_indicators}{default}(x, ...)
+
+\method{remove_indicators}{QR_matrix}(x, ...)
+
+\method{remove_indicators}{mQR_matrix}(x, ...)
+
 retain_indicators(x, ...)
+
+\method{retain_indicators}{default}(x, ...)
+
+\method{retain_indicators}{QR_matrix}(x, ...)
+
+\method{retain_indicators}{mQR_matrix}(x, ...)
+
+add_indicator(x, indicator, variable_name, ...)
+
+\method{add_indicator}{default}(x, indicator, variable_name, ...)
+
+\method{add_indicator}{QR_matrix}(x, indicator, variable_name, ...)
+
+\method{add_indicator}{mQR_matrix}(x, indicator, variable_name, ...)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
 
-\item{...}{names of the variable to remove (or keep)}
+\item{...}{other parameters of the function \code{\link[base]{merge}} (for
+\code{add_indicator}) or names of the variable to remove or keep (for
+\code{retain_indicators} and \code{remove_indicators})}
+
+\item{indicator}{a \code{vector} or a \code{data.frame} (cf. details).}
+
+\item{variable_name}{a string containing the name of the variables to add.}
 }
 \value{
-\code{remove_indicators()} returns the same object \code{x} reduced
-by the flags and variables used as arguments \dots So if the input \code{x}
-is a QR_matrix, an object of class QR_matrix is returned. If the input
-\code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+\itemize{
+\item \code{remove_indicators()} returns the same object \code{x} reduced by the
+flags and variables used as arguments \dots
+So if the input \code{x} is a \code{QR_matrix}, an object of class \code{QR_matrix}
+is returned. If the input \code{x} is a \code{mQR_matrix}, an object of class
+\code{mQR_matrix} is returned.
+\item \code{retains_indicators()} returns the same object, with only the chosen
+indicators.
+\item \code{add_indicators()} returns the same object, enhanced with the chosen
+indicator.
+So if the input \code{x} is a \code{QR_matrix}, an object of class
+\code{QR_matrix} is returned. If the input \code{x} is a \code{mQR_matrix}, an
+object of class \code{mQR_matrix} is returned.
+}
 }
 \description{
-Functions to remove indicators (\code{remove_indicators()}) or retrain some
-indicators only (\code{retain_indicators()}) from \code{\link{QR_matrix}} or
+Functions to add indicator (\code{add_indicator()}), remove indicators
+(\code{remove_indicators()}) or retrain some indicators only
+(\code{retain_indicators()}) to and from \code{\link{QR_matrix}} or
 \code{\link{mQR_matrix}} objects. The series names (column "series") cannot
 be removed.
+}
+\details{
+The function \code{add_indicator()} adds the chosen indicator to the
+values matrix of a quality report. Therefore, because said indicator isn't
+added in the modalities matrix, it cannot be used to calculate a score
+(except for weighting). Before using the added variable for score
+calculation, it will have to be coded with the function
+\code{\link{recode_indicator_num}}.
+
+The new indicator can be a \code{vector} or a \code{data.frame}. In both
+cases, its format must allow for pairing:
+\itemize{
+\item a \code{vector}'s elements must be named and these names must match those
+of the quality report (variable "series");
+\item a \code{data.frame} must contain a "series" column that matches with the
+quality report's series.
+}
 }
 \examples{
 # Path of matrix demetra_m
@@ -38,24 +102,26 @@ demetra_path <- file.path(
 # Extract the quality report from the demetra_m file
 QR <- extract_QR(demetra_path)
 
-# Compute the score
-QR <- compute_score(QR, n_contrib_score = 2)
+# Add a new indicator
+my_alea <- rnorm(nrow(QR$modalities))
+names(my_alea) <- QR$modalities$series
+QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 
-# Retain indicators
-retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
-retain_indicators(QR, c("score", "m7")) # Same
+# Retains indicators
+retain_indicators(QR, "alea", "m7") # retaining "alea" and "m7"
+retain_indicators(QR, c("alea", "m7")) # Same
 
 # Remove indicators
-QR <- remove_indicators(QR, "score") # removing "score"
+QR <- remove_indicators(QR, "alea") # Remove "alea"
 
-extract_score(QR) # is NULL because we removed the score indicator
+retain_indicators(QR, "alea")
+# is empty because we removed the alea indicator
 
 }
 \seealso{
-\link[=fr-remove_indicators]{Traduction française}
+\link[=fr-QR_var_manipulation]{Traduction française}
 
 Other var QR_matrix manipulation:
-\code{\link[=add_indicator]{add_indicator()}},
 \code{\link[=recode_indicator_num]{recode_indicator_num()}}
 }
 \concept{var QR_matrix manipulation}

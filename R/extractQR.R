@@ -4,21 +4,21 @@
 #' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la
 #' matrice des diagnostics.
 #'
-#' @param matrix_output_file Chaîne de caracère. Chemin vers le fichier CSV
-#' contenant la matrice des diagnostics.
-#' @param file Chaîne de caracère. Chemin vers le fichier CSV contenant la
-#' matrice des diagnostics. Cet argument remplace l'argument
-#' \code{matrix_output_file}.
-#' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut
-#' \code{sep = ";"})
-#' @param dec séparateur décimal utilisé dans le fichier csv (par défaut
-#' \code{dec = ","})
+#' @param file Chaîne de caractères. Chemin vers le fichier CSV contenant la
+#'   matrice des diagnostics. Cet argument remplace l'argument
+#'   \code{matrix_output_file}.
+#' @param x un data.frame contenant la matrice de diagnostiques. Si manquante,
+#'   on va lire la matrice à l'emplacement de `file`.
 #' @param thresholds \code{list} de vecteurs numériques. Seuils appliqués aux
 #' différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
 #' \code{Bad} et \code{Severe}.
 #' Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
 #' Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
 #' doit ressemble l'objet \code{thresholds}.
+#' @param ... D'autres paramètres pour la fonction `read_demetra_m` comme `sep`,
+#'   séparateur de caractères utilisé dans le fichier csv (par défaut
+#'   \code{sep = ";"}) et `dec` séparateur décimal utilisé dans le fichier csv
+#'   (par défaut \code{dec = ","}).
 #'
 #' @details La fonction permet d'extraire un bilan qualité à partir d'un
 #' fichier csv contenant l'ensemble des
@@ -147,8 +147,6 @@ NULL
 #' # Or:
 #' QR[["modalities"]]
 #'
-#' @importFrom stats sd
-#' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(

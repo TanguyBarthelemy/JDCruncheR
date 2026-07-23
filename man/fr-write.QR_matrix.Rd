@@ -13,16 +13,30 @@ fichier que l'on veut créer}
 (\code{auto_format = TRUE} par défaut).}
 
 \item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
-s'il existe déjà (\code{create = TRUE} par défaut)}
+s'il existe déjà (\code{overwrite = TRUE} par défaut)}
 
 \item{...}{autres argument non utilisés}
 }
 \value{
-Renvoie de manière invisible (via \code{invisible(x)}) un objet de
-classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation
-ultérieure.
+Renvoie de manière invisible (via \code{invisible()}) un classeur
+créé par \code{openxlsx::loadWorkbook()} pour une manipulation ultérieure.
 }
 \description{
 Permet d'exporter un bilan qualité dans un fichier Excel.
+}
+\examples{
+# Chemin menant au fichier demetra_m.csv
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
+QR <- extract_QR(demetra_path)
+
+# Export du QR dans un fichier Excel
+write(x = QR, file = tempfile(fileext = ".xlsx"))
+
 }
 \keyword{internal}
