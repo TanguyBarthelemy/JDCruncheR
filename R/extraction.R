@@ -973,12 +973,12 @@ extractMaxAdj_allseries <- function(y, sa) {
         )
     }
 
-    list_max_adj <- mapply(
-        FUN = extractMaxAdj_oneseries,
+    list_max_adj <- Map(
+        f = extractMaxAdj_oneseries,
         y = y[, -1L, drop = FALSE],
-        sa = sa[, -1L, drop = FALSE],
-        SIMPLIFY = TRUE
-    )
+        sa = sa[, -1L, drop = FALSE]
+    ) |>
+        do.call(what = rbind)
 
     return(list(
         values = list_max_adj
