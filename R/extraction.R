@@ -260,7 +260,11 @@ extractTrendFilter <- function(demetra_m) {
 extractStage2TrendFilter <- function(demetra_m) {
     trend_filters <- find_variable(
         demetra_m,
-        pattern = "(^decomposition\\.d7\\.trend\\.filter$)|(^d7\\.trend\\.filter$)",
+        pattern = paste(
+            "(^decomposition\\.d7\\.trend\\.filter$)",
+            "(^d7\\.trend\\.filter$)",
+            sep = "|"
+        ),
         type = "integer",
         variable = "decomposition.d7-trend-filter"
     )
@@ -310,7 +314,11 @@ extractAutoCorr <- function(demetra_m) {
 extractSeasCombined <- function(demetra_m) {
     presence_seasonality <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.seas\\.lin\\.combined$)|(^seas\\.lin\\.combined$)",
+        pattern = paste(
+            "(^diagnostics\\.seas\\.lin\\.combined$)",
+            "(^seas\\.lin\\.combined$)",
+            sep = "|"
+        ),
         type = "character",
         variable = "diagnostics.seas-lin-combined"
     )
@@ -749,7 +757,13 @@ extractDistributionTests <- function(
 
     normality_test <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)|(^normality$)",
+        pattern = paste(
+            "(^residuals\\.doornikhansen$)",
+            "(^doornikhansen$)",
+            "(^dh$)",
+            "(^normality$)",
+            sep = "|"
+        ),
         type = "double",
         variable = c("residuals.dh:3", "residuals.doornikhansen:3"),
         p_value = TRUE

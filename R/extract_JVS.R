@@ -359,7 +359,8 @@ extract_JVS <- function(
             toString(missing_items),
             "\n\n",
             "If you extract element with rjwsacruncher::cruncher_and_param(),",
-            " don't forget to put `short_column_headers = FALSE` and `v3 = TRUE`.",
+            " don't forget to put `short_column_headers = FALSE`",
+            " and `v3 = TRUE`.",
             call. = FALSE
         )
     }

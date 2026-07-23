@@ -48,10 +48,10 @@ NULL
 #' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
 print.QR_matrix <- function(
-    x,
-    print_variables = TRUE,
-    print_score_formula = TRUE,
-    ...
+        x,
+        print_variables = TRUE,
+        print_score_formula = TRUE,
+        ...
 ) {
     nb_var <- nrow(x[["modalities"]])
     nb_var_modalities <- ncol(x[["modalities"]])
@@ -59,9 +59,9 @@ print.QR_matrix <- function(
 
     if (
         is.null(nb_var) ||
-            is.null(nb_var_modalities) ||
-            is.null(nb_var_values) ||
-            nb_var * nb_var_modalities * nb_var_values == 0L
+        is.null(nb_var_modalities) ||
+        is.null(nb_var_values) ||
+        nb_var * nb_var_modalities * nb_var_values == 0L
     ) {
         cat("The quality report matrix is empty")
         return(invisible(x))
@@ -133,18 +133,18 @@ print.QR_matrix <- function(
     score_value <- extract_score(x, format_output = "vector")
     if (is.null(score_value)) {
         cat("No score was calculated")
-    } else {
-        cat(sprintf(
-            "The smallest score is %1g and the greatest is %2g\n",
-            min(score_value, na.rm = TRUE),
-            max(score_value, na.rm = TRUE)
-        ))
-        cat(sprintf(
-            "The average score is %1g and its standard deviation is %2g",
-            mean(score_value, na.rm = TRUE),
-            stats::sd(score_value, na.rm = TRUE)
-        ))
+        return(invisible(x))
     }
+    cat(sprintf(
+        "The smallest score is %1g and the greatest is %2g\n",
+        min(score_value, na.rm = TRUE),
+        max(score_value, na.rm = TRUE)
+    ))
+    cat(sprintf(
+        "The average score is %1g and its standard deviation is %2g",
+        mean(score_value, na.rm = TRUE),
+        stats::sd(score_value, na.rm = TRUE)
+    ))
     if (print_score_formula && !is.null(x[["score_formula"]])) {
         cat("\n\n")
         cat(sprintf(
@@ -177,30 +177,30 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
     bq_names[is.na(bq_names)] <- ""
     if (is.null(bq_names) || all(is.na(bq_names))) {
         cat("No quality report is named")
-    } else {
-        bq_names_na <- sum(is.na(bq_names))
-        bq_valid_names <- bq_names[!is.na(bq_names)]
+        return(invisible(x))
+    }
+    bq_names_na <- sum(is.na(bq_names))
+    bq_valid_names <- bq_names[!is.na(bq_names)]
+    cat(sprintf(
+        ngettext(
+            length(bq_valid_names),
+            "%d quality report is named: %s",
+            "%d quality reports are named: %s"
+        ),
+        length(bq_valid_names),
+        paste(bq_valid_names, collapse = "  ")
+    ))
+
+    if (length(bq_names_na) > 1L) {
+        cat("\n")
         cat(sprintf(
             ngettext(
-                length(bq_valid_names),
-                "%d quality report is named: %s",
-                "%d quality reports are named: %s"
+                bq_names_na,
+                "%d quality report isn't named",
+                "%d quality reports aren't named"
             ),
-            length(bq_valid_names),
-            paste(bq_valid_names, collapse = "  ")
+            bq_names_na
         ))
-
-        if (length(bq_names_na) > 1L) {
-            cat("\n")
-            cat(sprintf(
-                ngettext(
-                    bq_names_na,
-                    "%d quality report isn't named",
-                    "%d quality reports aren't named"
-                ),
-                bq_names_na
-            ))
-        }
     }
     if (score_statistics) {
         cat("\n")
@@ -208,47 +208,48 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
         all_score <- do.call(c, score_values)
         if (is.null(all_score)) {
             cat("No quality report has a calculated score")
-        } else {
-            cat(sprintf(
-                "The average score over all quality reports is %g\n",
-                mean(all_score, na.rm = TRUE)
-            ))
-            cat(sprintf(
-                "The smallest score is %1g and the greatest is %2g\n",
-                min(all_score, na.rm = TRUE),
-                max(all_score, na.rm = TRUE)
-            ))
+            return(invisible(x))
+        }
+        cat(sprintf(
+            "The average score over all quality reports is %g\n",
+            mean(all_score, na.rm = TRUE)
+        ))
+        cat(sprintf(
+            "The smallest score is %1g and the greatest is %2g\n",
+            min(all_score, na.rm = TRUE),
+            max(all_score, na.rm = TRUE)
+        ))
 
-            for (i in seq_along(score_values)) {
-                cat("\n\n")
-                score_value <- score_values[[i]]
+        for (i in seq_along(score_values)) {
+            cat("\n\n")
+            score_value <- score_values[[i]]
 
-                bq_name <- bq_names[i]
-                if (is.null(bq_name) || is.na(bq_name)) {
-                    bq_name <- ""
-                } else {
-                    bq_name <- paste0(" (", bq_name, ")")
-                }
+            bq_name <- bq_names[i]
+            if (is.null(bq_name) || is.na(bq_name)) {
+                bq_name <- ""
+            } else {
+                bq_name <- paste0(" (", bq_name, ")")
+            }
 
-                if (is.null(score_value)) {
-                    cat(sprintf(
-                        "There is no calculated score for the quality report n.%d%s",
-                        i,
-                        bq_name
-                    ))
-                } else {
-                    cat(sprintf(
-                        "The quality report n.%d%s has an average score of %g\n",
-                        i,
-                        bq_name,
-                        mean(score_value, na.rm = TRUE)
-                    ))
-                    cat(sprintf(
-                        "The smallest score is %1g and the greatest is %2g\n",
-                        min(score_value, na.rm = TRUE),
-                        max(score_value, na.rm = TRUE)
-                    ))
-                }
+            if (is.null(score_value)) {
+                cat(sprintf(
+                    "There is no calculated score for the quality report n.%d%s",
+                    i,
+                    bq_name
+                ))
+            } else {
+                cat(sprintf(
+                    "The quality report n.%d%s has an average score of %g\n",
+                    i,
+                    bq_name,
+                    mean(score_value, na.rm = TRUE)
+                ))
+                cat(sprintf(
+                    "The smallest score is %1g and the greatest is %2g\n",
+                    min(score_value, na.rm = TRUE),
+                    max(score_value, na.rm = TRUE)
+                ))
+
             }
         }
     }

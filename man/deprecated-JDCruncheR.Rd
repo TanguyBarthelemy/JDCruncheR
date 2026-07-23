@@ -15,7 +15,8 @@ export_xlsx(x, ...)
 \code{\link{write.QR_matrix}} or \code{\link{write.JVS_matrix}}.}
 }
 \value{
-\code{"QR_matrix"}, \code{"mQR_matrix"} or \code{"JVS_matrix"} object invisibly.
+\code{"QR_matrix"}, \code{"mQR_matrix"} or \code{"JVS_matrix"}
+object invisibly.
 }
 \description{
 Use \code{\link[=write]{write()}} instead of \code{export_xslx()}.

@@ -31,7 +31,7 @@ Excel.
 }
 }
 \examples{
-# Chemin menant au répertoire contenant le fichier demetra_m et les séries nécessaires
+# Chemin menant au répertoire contenant le fichier demetra_m et les séries
 dir_path <- system.file(
     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
     package = "JDCruncheR"

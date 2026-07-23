@@ -15,12 +15,13 @@
 \arguments{
 \item{x}{a \code{\link{JVS_matrix}} object to export.}
 
-\item{format}{output format. One of \code{"csv"} or \code{"xlsx"}. The default is \code{"csv"}.}
+\item{format}{output format. One of \code{"csv"} or \code{"xlsx"}. The default is
+\code{"csv"}.}
 
 \item{export_dir}{export directory.}
 
-\item{overwrite}{logical indicating whether to create a CSV or Excel file if it
-doesn't exist yet (\code{overwrite = TRUE} by default)}
+\item{overwrite}{logical indicating whether to create a CSV or Excel file if
+it doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }

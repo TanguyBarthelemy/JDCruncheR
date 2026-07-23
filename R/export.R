@@ -370,7 +370,7 @@ write.default <- function(x, ...) {
 #' bilan qualité \code{\link{JVS_matrix}} que \code{x}.
 #'
 #' @examples
-#' # Chemin menant au répertoire contenant le fichier demetra_m et les séries nécessaires
+#' # Chemin menant au répertoire contenant le fichier demetra_m et les séries
 #' dir_path <- system.file(
 #'     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
 #'     package = "JDCruncheR"
@@ -400,10 +400,11 @@ NULL
 #' To export several quality reports in CSV or Excel files
 #'
 #' @param x a \code{\link{JVS_matrix}} object to export.
-#' @param format output format. One of `"csv"` or `"xlsx"`. The default is `"csv"`.
+#' @param format output format. One of `"csv"` or `"xlsx"`. The default is
+#'   `"csv"`.
 #' @param export_dir export directory.
-#' @param overwrite logical indicating whether to create a CSV or Excel file if it
-#' doesn't exist yet (\code{overwrite = TRUE} by default)
+#' @param overwrite logical indicating whether to create a CSV or Excel file if
+#'   it doesn't exist yet (\code{overwrite = TRUE} by default)
 #' @param ... other unused arguments
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
