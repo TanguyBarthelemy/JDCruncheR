@@ -26,4 +26,24 @@ d'entrée \code{x} est une matrice mQR, un objet de la classe
 Permet d'encoder des variables présentes dans la matrice des valeurs en
 modalités ajoutables à la matrice des modalités.
 }
+\examples{
+# Chemin menant au fichier demetra_m.csv
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
+QR <- extract_QR(demetra_path)
+
+QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+                            breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+                            labels = c("Good", "Uncertain", "Bad", "Severe")
+)
+
+QR$modalities$residuals_skewness
+QR2$modalities$residuals_skewness
+
+}
 \keyword{internal}

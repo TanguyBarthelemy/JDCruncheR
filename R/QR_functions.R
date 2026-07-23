@@ -497,13 +497,13 @@ NULL
 #' @family QR_matrix functions
 #' @return the input with an additionnal weighted score
 #' @name weighted_score
-#' @rdname weighted_score
 #' @seealso [Traduction française][fr-weighted_score()]
 #' @export
 weighted_score <- function(x, pond = 1L) {
     UseMethod("weighted_score", x)
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score default
 #' @method weighted_score default
 #' @export
@@ -514,6 +514,7 @@ weighted_score.default <- function(x, pond = 1L) {
     )
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score QR_matrix
 #' @method weighted_score QR_matrix
 #' @export
@@ -533,6 +534,7 @@ weighted_score.QR_matrix <- function(x, pond = 1L) {
     return(x)
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score mQR_matrix
 #' @method weighted_score mQR_matrix
 #' @export
@@ -1185,8 +1187,9 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
 }
 
 
-#' Ré-encodage en modalités des variables
+#' @title Ré-encodage en modalités des variables
 #'
+#' @description
 #' Permet d'encoder des variables présentes dans la matrice des valeurs en
 #' modalités ajoutables à la matrice des modalités.
 #'
@@ -1196,11 +1199,32 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
 #' @param breaks voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
 #' @param labels voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
 #' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
+#'
 #' @returns La fonction \code{recode_indicator_num()} renvoie le même objet,
 #' enrichi de l'indicateur choisi. Ainsi, si l'entrée \code{x} est une matrice
 #' QR_matrix, un objet de classe \code{QR_matrix} est renvoyé. Si le code
 #' d'entrée \code{x} est une matrice mQR, un objet de la classe
 #' \code{mQR_matrix} est renvoyé.
+#'
+#' @examples
+#' # Chemin menant au fichier demetra_m.csv
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
+#' QR <- extract_QR(demetra_path)
+#'
+#' QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+#'                             breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+#'                             labels = c("Good", "Uncertain", "Bad", "Severe")
+#' )
+#'
+#' QR$modalities$residuals_skewness
+#' QR2$modalities$residuals_skewness
+#'
 #' @keywords internal
 #' @name fr-recode_indicator_num
 NULL
@@ -1223,6 +1247,26 @@ NULL
 #' enhanced with the chosen indicator. So if the input \code{x} is a QR_matrix,
 #' an object of class \code{QR_matrix} is returned. If the input \code{x} is a
 #' mQR_matrix, an object of class \code{mQR_matrix} is returned.
+#'
+#' @examples
+#' # Path to the demetra_m.csv file
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Recode residuals_skewness
+#' QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+#'                             breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+#'                             labels = c("Good", "Uncertain", "Bad", "Severe")
+#' )
+#'
+#' QR$modalities$residuals_skewness
+#' QR2$modalities$residuals_skewness
 #'
 #' @family var QR_matrix manipulation
 #' @seealso [Traduction française][fr-recode_indicator_num()]
@@ -1253,6 +1297,7 @@ recode_indicator_num.default <- function(
     )
 }
 
+#' @rdname recode_indicator_num
 #' @exportS3Method recode_indicator_num QR_matrix
 #' @method recode_indicator_num QR_matrix
 #' @export
@@ -1282,6 +1327,7 @@ recode_indicator_num.QR_matrix <- function(
     return(x)
 }
 
+#' @rdname recode_indicator_num
 #' @exportS3Method recode_indicator_num mQR_matrix
 #' @method recode_indicator_num mQR_matrix
 #' @export
