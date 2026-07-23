@@ -371,7 +371,10 @@ write.default <- function(x, ...) {
 #'
 #' @examples
 #' # Chemin menant au répertoire contenant le fichier demetra_m et les séries nécessaires
-#' dir_path <- system.file("extdata", "WS/WS_world/Output/SAProcessing-1", package = "JDCruncheR")
+#' dir_path <- system.file(
+#'     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
+#'     package = "JDCruncheR"
+#' )
 #'
 #' # Extraire le rapport JVS à partir des fichiers CSV
 #' JVS <- extract_JVS(dir = dir_path)
@@ -381,7 +384,6 @@ write.default <- function(x, ...) {
 #'
 #' # Export du rapport JVS dans un fichier CSV
 #' write(JVS, format = "csv", export_dir = tempdir(), overwrite = TRUE)
-#'
 #'
 #' @details
 #' - les fichiers xlsx seront exportées avec le package 'openxlsx'.
@@ -408,8 +410,11 @@ NULL
 #' \code{\link{JVS_matrix}} object as \code{x}.
 #'
 #' @examples
-#' # Path leading to the needed CSV files (demetra_m and series)
-#' dir_path <- system.file("extdata", "WS/WS_world/Output/SAProcessing-1", package = "JDCruncheR")
+#' # Path leading to the needed CSV files demetra_m and series
+#' dir_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1"
+#' )
 #'
 #' # Extract the JVS report from the CSV files
 #' JVS <- extract_JVS(dir = dir_path)

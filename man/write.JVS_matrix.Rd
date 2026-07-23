@@ -38,8 +38,11 @@ To export several quality reports in CSV or Excel files
 }
 }
 \examples{
-# Path leading to the needed CSV files (demetra_m and series)
-dir_path <- system.file("extdata", "WS/WS_world/Output/SAProcessing-1", package = "JDCruncheR")
+# Path leading to the needed CSV files demetra_m and series
+dir_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1"
+)
 
 # Extract the JVS report from the CSV files
 JVS <- extract_JVS(dir = dir_path)
