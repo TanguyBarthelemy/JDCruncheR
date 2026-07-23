@@ -65,7 +65,6 @@ répertoire contenant les fichiers CSV correspondants.
 }
 \examples{
 # Chemin menant au dossier contenant les fichiers d'output :
-
 dir_path <- system.file(
     "extdata",
     "WS/WS_world/Output/SAProcessing-1",

@@ -38,7 +38,6 @@ that can be added into the modalities matrix.
 \link[=fr-recode_indicator_num]{Traduction française}
 
 Other var QR_matrix manipulation:
-\code{\link{QR_var_manipulation}},
-\code{\link[=add_indicator]{add_indicator()}}
+\code{\link{QR_var_manipulation}}
 }
 \concept{var QR_matrix manipulation}
