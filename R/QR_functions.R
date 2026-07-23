@@ -987,7 +987,7 @@ NULL
 #'
 #' # Ajouter un nouvel indicateur
 #' my_alea <- rnorm(nrow(QR$modalities))
-#' names(my_alea) <- demetra_m$X
+#' names(my_alea) <- QR$modalities$series
 #' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 #'
 #' # Retains indicators
