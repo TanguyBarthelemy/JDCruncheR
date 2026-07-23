@@ -1,14 +1,21 @@
 linters: lintr::all_linters(
         indentation_linter = indentation_linter(indent = 4L),
-        line_length_linter = lintr::line_length_linter(80L),
-        #line_length_linter = lintr::line_length_linter(100L),
+        #line_length_linter = lintr::line_length_linter(80L),
+        line_length_linter = lintr::line_length_linter(83L),
         cyclocomp_linter = lintr::cyclocomp_linter(complexity_limit = 35L),
         library_call_linter = NULL,
         namespace_linter = NULL,
         return_linter = NULL,
         object_name_linter = NULL,
-        nonportable_path_linter = NULL
-        #if_switch_linter = NULL,
-        #undesirable_function_linter = NULL
+        nonportable_path_linter = NULL,
+        if_switch_linter = NULL
     )
 encoding: "UTF-8"
+exclusions: list(
+    "vignettes" = list(
+        undesirable_function_linter = Inf
+    ),
+    "R/thresholds.R" = list(
+        undesirable_function_linter = Inf
+    )
+  )

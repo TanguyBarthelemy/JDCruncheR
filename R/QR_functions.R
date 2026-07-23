@@ -263,7 +263,8 @@ compute_score.QR_matrix <- function(
     }
 
     # Computing score from modalities
-    # Creation of an additionnal row to store the maximum score to normalise the score variable
+    # Creation of an additionnal row to store the maximum score
+    # to normalise the score variable
     QR_modalities <- lapply(
         X = x[["modalities"]][names(score_pond)],
         FUN = recode_vec,
@@ -1378,7 +1379,10 @@ recode_indicator_num.mQR_matrix <- function(
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Calculer differents scores
-#' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5))
+#' QR1 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5)
+#' )
 #' QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_s_on_sa = 5))
 #'
 #' # Fusionner 2 bilans qualité
@@ -1417,7 +1421,10 @@ NULL
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Compute differents scores
-#' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5))
+#' QR1 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5)
+#' )
 #' QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_s_on_sa = 5))
 #'
 #' # Merge two quality report
@@ -1447,10 +1454,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             FUN.VALUE = character(1L)
         )
         list_formula_unique <- unique(list_formula)
-        if (
-            length(list_formula) != length(list_QR_matrix) ||
-            length(list_formula_unique) != 1L
-        ) {
+        if (length(list_formula) != length(list_QR_matrix)
+            || length(list_formula_unique) != 1L) {
             stop(
                 "All QR_matrices must have the same score formulas.",
                 call. = FALSE
