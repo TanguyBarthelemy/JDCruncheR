@@ -62,6 +62,50 @@ A\code{\link{JVS_matrix}} object is a data.frame with 30 items:
 \item Max-Adj
 }
 }
+\examples{
+JVS_data <- data.frame(
+    Series = "Series 1",
+    Method = "X13",
+    Period = 12L,
+    Nobs = 300L,
+    Start = "2000-01-01",
+    End = "2024-12-01",
+    Adjustment = "SA",
+    `Presence of Seasonality in the Raw Series` = "Yes",
+    `Presence of TD effects` = "No",
+    `Log-Transformation` = "No",
+    `ARIMA Model` = "(0,1,1)(0,1,1)",
+    LeapYear = "Yes",
+    MovingHoliday = "No",
+    NbTD = 0L,
+    Noutliers = 1L,
+    Outlier1 = "AO (2020-01)",
+    Outlier2 = "AO (2018-11)",
+    Outlier3 = NA_character_,
+    `Residual Seasonality in SA Series (F-test)` = "No",
+    `Residual TD Effect` = "No",
+    `Q-Stat (for X13)` = "Good",
+    `Final Henderson Filter` = "H13",
+    `Stage 2 Henderson Filter` = "",
+    `Seasonal Filter` = "S3X5",
+    Quality = "Good",
+    `Autocorrelation of order 1 of the SA series` = 0.2,
+    `Ljung-Box Test (P-value)` = 0.8,
+    `Autocorrelation negative and significant` = "",
+    `Irregular Standard-Deviation` = 0.8,
+    `Max-Adj` = 2.5
+)
+
+# Create a JVS_matrix object
+JVS <- JVS_matrix(JVS_data)
+
+# Check the class of the object
+class(JVS)
+
+# Test wether JVS is a JVS_matrix
+is(JVS, "JVS_matrix")
+
+}
 \seealso{
 \link[=fr-JVS_matrix]{Traduction française}
 }
