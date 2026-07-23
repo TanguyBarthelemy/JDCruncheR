@@ -2,9 +2,27 @@
 % Please edit documentation in R/QR_functions.R
 \name{recode_indicator_num}
 \alias{recode_indicator_num}
+\alias{recode_indicator_num.QR_matrix}
+\alias{recode_indicator_num.mQR_matrix}
 \title{Converting "values variables" into "modalities variables"}
 \usage{
 recode_indicator_num(
+  x,
+  variable_name,
+  breaks = c(0, 0.01, 0.05, 0.1, 1),
+  labels = c("Good", "Uncertain", "Bad", "Severe"),
+  ...
+)
+
+\method{recode_indicator_num}{QR_matrix}(
+  x,
+  variable_name,
+  breaks = c(0, 0.01, 0.05, 0.1, 1),
+  labels = c("Good", "Uncertain", "Bad", "Severe"),
+  ...
+)
+
+\method{recode_indicator_num}{mQR_matrix}(
   x,
   variable_name,
   breaks = c(0, 0.01, 0.05, 0.1, 1),
@@ -34,11 +52,31 @@ mQR_matrix, an object of class \code{mQR_matrix} is returned.
 To transform variables from the values matrix into categorical variables
 that can be added into the modalities matrix.
 }
+\examples{
+# Path to the demetra_m.csv file
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Recode residuals_skewness
+QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+                            breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+                            labels = c("Good", "Uncertain", "Bad", "Severe")
+)
+
+QR$modalities$residuals_skewness
+QR2$modalities$residuals_skewness
+
+}
 \seealso{
 \link[=fr-recode_indicator_num]{Traduction française}
 
 Other var QR_matrix manipulation:
-\code{\link{QR_var_manipulation}},
-\code{\link[=add_indicator]{add_indicator()}}
+\code{\link{QR_var_manipulation}}
 }
 \concept{var QR_matrix manipulation}

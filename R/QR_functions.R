@@ -113,7 +113,7 @@ recode_vec <- function(x, recode_variable) {
 #' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
+#' # Calculer le score
 #' QR <- compute_score(QR, n_contrib_score = 2)
 #' print(QR)
 #'
@@ -497,13 +497,13 @@ NULL
 #' @family QR_matrix functions
 #' @return the input with an additionnal weighted score
 #' @name weighted_score
-#' @rdname weighted_score
 #' @seealso [Traduction française][fr-weighted_score()]
 #' @export
 weighted_score <- function(x, pond = 1L) {
     UseMethod("weighted_score", x)
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score default
 #' @method weighted_score default
 #' @export
@@ -514,6 +514,7 @@ weighted_score.default <- function(x, pond = 1L) {
     )
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score QR_matrix
 #' @method weighted_score QR_matrix
 #' @export
@@ -533,6 +534,7 @@ weighted_score.QR_matrix <- function(x, pond = 1L) {
     return(x)
 }
 
+#' @rdname weighted_score
 #' @exportS3Method weighted_score mQR_matrix
 #' @method weighted_score mQR_matrix
 #' @export
@@ -850,23 +852,55 @@ extract_score.mQR_matrix <- function(
 }
 
 
-#' Manipulation de la liste des indicateurs
+#' @title Manipulation de la liste des indicateurs
 #'
-#' Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de
-#' n'en retenir que certains (fonction \code{retain_indicators()}) d'objets
+#' @description
+#' Permet d'ajouter des indicateurs (fonction `add_indicator`), retirer des
+#' indicateurs (fonction \code{remove_indicators()}) ou de n'en retenir que
+#' certains (fonction \code{retain_indicators()}) d'objets
 #' \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}. Le nom des séries
 #' (colonne "series") ne peut être enlevé.
 #'
 #' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
-#' @param ... noms des variables à retirer (ou conserver).
-#' @returns \code{remove_indicators()} renvoie le même objet \code{x} réduit par
-#' les drapeaux et les variables utilisés comme arguments \dots Donc si l'entrée
-#' \code{x} est une matrice QR_matrix, un objet de la classe QR_matrix est
-#' renvoyé. Si le code d'entrée \code{x} est une matrice mQR, un objet de la
-#' classe mQR_matrix est renvoyé.
+#' @param indicator un \code{vector} ou un \code{data.frame} (voir détails).
+#' @param variable_name chaîne de caractères contenant les noms des nouvelles
+#' variables.
+#' @param ... autres paramètres de la fonction \code{\link[base]{merge}} (pour
+#'   `add_inidcator`) et les noms des variables à retirer ou conserver (pour
+#'   `remove_indicators` et `retain_idicators`).
+#'
+#' @details La fonction \code{add_indicator()} permet d'ajouter un indicateur
+#' dans la matrice des valeurs du bilan qualité. L'indicateur n'est donc pas
+#' ajouté dans la matrice des modalités et ne peut être utilisé dans le calcul
+#' du score (sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il
+#' faudra d'abord le recoder avec la fonction
+#' \code{\link{recode_indicator_num}}.
+#'
+#' L'indicateur à ajouter peut être sous deux formats : \code{vector} ou
+#' \code{data.frame}. Dans les deux cas, il faut que les valeurs à ajouter
+#' puissent être associées aux bonnes séries dans la matrice du bilan qualité :
+#'  * dans le cas d'un \code{vector}, les éléments devront être nommés et les
+#'    noms doivent correspondre à ceux présents dans le bilan qualité (variable
+#'    "series") ;
+#'  * dans le cas d'un \code{data.frame}, il devra contenir une colonne "series"
+#'    avec les noms des séries correspondantes.
+#'
+#' @returns Cette fonction
+#'
+#' @returns
+#' - \code{remove_indicators()} renvoie le même objet \code{x} réduit par les
+#'   drapeaux et les variables utilisés comme arguments \dots Donc si l'entrée
+#'   \code{x} est une matrice `QR_matrix`, un objet de la classe `QR_matrix` est
+#'   renvoyé. Si le code d'entrée \code{x} est une matrice mQR, un objet de la
+#'   classe `mQR_matrix` est renvoyé.
+#' - `retains_indicators()` renvoie le même objet, avec seulement les
+#'   indicateurs choisis.
+#' - `add_incicators` renvoie le même objet, enrichi de l'indicateur choisi.
+#'   Ainsi, si l'entrée \code{x} est une matrice QR, un objet de la classe
+#'   \code{QR_matrix} est renvoyé. Si le code d'entrée \code{x} est une matrice
+#'   mQR, un objet de la classe \code{mQR_matrix} est renvoyé.
 #'
 #' @examples
-#'
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
@@ -877,37 +911,68 @@ extract_score.mQR_matrix <- function(
 #' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Calculer le score
-#' QR <- compute_score(x = QR, n_contrib_score = 5)
+#' # Ajouter un nouvel indicateur
+#' my_alea <- rnorm(nrow(demetra_m))
+#' names(my_alea) <- demetra_m$X
+#' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 #'
 #' # Retenir certains indicateurs
-#' retain_indicators(QR, "score", "m7") # Retiens les indicateurs "score" et "m7"
-#' retain_indicators(QR, c("score", "m7")) # Pareil
+#' retain_indicators(QR, "alea", "m7") # Retiens les indicateurs "alea" et "m7"
+#' retain_indicators(QR, c("alea", "m7")) # Pareil
 #'
 #' # Retirer des indicateurs
-#' QR <- remove_indicators(QR, "score") # removing "score"
+#' QR <- remove_indicators(QR, "alea") # Retirer "alea"
 #'
-#' extract_score(QR) # est NULL car l'indicateur "score a été retiré
+#' retain_indicators(QR, "alea") # est vide car l'indicateur "alea" a été retiré
 #'
 #' @keywords internal
-#' @name fr-remove_indicators
+#' @name fr-QR_var_manipulation
 NULL
 #> NULL
 
-#' Editing the indicators list
+#' @title Editing the indicators list
 #'
-#' Functions to remove indicators (\code{remove_indicators()}) or retrain some
-#' indicators only (\code{retain_indicators()}) from \code{\link{QR_matrix}} or
+#' @description
+#' Functions to add indicator (\code{add_indicator()}), remove indicators
+#' (\code{remove_indicators()}) or retrain some indicators only
+#' (\code{retain_indicators()}) to and from \code{\link{QR_matrix}} or
 #' \code{\link{mQR_matrix}} objects. The series names (column "series") cannot
 #' be removed.
 #'
 #' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
-#' @param ... names of the variable to remove (or keep)
+#' @param indicator a \code{vector} or a \code{data.frame} (cf. details).
+#' @param variable_name a string containing the name of the variables to add.
+#' @param ... other parameters of the function \code{\link[base]{merge}} (for
+#'   `add_indicator`) or names of the variable to remove or keep (for
+#'   `retain_indicators` and `remove_indicators`)
 #'
-#' @returns \code{remove_indicators()} returns the same object \code{x} reduced
-#' by the flags and variables used as arguments \dots So if the input \code{x}
-#' is a QR_matrix, an object of class QR_matrix is returned. If the input
-#' \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+#' @returns
+#' - \code{remove_indicators()} returns the same object \code{x} reduced by the
+#'   flags and variables used as arguments \dots
+#'   So if the input \code{x} is a `QR_matrix`, an object of class `QR_matrix`
+#'   is returned. If the input \code{x} is a `mQR_matrix`, an object of class
+#'   `mQR_matrix` is returned.
+#' - `retains_indicators()` returns the same object, with only the chosen
+#'   indicators.
+#' - `add_indicators()` returns the same object, enhanced with the chosen
+#'   indicator.
+#'   So if the input \code{x} is a `QR_matrix`, an object of class
+#'   \code{QR_matrix} is returned. If the input \code{x} is a `mQR_matrix`, an
+#'   object of class \code{mQR_matrix} is returned.
+#'
+#' @details The function \code{add_indicator()} adds the chosen indicator to the
+#' values matrix of a quality report. Therefore, because said indicator isn't
+#' added in the modalities matrix, it cannot be used to calculate a score
+#' (except for weighting). Before using the added variable for score
+#' calculation, it will have to be coded with the function
+#' \code{\link{recode_indicator_num}}.
+#'
+#' The new indicator can be a \code{vector} or a \code{data.frame}. In both
+#' cases, its format must allow for pairing:
+#'  * a \code{vector}'s elements must be named and these names must match those
+#'    of the quality report (variable "series");
+#'  * a \code{data.frame} must contain a "series" column that matches with the
+#'    quality report's series.
 #'
 #' @examples
 #' # Path of matrix demetra_m
@@ -920,27 +985,34 @@ NULL
 #' # Extract the quality report from the demetra_m file
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
-#' QR <- compute_score(QR, n_contrib_score = 2)
+#' # Ajouter un nouvel indicateur
+#' my_alea <- rnorm(nrow(demetra_m))
+#' names(my_alea) <- demetra_m$X
+#' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 #'
-#' # Retain indicators
-#' retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
-#' retain_indicators(QR, c("score", "m7")) # Same
+#' # Retains indicators
+#' retain_indicators(QR, "alea", "m7") # retaining "alea" and "m7"
+#' retain_indicators(QR, c("alea", "m7")) # Same
 #'
 #' # Remove indicators
-#' QR <- remove_indicators(QR, "score") # removing "score"
+#' QR <- remove_indicators(QR, "alea") # Remove "alea"
 #'
-#' extract_score(QR) # is NULL because we removed the score indicator
+#' retain_indicators(QR, "alea")
+#' # is empty because we removed the alea indicator
 #'
 #' @family var QR_matrix manipulation
 #' @name QR_var_manipulation
+#' @seealso [Traduction française][fr-QR_var_manipulation()]
+NULL
+#> NULL
+
 #' @rdname QR_var_manipulation
-#' @seealso [Traduction française][fr-remove_indicators()]
 #' @export
 remove_indicators <- function(x, ...) {
     UseMethod("remove_indicators", x)
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method remove_indicators default
 #' @method remove_indicators default
 #' @export
@@ -951,6 +1023,7 @@ remove_indicators.default <- function(x, ...) {
     )
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method remove_indicators QR_matrix
 #' @method remove_indicators QR_matrix
 #' @export
@@ -969,6 +1042,7 @@ remove_indicators.QR_matrix <- function(x, ...) {
     return(x)
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method remove_indicators mQR_matrix
 #' @method remove_indicators mQR_matrix
 #' @export
@@ -982,6 +1056,7 @@ retain_indicators <- function(x, ...) {
     UseMethod("retain_indicators", x)
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method retain_indicators default
 #' @method retain_indicators default
 #' @export
@@ -992,6 +1067,7 @@ retain_indicators.default <- function(x, ...) {
     )
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method retain_indicators QR_matrix
 #' @method retain_indicators QR_matrix
 #' @export
@@ -1010,11 +1086,268 @@ retain_indicators.QR_matrix <- function(x, ...) {
     return(x)
 }
 
+#' @rdname QR_var_manipulation
 #' @exportS3Method retain_indicators mQR_matrix
 #' @method retain_indicators mQR_matrix
 #' @export
 retain_indicators.mQR_matrix <- function(x, ...) {
     return(mQR_matrix(lapply(x, retain_indicators, ...)))
+}
+
+#' @rdname QR_var_manipulation
+#' @export
+add_indicator <- function(x, indicator, variable_name, ...) {
+    UseMethod("add_indicator", x)
+}
+
+#' @rdname QR_var_manipulation
+#' @exportS3Method add_indicator default
+#' @method add_indicator default
+#' @export
+add_indicator.default <- function(x, indicator, variable_name, ...) {
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
+}
+
+#' @rdname QR_var_manipulation
+#' @exportS3Method add_indicator QR_matrix
+#' @method add_indicator QR_matrix
+#' @export
+add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
+    if (is.vector(indicator)) {
+        if (is.null(names(indicator))) {
+            stop("The vector's elements must be named!", call. = FALSE)
+        }
+        indicator <- data.frame(series = names(indicator), val = indicator)
+    }
+    if (!is.data.frame(indicator)) {
+        stop(
+            "The function input must be a vector or a data.frame!",
+            call. = FALSE
+        )
+    }
+
+    if (!"series" %in% colnames(indicator)) {
+        stop(
+            "The data.frame is missing a column named \"series\"",
+            call. = FALSE
+        )
+    }
+    if (ncol(indicator) < 2L) {
+        stop("The data.frame must have at least two columns", call. = FALSE)
+    }
+    # The "series" variable is moved in first position
+    indicator <- indicator[, c(
+        "series",
+        grep(
+            pattern = "^series$",
+            x = colnames(indicator),
+            invert = TRUE,
+            value = TRUE
+        )
+    )]
+    if (missing(variable_name)) {
+        variable_name <- colnames(indicator)[-1L]
+    }
+    values <- x[["values"]]
+    n_col <- ncol(values)
+    values[["initial_sort"]] <- seq_len(nrow(values))
+    values <- merge(
+        values,
+        indicator,
+        by = "series",
+        all.x = TRUE,
+        all.y = FALSE,
+        ...
+    )
+    values <- values[order(values[["initial_sort"]], decreasing = FALSE), ]
+
+    values[["initial_sort"]] <- NULL
+    colnames(values)[-seq_len(n_col)] <- variable_name
+
+    x[["values"]] <- values
+
+    return(x)
+}
+
+#' @rdname QR_var_manipulation
+#' @exportS3Method add_indicator mQR_matrix
+#' @method add_indicator mQR_matrix
+#' @export
+add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
+    output <- lapply(
+        X = x,
+        FUN = add_indicator,
+        variable_name = variable_name,
+        ...
+    )
+    return(mQR_matrix(output))
+}
+
+
+#' @title Ré-encodage en modalités des variables
+#'
+#' @description
+#' Permet d'encoder des variables présentes dans la matrice des valeurs en
+#' modalités ajoutables à la matrice des modalités.
+#'
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
+#' @param variable_name vecteur de chaînes de caractères contenant les noms des
+#' variables à recoder.
+#' @param breaks voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
+#' @param labels voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
+#' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
+#'
+#' @returns La fonction \code{recode_indicator_num()} renvoie le même objet,
+#' enrichi de l'indicateur choisi. Ainsi, si l'entrée \code{x} est une matrice
+#' QR_matrix, un objet de classe \code{QR_matrix} est renvoyé. Si le code
+#' d'entrée \code{x} est une matrice mQR, un objet de la classe
+#' \code{mQR_matrix} est renvoyé.
+#'
+#' @examples
+#' # Chemin menant au fichier demetra_m.csv
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
+#' QR <- extract_QR(demetra_path)
+#'
+#' QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+#'                             breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+#'                             labels = c("Good", "Uncertain", "Bad", "Severe")
+#' )
+#'
+#' QR$modalities$residuals_skewness
+#' QR2$modalities$residuals_skewness
+#'
+#' @keywords internal
+#' @name fr-recode_indicator_num
+NULL
+#> NULL
+
+#' @title Converting "values variables" into "modalities variables"
+#'
+#' @description
+#' To transform variables from the values matrix into categorical variables
+#' that can be added into the modalities matrix.
+#'
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
+#' @param variable_name a vector of strings containing the names of the
+#' variables to convert.
+#' @param breaks see function \code{\link[base]{cut}}.
+#' @param labels see function \code{\link[base]{cut}}.
+#' @param ... other parameters of the \code{\link[base]{cut}} function.
+#'
+#' @returns The function \code{recode_indicator_num()} returns the same object,
+#' enhanced with the chosen indicator. So if the input \code{x} is a QR_matrix,
+#' an object of class \code{QR_matrix} is returned. If the input \code{x} is a
+#' mQR_matrix, an object of class \code{mQR_matrix} is returned.
+#'
+#' @examples
+#' # Path to the demetra_m.csv file
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Recode residuals_skewness
+#' QR2 <- recode_indicator_num(QR, variable_name = "residuals_skewness",
+#'                             breaks = c(0.0, 0.01, 0.05, 0.1, 1.0),
+#'                             labels = c("Good", "Uncertain", "Bad", "Severe")
+#' )
+#'
+#' QR$modalities$residuals_skewness
+#' QR2$modalities$residuals_skewness
+#'
+#' @family var QR_matrix manipulation
+#' @seealso [Traduction française][fr-recode_indicator_num()]
+#' @export
+recode_indicator_num <- function(
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
+    UseMethod("recode_indicator_num", x)
+}
+
+#' @exportS3Method recode_indicator_num default
+#' @method recode_indicator_num default
+#' @export
+recode_indicator_num.default <- function(
+    x,
+    variable_name,
+    breaks,
+    labels,
+    ...
+) {
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object",
+        call. = FALSE
+    )
+}
+
+#' @rdname recode_indicator_num
+#' @exportS3Method recode_indicator_num QR_matrix
+#' @method recode_indicator_num QR_matrix
+#' @export
+recode_indicator_num.QR_matrix <- function(
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
+    modalities <- x[["modalities"]]
+    values <- x[["values"]]
+    for (var in variable_name) {
+        if (var %in% colnames(values)) {
+            modalities[, var] <- cut(
+                values[, var],
+                breaks = breaks,
+                labels = labels
+            )
+        } else {
+            warning("The variable ", var, " couldn't be found.", call. = FALSE)
+        }
+    }
+
+    x[["modalities"]] <- modalities
+
+    return(x)
+}
+
+#' @rdname recode_indicator_num
+#' @exportS3Method recode_indicator_num mQR_matrix
+#' @method recode_indicator_num mQR_matrix
+#' @export
+recode_indicator_num.mQR_matrix <- function(
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
+    return(mQR_matrix(
+        x = lapply(
+            X = x,
+            FUN = recode_indicator_num,
+            variable_name = variable_name,
+            breaks = breaks,
+            labels = labels,
+            ...
+        )
+    ))
 }
 
 
@@ -1116,7 +1449,7 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         list_formula_unique <- unique(list_formula)
         if (
             length(list_formula) != length(list_QR_matrix) ||
-                length(list_formula_unique) != 1L
+            length(list_formula_unique) != 1L
         ) {
             stop(
                 "All QR_matrices must have the same score formulas.",
@@ -1154,276 +1487,4 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         score_formula = score_formula
     )
     return(QR)
-}
-
-#' Ajout d'un indicateur dans les objets QR_matrix
-#'
-#' Permet d'ajouter un indicateur dans les objets \code{\link{QR_matrix}}.
-#'
-#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
-#' @param indicator un \code{vector} ou un \code{data.frame} (voir détails).
-#' @param variable_name chaîne de caractères contenant les noms des nouvelles
-#' variables.
-#' @param ... autres paramètres de la fonction \code{\link[base]{merge}}.
-#'
-#' @details La fonction \code{add_indicator()} permet d'ajouter un indicateur
-#' dans la matrice des valeurs du bilan qualité. L'indicateur n'est donc pas
-#' ajouté dans la matrice des modalités et ne peut être utilisé dans le calcul
-#' du score (sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il
-#' faudra d'abord le recoder avec la fonction
-#' \code{\link{recode_indicator_num}}.
-#'
-#' L'indicateur à ajouter peut être sous deux formats : \code{vector} ou
-#' \code{data.frame}. Dans les deux cas, il faut que les valeurs à ajouter
-#' puissent être associées aux bonnes séries dans la matrice du bilan qualité :
-#'  * dans le cas d'un \code{vector}, les éléments devront être nommés et les
-#'    noms doivent correspondre à ceux présents dans le bilan qualité (variable
-#'    "series") ;
-#'  * dans le cas d'un \code{data.frame}, il devra contenir une colonne "series"
-#'    avec les noms des séries correspondantes.
-#' @returns Cette fonction renvoie le même objet, enrichi de l'indicateur
-#' choisi. Ainsi, si l'entrée \code{x} est une matrice QR, un objet de la classe
-#' \code{QR_matrix} est renvoyé. Si le code d'entrée \code{x} est une matrice
-#' mQR, un objet de la classe \code{mQR_matrix} est renvoyé.
-#' @keywords internal
-#' @name fr-add_indicator
-NULL
-#> NULL
-
-#' Adding an indicator in QR_matrix objects
-#'
-#' Function to add indicators in \code{\link{QR_matrix}} objects.
-#'
-#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object
-#' @param indicator a \code{vector} or a \code{data.frame} (cf. details).
-#' @param variable_name a string containing the name of the variables to add.
-#' @param ... other parameters of the function \code{\link[base]{merge}}.
-#'
-#' @details The function \code{add_indicator()} adds the chosen indicator to the
-#' values matrix of a quality report. Therefore, because said indicator isn't
-#' added in the modalities matrix, it cannot be used to calculate a score
-#' (except for weighting). Before using the added variable for score
-#' calculation, it will have to be coded with the function
-#' \code{\link{recode_indicator_num}}.
-#'
-#' The new indicator can be a \code{vector} or a \code{data.frame}. In both
-#' cases, its format must allow for pairing:
-#'  * a \code{vector}'s elements must be named and these names must match those
-#'    of the quality report (variable "series");
-#'  * a \code{data.frame} must contain a "series" column that matches with the
-#'    quality report's series.
-#'
-#' @returns This function returns the same object, enhanced with the chosen
-#' indicator. So if the input \code{x} is a QR_matrix, an object of class
-#' \code{QR_matrix} is returned. If the input \code{x} is a mQR_matrix, an
-#' object of class \code{mQR_matrix} is returned.
-#'
-#' @family var QR_matrix manipulation
-#' @seealso [Traduction française][fr-add_indicator()]
-#' @export
-add_indicator <- function(x, indicator, variable_name, ...) {
-    UseMethod("add_indicator", x)
-}
-
-#' @exportS3Method add_indicator default
-#' @method add_indicator default
-#' @export
-add_indicator.default <- function(x, indicator, variable_name, ...) {
-    stop(
-        "This function requires a QR_matrix or mQR_matrix object.",
-        call. = FALSE
-    )
-}
-
-#' @exportS3Method add_indicator QR_matrix
-#' @method add_indicator QR_matrix
-#' @export
-add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
-    if (is.vector(indicator)) {
-        if (is.null(names(indicator))) {
-            stop("The vector's elements must be named!", call. = FALSE)
-        }
-        indicator <- data.frame(series = names(indicator), val = indicator)
-    }
-    if (!is.data.frame(indicator)) {
-        stop(
-            "The function input must be a vector or a data.frame!",
-            call. = FALSE
-        )
-    }
-
-    if (!"series" %in% colnames(indicator)) {
-        stop(
-            "The data.frame is missing a column named \"series\"",
-            call. = FALSE
-        )
-    }
-    if (ncol(indicator) < 2L) {
-        stop("The data.frame must have at least two columns", call. = FALSE)
-    }
-    # The "series" variable is moved in first position
-    indicator <- indicator[, c(
-        "series",
-        grep(
-            pattern = "^series$",
-            x = colnames(indicator),
-            invert = TRUE,
-            value = TRUE
-        )
-    )]
-    if (missing(variable_name)) {
-        variable_name <- colnames(indicator)[-1L]
-    }
-    values <- x[["values"]]
-    n_col <- ncol(values)
-    values[["initial_sort"]] <- seq_len(nrow(values))
-    values <- merge(
-        values,
-        indicator,
-        by = "series",
-        all.x = TRUE,
-        all.y = FALSE,
-        ...
-    )
-    values <- values[order(values[["initial_sort"]], decreasing = FALSE), ]
-
-    values[["initial_sort"]] <- NULL
-    colnames(values)[-seq_len(n_col)] <- variable_name
-
-    x[["values"]] <- values
-
-    return(x)
-}
-
-#' @exportS3Method add_indicator mQR_matrix
-#' @method add_indicator mQR_matrix
-#' @export
-add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
-    output <- lapply(
-        X = x,
-        FUN = add_indicator,
-        variable_name = variable_name,
-        ...
-    )
-    return(mQR_matrix(output))
-}
-
-
-#' Ré-encodage en modalités des variables
-#'
-#' Permet d'encoder des variables présentes dans la matrice des valeurs en
-#' modalités ajoutables à la matrice des modalités.
-#'
-#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
-#' @param variable_name vecteur de chaînes de caractères contenant les noms des
-#' variables à recoder.
-#' @param breaks voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
-#' @param labels voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
-#' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
-#' @returns La fonction \code{recode_indicator_num()} renvoie le même objet,
-#' enrichi de l'indicateur choisi. Ainsi, si l'entrée \code{x} est une matrice
-#' QR_matrix, un objet de classe \code{QR_matrix} est renvoyé. Si le code
-#' d'entrée \code{x} est une matrice mQR, un objet de la classe
-#' \code{mQR_matrix} est renvoyé.
-#' @keywords internal
-#' @name fr-recode_indicator_num
-NULL
-#> NULL
-
-#' @title Converting "values variables" into "modalities variables"
-#'
-#' @description
-#' To transform variables from the values matrix into categorical variables
-#' that can be added into the modalities matrix.
-#'
-#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
-#' @param variable_name a vector of strings containing the names of the
-#' variables to convert.
-#' @param breaks see function \code{\link[base]{cut}}.
-#' @param labels see function \code{\link[base]{cut}}.
-#' @param ... other parameters of the \code{\link[base]{cut}} function.
-#'
-#' @returns The function \code{recode_indicator_num()} returns the same object,
-#' enhanced with the chosen indicator. So if the input \code{x} is a QR_matrix,
-#' an object of class \code{QR_matrix} is returned. If the input \code{x} is a
-#' mQR_matrix, an object of class \code{mQR_matrix} is returned.
-#'
-#' @family var QR_matrix manipulation
-#' @seealso [Traduction française][fr-recode_indicator_num()]
-#' @export
-recode_indicator_num <- function(
-    x,
-    variable_name,
-    breaks = c(0., 0.01, 0.05, 0.1, 1.),
-    labels = c("Good", "Uncertain", "Bad", "Severe"),
-    ...
-) {
-    UseMethod("recode_indicator_num", x)
-}
-
-#' @exportS3Method recode_indicator_num default
-#' @method recode_indicator_num default
-#' @export
-recode_indicator_num.default <- function(
-    x,
-    variable_name,
-    breaks,
-    labels,
-    ...
-) {
-    stop(
-        "This function requires a QR_matrix or mQR_matrix object",
-        call. = FALSE
-    )
-}
-
-#' @exportS3Method recode_indicator_num QR_matrix
-#' @method recode_indicator_num QR_matrix
-#' @export
-recode_indicator_num.QR_matrix <- function(
-    x,
-    variable_name,
-    breaks = c(0., 0.01, 0.05, 0.1, 1.),
-    labels = c("Good", "Uncertain", "Bad", "Severe"),
-    ...
-) {
-    modalities <- x[["modalities"]]
-    values <- x[["values"]]
-    for (var in variable_name) {
-        if (var %in% colnames(values)) {
-            modalities[, var] <- cut(
-                values[, var],
-                breaks = breaks,
-                labels = labels
-            )
-        } else {
-            warning("The variable ", var, " couldn't be found.", call. = FALSE)
-        }
-    }
-
-    x[["modalities"]] <- modalities
-
-    return(x)
-}
-
-#' @exportS3Method recode_indicator_num mQR_matrix
-#' @method recode_indicator_num mQR_matrix
-#' @export
-recode_indicator_num.mQR_matrix <- function(
-    x,
-    variable_name,
-    breaks = c(0., 0.01, 0.05, 0.1, 1.),
-    labels = c("Good", "Uncertain", "Bad", "Severe"),
-    ...
-) {
-    return(mQR_matrix(
-        x = lapply(
-            X = x,
-            FUN = recode_indicator_num,
-            variable_name = variable_name,
-            breaks = breaks,
-            labels = labels,
-            ...
-        )
-    ))
 }

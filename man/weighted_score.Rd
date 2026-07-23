@@ -2,9 +2,18 @@
 % Please edit documentation in R/QR_functions.R
 \name{weighted_score}
 \alias{weighted_score}
+\alias{weighted_score.default}
+\alias{weighted_score.QR_matrix}
+\alias{weighted_score.mQR_matrix}
 \title{Weighted score calculation}
 \usage{
 weighted_score(x, pond = 1L)
+
+\method{weighted_score}{default}(x, pond = 1L)
+
+\method{weighted_score}{QR_matrix}(x, pond = 1L)
+
+\method{weighted_score}{mQR_matrix}(x, pond = 1L)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
