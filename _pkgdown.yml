@@ -38,7 +38,7 @@ navbar:
       - text: To download the JDemetra+ cruncher
         href: https://github.com/jdemetra/jwsacruncher/releases
       - text: Set up with a portable version of Java
-        href: https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher
+        href: https://github.com/InseeFr/rjd3qr/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher
     github:
       icon: fa-github fa-lg
       href: https://github.com/rjdverse/rjdemetra

@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. [#44](https://github.com/InseeFr/JDCruncheR/issues/44)
+* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. [#44](https://github.com/InseeFr/rjd3qr/issues/44)
 * `sa_on_sa` statistics are renamed in `s_on_sa`
 * QR produced if missing values
 * `compute_score()` works now with `conditional_indicator`
@@ -80,7 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* `na.rm = TRUE` by default in `compute_score()` [#36](https://github.com/InseeFr/JDCruncheR/issues/36)
+* `na.rm = TRUE` by default in `compute_score()` [#36](https://github.com/InseeFr/rjd3qr/issues/36)
 * `extract_QR` accept demetra_m with duplicated columns
 
 ## [0.3.4] - 2025-03-27
@@ -190,17 +190,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
 * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
 
-[Unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.4.0...HEAD
-[0.4.0]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.6...v0.4.0
-[0.3.6]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...v0.3.6
-[0.3.5]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...v0.3.5
-[0.3.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...v0.3.4
-[0.3.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.2...v0.3.3
-[0.3.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...v0.3.2
-[0.3.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.0...v0.3.1
-[0.3.0]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.4...v0.3.0
-[0.2.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.3...v0.2.4
-[0.2.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.2...v0.2.3
-[0.2.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.1...v0.2.2
-[0.2.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/InseeFr/JDCruncheR/releases/tag/v0.2.0
+[Unreleased]: https://github.com/InseeFr/rjd3qr/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/InseeFr/rjd3qr/compare/v0.3.6...v0.4.0
+[0.3.6]: https://github.com/InseeFr/rjd3qr/compare/v0.3.5...v0.3.6
+[0.3.5]: https://github.com/InseeFr/rjd3qr/compare/v0.3.4...v0.3.5
+[0.3.4]: https://github.com/InseeFr/rjd3qr/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/InseeFr/rjd3qr/compare/v0.3.2...v0.3.3
+[0.3.2]: https://github.com/InseeFr/rjd3qr/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/InseeFr/rjd3qr/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/InseeFr/rjd3qr/compare/v0.2.4...v0.3.0
+[0.2.4]: https://github.com/InseeFr/rjd3qr/compare/v0.2.3...v0.2.4
+[0.2.3]: https://github.com/InseeFr/rjd3qr/compare/v0.2.2...v0.2.3
+[0.2.2]: https://github.com/InseeFr/rjd3qr/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/InseeFr/rjd3qr/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/InseeFr/rjd3qr/releases/tag/v0.2.0
