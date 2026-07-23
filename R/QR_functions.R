@@ -912,8 +912,8 @@ extract_score.mQR_matrix <- function(
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Ajouter un nouvel indicateur
-#' my_alea <- rnorm(nrow(demetra_m))
-#' names(my_alea) <- demetra_m$X
+#' my_alea <- rnorm(nrow(QR$modalities))
+#' names(my_alea) <- QR$modalities$series
 #' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
 #'
 #' # Retenir certains indicateurs
@@ -985,7 +985,7 @@ NULL
 #' # Extract the quality report from the demetra_m file
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Ajouter un nouvel indicateur
+#' # Add a new indicator
 #' my_alea <- rnorm(nrow(QR$modalities))
 #' names(my_alea) <- QR$modalities$series
 #' QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")

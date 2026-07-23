@@ -102,7 +102,7 @@ demetra_path <- file.path(
 # Extract the quality report from the demetra_m file
 QR <- extract_QR(demetra_path)
 
-# Ajouter un nouvel indicateur
+# Add a new indicator
 my_alea <- rnorm(nrow(QR$modalities))
 names(my_alea) <- QR$modalities$series
 QR <- add_indicator(QR, indicator = my_alea, variable_name = "alea")
