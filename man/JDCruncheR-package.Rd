@@ -14,7 +14,7 @@ Tool for generating quality reports from cruncher outputs (and calculating serie
 Useful links:
 \itemize{
   \item \url{https://github.com/InseeFr/rjd3qr}
-  \item \url{https://inseefr.github.io/JDCruncheR/}
+  \item \url{https://inseefr.github.io/rjd3qr/}
   \item Report bugs at \url{https://github.com/InseeFr/rjd3qr/issues}
 }
 
