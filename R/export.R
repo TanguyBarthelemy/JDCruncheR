@@ -57,7 +57,6 @@ rowname_style <- openxlsx::createStyle(
 
 #' @importFrom openxlsx conditionalFormatting
 #' @importFrom openxlsx addStyle
-#' @dev
 apply_BQ_style <- function(
     wb,
     x,
