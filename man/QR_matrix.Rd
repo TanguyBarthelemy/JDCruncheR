@@ -66,6 +66,39 @@ frequency, the ARIMA model, etc).
 score (once the calculus is done).
 }
 }
+\examples{
+modalities <- data.frame(
+    Quality = c("Good", "Uncertain", "Bad"),
+    Seasonality = c("Good", "Good", "Bad")
+)
+
+values <- data.frame(
+    Quality = c(0.95, 0.75, 0.02),
+    Seasonality = c(0.80, 0.60, 0.01),
+    Period = c(12L, 12L, 12L)
+)
+
+# Create two quality report objects
+QR1 <- QR_matrix(
+    modalities = modalities,
+    values = values
+)
+
+QR2 <- QR_matrix(
+    modalities = modalities,
+    values = values
+)
+
+# Test whether an object is a quality report
+is.QR_matrix(QR1)
+
+# Create a list of quality reports
+mQR <- mQR_matrix(QR1, QR2)
+
+# Test whether an object is a list of quality reports
+is.mQR_matrix(mQR)
+
+}
 \seealso{
 \link[=fr-QR_matrix]{Traduction française}
 

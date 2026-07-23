@@ -81,6 +81,38 @@ NULL
 #' (ie. a list of \code{\link{QR_matrix}} objects). \code{is.QR_matrix()} and
 #' \code{is.mQR_matrix()} return Boolean values (\code{TRUE} or \code{FALSE}).
 #'
+#' @examples
+#' modalities <- data.frame(
+#'     Quality = c("Good", "Uncertain", "Bad"),
+#'     Seasonality = c("Good", "Good", "Bad")
+#' )
+#'
+#' values <- data.frame(
+#'     Quality = c(0.95, 0.75, 0.02),
+#'     Seasonality = c(0.80, 0.60, 0.01),
+#'     Period = c(12L, 12L, 12L)
+#' )
+#'
+#' # Create two quality report objects
+#' QR1 <- QR_matrix(
+#'     modalities = modalities,
+#'     values = values
+#' )
+#'
+#' QR2 <- QR_matrix(
+#'     modalities = modalities,
+#'     values = values
+#' )
+#'
+#' # Test whether an object is a quality report
+#' is.QR_matrix(QR1)
+#'
+#' # Create a list of quality reports
+#' mQR <- mQR_matrix(QR1, QR2)
+#'
+#' # Test whether an object is a list of quality reports
+#' is.mQR_matrix(mQR)
+#'
 #' @encoding UTF-8
 #' @family QR_matrix functions
 #' @name QR_matrix
