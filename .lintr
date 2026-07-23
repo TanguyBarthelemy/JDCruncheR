@@ -7,8 +7,8 @@ linters: lintr::all_linters(
         namespace_linter = NULL,
         return_linter = NULL,
         object_name_linter = NULL,
-        nonportable_path_linter = NULL,
-        if_switch_linter = NULL,
-        undesirable_function_linter = NULL
+        nonportable_path_linter = NULL
+        #if_switch_linter = NULL,
+        #undesirable_function_linter = NULL
     )
 encoding: "UTF-8"
