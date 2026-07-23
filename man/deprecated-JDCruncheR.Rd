@@ -20,3 +20,19 @@ export_xlsx(x, ...)
 \description{
 Use \code{\link[=write]{write()}} instead of \code{export_xslx()}.
 }
+\examples{
+# Path leading to a demetra_m matrix
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# export_xlsx() is deprecated.
+# Use write() instead:
+write(x = QR, file = tempfile(fileext = ".xlsx"))
+
+}

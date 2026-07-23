@@ -192,6 +192,20 @@ apply_BQ_style <- function(
 #' @returns Renvoie de manière invisible (via \code{invisible()}) un classeur
 #' créé par \code{openxlsx::loadWorkbook()} pour une manipulation ultérieure.
 #'
+#' @examples
+#' # Chemin menant au fichier demetra_m.csv
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Export du QR dans un fichier Excel
+#' write(x = QR, file = tempfile(fileext = ".xlsx"))
+#'
 #' @keywords internal
 #' @name fr-write.QR_matrix
 NULL
@@ -204,7 +218,6 @@ NULL
 #'
 #' @param x a \code{\link{QR_matrix}} object.
 #' @param file a \code{character} object with the path to the file to export
-#' que l'on veut créer
 #' @param auto_format logical indicating whether to format the output
 #' (\code{auto_format = TRUE} by default).
 #' @param overwrite logical indicating whether to create an Excel file if it
@@ -213,6 +226,20 @@ NULL
 #'
 #' @returns Returns invisibly (via \code{invisible()}) a workbook object
 #' created by \code{openxlsx::loadWorkbook()} for further manipulation.
+#'
+#' @examples
+#' # Path leading to a demetra_m matrix
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Export the Quality Report to an Excel file
+#' write(x = QR, file = tempfile(fileext = ".xlsx"))
 #'
 #' @importFrom openxlsx addWorksheet
 #' @importFrom openxlsx createWorkbook
@@ -456,6 +483,30 @@ write.JVS_matrix <- function(
 #' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet
 #' \code{\link{mQR_matrix}} que \code{x}.
 #'
+#' @examples
+#' # Chemin menant au fichier demetra_m.csv
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Calculer le score
+#' QR1 <- compute_score(x = QR, n_contrib_score = 5)
+#' QR2 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(qs_residual_s_on_sa = 5, qs_residual_sa_on_i = 30,
+#'                    f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+#'                    oos_mean = 30, residuals_skewness = 15, m7 = 25)
+#' )
+#' mQR <- mQR_matrix(list(a = QR1, b = QR2))
+#'
+#' # Export du mQR dans un fichier Excel
+#' write(x = mQR, file = tempfile(fileext = ".xlsx"))
+#'
 #' @keywords internal
 #' @name fr-write.mQR_matrix
 NULL
@@ -482,6 +533,31 @@ NULL
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
 #' \code{\link{mQR_matrix}} object as \code{x}.
+#'
+#' @examples
+#' # Path leading to the demetra_m.csv file
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extraction of the QR from the demetra_m.csv file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the scores
+#' QR1 <- compute_score(x = QR, n_contrib_score = 5)
+#' QR2 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(qs_residual_s_on_sa = 5, qs_residual_sa_on_i = 30,
+#'                    f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+#'                    oos_mean = 30, residuals_skewness = 15, m7 = 25)
+#' )
+#' mQR <- mQR_matrix(list(a = QR1, b = QR2))
+#'
+#' # Export the Multiple Quality Report to an Excel file
+#' write(x = mQR, file = tempfile(fileext = ".xlsx"))
+#'
 #'
 #' @importFrom openxlsx addWorksheet
 #' @importFrom openxlsx createWorkbook
