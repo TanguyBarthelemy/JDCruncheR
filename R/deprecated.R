@@ -5,7 +5,8 @@
 #'
 #' @inheritParams write
 #'
-#' @returns \code{"QR_matrix"}, \code{"mQR_matrix"} or \code{"JVS_matrix"} object invisibly.
+#' @returns \code{"QR_matrix"}, \code{"mQR_matrix"} or \code{"JVS_matrix"}
+#' object invisibly.
 #'
 #' @examples
 #' # Path leading to a demetra_m matrix
