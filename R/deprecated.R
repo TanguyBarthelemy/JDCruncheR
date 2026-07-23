@@ -29,8 +29,8 @@
 #' mQR <- mQR_matrix(list(a = QR1, b = QR2))
 #'
 #' # Export the Multiple Quality Report to an Excel file
-#' # export_xlsx() is deprecated.
-#' # Use write() instead:
+#' # `export_xlsx` is deprecated.
+#' # Use `write` instead:
 #' write(x = QR, file = tempfile(fileext = ".xlsx"))
 #' write(x = mQR, export_dir = tempdir())
 #'
