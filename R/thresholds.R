@@ -4,6 +4,11 @@
 #' @param thresholds Vecteur numérique nommé. Les valeurs supérieures de chaque
 #'   seuil d'un test.
 #'
+#' @returns Renvoie de manière invisible la liste de tous les seuils
+#' actuellement en vigueur (donc mis à jour). C'est une liste d'item avec les
+#' différentes modalités ("Good", "Uncertain", "Bad", "Severe", "Poor"...) et
+#' leur seuils associés.
+#'
 #' @details
 #' Si \code{test_name} est manquant, l'argument \code{thresholds} n'est pas
 #' utilisé et tous les seuils seront réinitialisés à leurs valeurs par défaut.
@@ -40,6 +45,9 @@ NULL
 #' @param test_name String. The name of the test to update.
 #' @param thresholds Named vector of numerics. The upper values of
 #' each break of a threshold.
+#'
+#' @returns Returns invisibly all the current (updated) thresholds. It's a list
+#' of item with grade ("Good", "Uncertain", "Bad", "Severe", "Poor"...).
 #'
 #' @details
 #' If \code{test_name} is missing, the argument \code{thresholds} is not used
@@ -93,6 +101,9 @@ set_thresholds <- function(test_name, thresholds) {
 #'   Si TRUE, les seuils par défaut seront retournés.
 #'   Si FALSE, les seuils actuellement utilisés seront retournés.
 #'
+#' @returns Renvoie de manière invisible les seuils de `test_name`. Si
+#' `test_name` est manquant, la fonction retourne tous les seuils.
+#'
 #' @details
 #' Si \code{test_name} est manquant, tous les seuils seront retournés.
 #'
@@ -118,6 +129,9 @@ NULL
 #' @param default Boolean. (default is TRUE)
 #' If TRUE, the default threshold will be returned.
 #' If FALSE the current used thresholds.
+#'
+#' @returns Returns invisibly the thresholds of the chosen item. If test_name
+#' is missing, it returns all the current thresholds.
 #'
 #' @details
 #' If \code{test_name} is missing, all threshold will be returned.

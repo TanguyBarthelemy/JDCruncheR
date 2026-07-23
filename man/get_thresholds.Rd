@@ -13,6 +13,10 @@ get_thresholds(test_name, default = TRUE)
 If TRUE, the default threshold will be returned.
 If FALSE the current used thresholds.}
 }
+\value{
+Returns invisibly the thresholds of the chosen item. If test_name
+is missing, it returns all the current thresholds.
+}
 \description{
 Get all (default) thresholds
 }

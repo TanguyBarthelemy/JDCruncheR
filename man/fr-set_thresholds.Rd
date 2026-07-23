@@ -9,6 +9,12 @@
 \item{thresholds}{Vecteur numérique nommé. Les valeurs supérieures de chaque
 seuil d'un test.}
 }
+\value{
+Renvoie de manière invisible la liste de tous les seuils
+actuellement en vigueur (donc mis à jour). C'est une liste d'item avec les
+différentes modalités ("Good", "Uncertain", "Bad", "Severe", "Poor"...) et
+leur seuils associés.
+}
 \description{
 Définir les valeurs des seuils
 }

@@ -11,6 +11,10 @@ les seuils.}
 Si TRUE, les seuils par défaut seront retournés.
 Si FALSE, les seuils actuellement utilisés seront retournés.}
 }
+\value{
+Renvoie de manière invisible les seuils de \code{test_name}. Si
+\code{test_name} est manquant, la fonction retourne tous les seuils.
+}
 \description{
 Obtenir tous les seuils (par défaut)
 }
