@@ -120,7 +120,7 @@ NULL
 #'     `Residual TD Effect` = "No",
 #'     `Q-Stat (for X13)` = "Good",
 #'     `Final Henderson Filter` = "H13",
-#'     `Stage 2 Henderson Filter` = "",
+#'     `Stage 2 Henderson Filter` = "H13",
 #'     `Seasonal Filter` = "S3X5",
 #'     Quality = "Good",
 #'     `Autocorrelation of order 1 of the SA series` = 0.2,
@@ -135,9 +135,6 @@ NULL
 #'
 #' # Check the class of the object
 #' class(JVS)
-#'
-#' # Test wether JVS is a JVS_matrix
-#' is(JVS, "JVS_matrix")
 #'
 #' @encoding UTF-8
 #' @name JVS_matrix
