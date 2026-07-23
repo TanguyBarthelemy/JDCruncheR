@@ -40,6 +40,32 @@ Returns invisibly (via \code{invisible(x)}) the same
 \description{
 To export several quality reports in Excel files
 }
+\examples{
+# Path leading to the demetra_m.csv file
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extraction of the QR from the demetra_m.csv file
+QR <- extract_QR(demetra_path)
+
+# Compute the scores
+QR1 <- compute_score(x = QR, n_contrib_score = 5)
+QR2 <- compute_score(
+    x = QR,
+    score_pond = c(qs_residual_s_on_sa = 5, qs_residual_sa_on_i = 30,
+                   f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+                   oos_mean = 30, residuals_skewness = 15, m7 = 25)
+)
+mQR <- mQR_matrix(list(a = QR1, b = QR2))
+
+# Export the Multiple Quality Report to an Excel file
+write(x = mQR, export_dir = tempdir())
+
+
+}
 \seealso{
 \link[=fr-write.mQR_matrix]{Traduction française}
 

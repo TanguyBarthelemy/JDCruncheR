@@ -32,7 +32,7 @@
 #' # export_xlsx() is deprecated.
 #' # Use write() instead:
 #' write(x = QR, file = tempfile(fileext = ".xlsx"))
-#' write(x = mQR, file = tempfile(fileext = ".xlsx"))
+#' write(x = mQR, export_dir = tempdir())
 #'
 #' @name deprecated-JDCruncheR
 #' @export

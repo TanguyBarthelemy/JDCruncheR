@@ -369,6 +369,23 @@ write.default <- function(x, ...) {
 #' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même
 #' bilan qualité \code{\link{JVS_matrix}} que \code{x}.
 #'
+#' @examples
+#' # Chemin menant au répertoire contenant le fichier demetra_m et les séries nécessaires
+#' dir_path <- system.file(
+#' "extdata",
+#' "WS/WS_world/Output/SAProcessing-1",
+#' package = "JDCruncheR"
+#' )
+#'
+#' # Extraire le rapport JVS à partir des fichiers CSV
+#' JVS <- extract_JVS(dir = dir_path)
+#'
+#' # Export du rapport JVS dans un fichier Excel
+#' write(JVS, format = "xlsx", export_dir = tempdir(), overwrite = TRUE)
+#' # Export du rapport JVS dans un fichier CSV
+#' write(JVS, format = "csv", export_dir = tempdir(), overwrite = TRUE)
+#'
+#'
 #' @details
 #' - les fichiers xlsx seront exportées avec le package 'openxlsx'.
 #' - les fichiers csv seront exportées avec le package 'utils'.
@@ -392,6 +409,22 @@ NULL
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
 #' \code{\link{JVS_matrix}} object as \code{x}.
+#'
+#' @examples
+#' # Path leading to the needed CSV files (demetra_m.csv and series)
+#' dir_path <- system.file(
+#' "extdata",
+#' "WS/WS_world/Output/SAProcessing-1",
+#' package = "JDCruncheR"
+#' )
+#'
+#' # Extract the JVS report from the CSV files
+#' JVS <- extract_JVS(dir = dir_path)
+#'
+#' # Export of the JVS report in an Excel file
+#' write(JVS, format = "xlsx", export_dir = tempdir(), overwrite = TRUE)
+#' # Export of the JVS report in a CSV file
+#' write(JVS, format = "csv", export_dir = tempdir(), overwrite = TRUE)
 #'
 #' @details
 #' - xlsx files will be exported with the package 'openxlsx'.
@@ -505,7 +538,7 @@ write.JVS_matrix <- function(
 #' mQR <- mQR_matrix(list(a = QR1, b = QR2))
 #'
 #' # Export du mQR dans un fichier Excel
-#' write(x = mQR, file = tempfile(fileext = ".xlsx"))
+#' write(x = mQR, export_dir = tempdir())
 #'
 #' @keywords internal
 #' @name fr-write.mQR_matrix
@@ -556,7 +589,7 @@ NULL
 #' mQR <- mQR_matrix(list(a = QR1, b = QR2))
 #'
 #' # Export the Multiple Quality Report to an Excel file
-#' write(x = mQR, file = tempfile(fileext = ".xlsx"))
+#' write(x = mQR, export_dir = tempdir())
 #'
 #'
 #' @importFrom openxlsx addWorksheet
