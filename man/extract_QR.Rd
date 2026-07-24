@@ -5,7 +5,7 @@
 \alias{extract_QR}
 \title{Extraction of a quality report}
 \usage{
-extract_QR(file, x, thresholds = getOption("JDCruncheR.thresholds"), ...)
+extract_QR(file, x, thresholds = getOption("rjd3qr.thresholds"), ...)
 }
 \arguments{
 \item{file}{the csv file containing the diagnostics matrix. This argument
@@ -64,7 +64,7 @@ parallel and used with the \code{x} argument).
 \examples{
 # Path of matrix demetra_m
 demetra_path <- file.path(
-    system.file("extdata", package = "JDCruncheR"),
+    system.file("extdata", package = "rjd3qr"),
     "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )

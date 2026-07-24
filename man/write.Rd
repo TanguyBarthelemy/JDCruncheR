@@ -78,7 +78,7 @@ only written to Excel files.
 # Path to the directory containing the demetra_m file and series
 dir_path <- system.file(
     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
-    package = "JDCruncheR"
+    package = "rjd3qr"
 )
 
 # Path to the demetra_m.csv file

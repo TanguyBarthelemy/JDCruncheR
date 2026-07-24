@@ -218,7 +218,7 @@ apply_BQ_style <- function(
 #' # Chemin menant au répertoire contenant le fichier demetra_m et les séries
 #' dir_path <- system.file(
 #'     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
-#'     package = "JDCruncheR"
+#'     package = "rjd3qr"
 #' )
 #'
 #' # Chemin menant au fichier demetra_m.csv
@@ -298,7 +298,7 @@ NULL
 #' # Path to the directory containing the demetra_m file and series
 #' dir_path <- system.file(
 #'     "extdata", "WS", "WS_world", "Output", "SAProcessing-1",
-#'     package = "JDCruncheR"
+#'     package = "rjd3qr"
 #' )
 #'
 #' # Path to the demetra_m.csv file

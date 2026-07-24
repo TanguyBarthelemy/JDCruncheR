@@ -105,7 +105,7 @@ recode_vec <- function(x, recode_variable) {
 #' @examples
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -211,7 +211,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -252,7 +252,7 @@ compute_score.QR_matrix <- function(
     na.rm = TRUE,
     n_contrib_score = NULL,
     conditional_indicator = NULL,
-    thresholds = getOption("JDCruncheR.thresholds"),
+    thresholds = getOption("rjd3qr.thresholds"),
     ...
 ) {
     if (!all(names(score_pond) %in% colnames(x[["modalities"]]))) {
@@ -441,7 +441,7 @@ compute_score.default <- function(x, ...) {
 #'
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -477,7 +477,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -582,7 +582,7 @@ weighted_score.mQR_matrix <- function(x, pond = 1L) {
 #'
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -620,7 +620,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -708,7 +708,7 @@ sort.mQR_matrix <- function(
 #'
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -757,7 +757,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -904,7 +904,7 @@ extract_score.mQR_matrix <- function(
 #' @examples
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -978,7 +978,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -1210,7 +1210,7 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
 #' @examples
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -1252,7 +1252,7 @@ NULL
 #' @examples
 #' # Path to the demetra_m.csv file
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -1370,7 +1370,7 @@ recode_indicator_num.mQR_matrix <- function(
 #' @examples
 #' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
@@ -1412,7 +1412,7 @@ NULL
 #' @examples
 #' # Path of matrix demetra_m
 #' demetra_path <- file.path(
-#'     system.file("extdata", package = "JDCruncheR"),
+#'     system.file("extdata", package = "rjd3qr"),
 #'     "WS/WS_world/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )

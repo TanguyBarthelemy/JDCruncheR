@@ -1,5 +1,5 @@
 Type: Package
-Package: JDCruncheR
+Package: rjd3qr
 Title: 'JDemetra+' Quality Report Generator
 Version: 0.4.1
 Authors@R: c(

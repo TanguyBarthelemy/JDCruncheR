@@ -34,7 +34,7 @@
 #' \code{\link[rjwsacruncher]{cruncher_and_param}}).
 #'
 #' Pour plus d'informations sur la génération des sorties, voir la vignette :
-#' `browseVignettes(package = "JDCruncheR")`
+#' `browseVignettes(package = "rjd3qr")`
 #'
 #' Si les séries sont fournies, elles doivent être des \code{data.frame} avec
 #' les dates dans la première colonne et les valeurs des séries dans les autres
@@ -57,7 +57,7 @@
 #' dir_path <- system.file(
 #'     "extdata",
 #'     "WS/WS_world/Output/SAProcessing-1",
-#'     package = "JDCruncheR"
+#'     package = "rjd3qr"
 #' )
 #'
 #' # Extraction du rapport JVS :
@@ -101,7 +101,7 @@ NULL
 #' \code{\link[rjwsacruncher]{cruncher_and_param}}).
 #'
 #' For more information about the generation of the output, see the vignette:
-#' `browseVignettes(package = "JDCruncheR")`
+#' `browseVignettes(package = "rjd3qr")`
 #'
 #' If the series are provided, they have to be `data.frame` with the dates in
 #' the first column and the values of the series in the other columns.
@@ -124,7 +124,7 @@ NULL
 #' dir_path <- system.file(
 #'     "extdata",
 #'     "WS/WS_world/Output/SAProcessing-1",
-#'     package = "JDCruncheR"
+#'     package = "rjd3qr"
 #' )
 #'
 #' # Extract the JVS report from the directory

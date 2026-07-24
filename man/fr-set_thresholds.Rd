@@ -30,7 +30,7 @@ Enfin, si \code{test_name} et \code{thresholds} sont tous deux fournis,
 seuls les seuils du test \code{test_name} seront mis à jour avec les valeurs
 spécifiées dans \code{thresholds}.
 
-Cette fonction met à jour l'option \code{JDCruncheR.thresholds}.
+Cette fonction met à jour l'option \code{rjd3qr.thresholds}.
 }
 \examples{
 

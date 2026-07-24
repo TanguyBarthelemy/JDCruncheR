@@ -15,13 +15,13 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library("JDCruncheR")
+library("rjd3qr")
 ```
 
 
 ## Introduction
 
-This vignette explains how to create a JVS Quality Report with the {JDCruncheR} package. This only works for v3.
+This vignette explains how to create a JVS Quality Report with the {rjd3qr} package. This only works for v3.
 
 ## Definition of the JVS QR
 
@@ -147,7 +147,7 @@ Uns fois le cruncher lancé et les outputs générés, on peut créer notre rapp
 dir_path <- system.file(
     "extdata",
     "WS/WS_world/Output/SAProcessing-1",
-    package = "JDCruncheR"
+    package = "rjd3qr"
 )
 
 JVS <- extract_JVS(dir = dir_path)

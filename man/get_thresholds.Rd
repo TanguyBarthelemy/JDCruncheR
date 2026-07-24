@@ -23,7 +23,7 @@ Get all (default) thresholds
 \details{
 If \code{test_name} is missing, all threshold will be returned.
 
-The thresholds are read from the option \code{JDCruncheR.thresholds}.
+The thresholds are read from the option \code{rjd3qr.thresholds}.
 }
 \examples{
 
