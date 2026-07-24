@@ -38,6 +38,32 @@ NULL
 #' \code{\link{mQR_matrix}} object and returns it invisibly (via
 #' \code{invisible(x)}).
 #'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/WS_world/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(file = demetra_path)
+#'
+#' print(QR)
+#'
+#'
+#' # Prepare 2 quality reports
+#' QR1 <- compute_score(x = QR, n_contrib_score = 5)
+#' QR2 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(qs_residual_s_on_sa = 5, qs_residual_sa_on_i = 30,
+#'                    f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+#'                    oos_mean = 30, residuals_skewness = 15, m7 = 25)
+#' )
+#' mQR <- mQR_matrix(list(a = QR1, b = QR2))
+#'
+#' print(mQR)
+#'
 #' @importFrom stats sd
 #'
 #' @encoding UTF-8
