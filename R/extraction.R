@@ -593,18 +593,20 @@ extractARIMA <- function(demetra_m) {
     )
     arima_df[["arima_model"]] <- paste0(
         "(",
-        arima_df[["arima_p"]],
-        ",",
-        arima_df[["arima_d"]],
-        ",",
-        arima_df[["arima_q"]],
+        paste(
+            arima_df[["arima_p"]],
+            arima_df[["arima_d"]],
+            arima_df[["arima_q"]],
+            sep = " "
+        ),
         ")",
         "(",
-        arima_df[["arima_bp"]],
-        ",",
-        arima_df[["arima_bd"]],
-        ",",
-        arima_df[["arima_bq"]],
+        paste(
+            arima_df[["arima_bp"]],
+            arima_df[["arima_bd"]],
+            arima_df[["arima_bq"]],
+            sep = " "
+        ),
         ")"
     )
     return(list(

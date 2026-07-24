@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* ARIMA model is now displayed with space instead of commas
 * {JDCruncheR} becomes {rjd3qr}
 * The option `jdc_thresholds` is renamed `rjd3qr.thresholds` to avoid conflict with other packages.
 * In JVS, Trend filters and D7 filters are now displayed starting with a "H"

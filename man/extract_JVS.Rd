@@ -72,7 +72,6 @@ directory containing the corresponding CSV files.
 }
 \examples{
 # Path leading to the directory containing the needed files
-
 dir_path <- system.file(
     "extdata",
     "WS/WS_world/Output/SAProcessing-1",
