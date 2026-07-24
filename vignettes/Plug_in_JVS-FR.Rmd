@@ -115,12 +115,7 @@ options(
         "arima.p", "arima.d", "arima.q", "arima.bp", "arima.bd", "arima.bq",
         "m-statistics.q", "m-statistics.q-m2"
     ),
-    default_tsmatrix_series = c(
-        "decomposition.y_cmp",
-        "decomposition.s_cmp",
-        "decomposition.sa_cmp",
-        "decomposition.t_cmp"
-    )
+    default_tsmatrix_series = c("y", "s", "sa", "t")
 )
 
 cruncher_and_param(
