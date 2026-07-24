@@ -6,9 +6,9 @@
 \title{Création d'un rapport JVS}
 \arguments{
 \item{dir}{Chemin vers le dossier contenant les fichiers
-demetra_m.csv, series_decomposition_y_cmp.csv,
-series_decomposition_sa_cmp.csv, series_decomposition_s_cmp.csv et
-series_decomposition_t_cmp.csv.}
+demetra_m.csv, series_y.csv,
+series_sa.csv, series_s.csv et
+series_t.csv.}
 
 \item{demetra_m}{Un data.frame contenant la matrice de diagnostics.
 Si manquant ou \code{NULL}, le fichier est recherché dans \code{dir}.}

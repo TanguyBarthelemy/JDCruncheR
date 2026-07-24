@@ -17,8 +17,8 @@ extract_JVS(
 }
 \arguments{
 \item{dir}{path to the directory containing the demetra_m.csv,
-series_decomposition_y_cmp.csv, series_decomposition_sa_cmp.csv,
-series_decomposition_s_cmp.csv and series_decomposition_t_cmp.csv files.}
+series_y.csv, series_sa.csv,
+series_s.csv and series_t.csv files.}
 
 \item{demetra_m}{data.frame containing the diagnostics matrix.
 If missing or \code{NULL}, the file is searched for in \code{dir}.}
