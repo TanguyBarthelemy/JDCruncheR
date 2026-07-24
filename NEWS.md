@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * In JVS, we apply a threshold of 0.05 to stat_Q between Good and Bad
 * In JVS, Quality SEVERE is renamed in POOR
 * In JVS, the final series are no longer used and replaced by the decomposition series before applying the effects of preadjustment
-* In JVS, the irregular standard deviation is now based on the computation sa_cmp - t_cmp
+* In JVS, the irregular standard deviation is now based on the computation sa - t
 * In example data, we updated the generated output csv files to match JVS and QR creation
 * The column follows now the same order as the plug-in
 
