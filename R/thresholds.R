@@ -21,6 +21,8 @@
 #' seuls les seuils du test \code{test_name} seront mis à jour avec les valeurs
 #' spécifiées dans \code{thresholds}.
 #'
+#' Cette fonction met à jour l'option `jdc_thresholds`.
+#'
 #' @examples
 #'
 #' # Définir les seuils pour le test "m7"
@@ -60,6 +62,8 @@ NULL
 #' Finally, if \code{test_name} and \code{thresholds} are not missing, then only
 #' the thresholds of the test \code{test_name} are updated with the value
 #' \code{thresholds}.
+#'
+#' This function updates the option `jdc_thresholds`.
 #'
 #' @examples
 #'
@@ -107,6 +111,8 @@ set_thresholds <- function(test_name, thresholds) {
 #' @details
 #' Si \code{test_name} est manquant, tous les seuils seront retournés.
 #'
+#' Les seuils sont lus depuis l'option `jdc_thresholds`.
+#'
 #' @examples
 #'
 #' # Obtenir tous les seuils par défaut
@@ -135,6 +141,8 @@ NULL
 #'
 #' @details
 #' If \code{test_name} is missing, all threshold will be returned.
+#'
+#' The thresholds are read from the option `jdc_thresholds`.
 #'
 #' @examples
 #'

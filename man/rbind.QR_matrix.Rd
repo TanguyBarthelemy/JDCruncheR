@@ -34,7 +34,10 @@ demetra_path <- file.path(
 QR <- extract_QR(demetra_path)
 
 # Compute differents scores
-QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5))
+QR1 <- compute_score(
+    x = QR,
+    score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5)
+)
 QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_s_on_sa = 5))
 
 # Merge two quality report
