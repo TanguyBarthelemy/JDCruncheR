@@ -84,8 +84,5 @@ JVS <- extract_JVS(dir = dir_path)
 }
 \seealso{
 \link[=fr-extract_JVS]{Traduction française}
-
-Other JVS_matrix functions:
-\code{\link[=write.JVS_matrix]{write.JVS_matrix()}}
 }
 \concept{JVS_matrix functions}

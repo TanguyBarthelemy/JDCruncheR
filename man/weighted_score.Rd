@@ -58,8 +58,6 @@ Other QR_matrix functions:
 \code{\link[=extract_QR]{extract_QR()}},
 \code{\link[=print.QR_matrix]{print.QR_matrix()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
-\code{\link{sort}},
-\code{\link[=write.QR_matrix]{write.QR_matrix()}},
-\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
+\code{\link{sort}}
 }
 \concept{QR_matrix functions}
