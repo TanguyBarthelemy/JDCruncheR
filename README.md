@@ -65,7 +65,7 @@ library("JDCruncheR")
 #### Changer les seuils des tests statistiques
 
 Les seuils des tests du bilan qualité sont personnalisables. Pour cela,
-il faut modifier l’option `"jdc_thresholds"`.
+il faut modifier l’option `"JDCruncheR.thresholds"`.
 
 Pour récupérer les valeurs des tests par défault, il faut appeler la
 fonction `get_thresholds()` :
@@ -302,7 +302,7 @@ library("JDCruncheR")
 #### Changing statistical test thresholds
 
 The thresholds of the QR tests can be customised You have to modify the
-option `"jdc_thresholds"`.
+option `"JDCruncheR.thresholds"`.
 
 To get the (default or not) values of the thresholds of the tests, you
 can call the fonction `get_thresholds()` :

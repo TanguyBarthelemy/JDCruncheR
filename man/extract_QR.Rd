@@ -5,7 +5,7 @@
 \alias{extract_QR}
 \title{Extraction of a quality report}
 \usage{
-extract_QR(file, x, thresholds = getOption("jdc_thresholds"), ...)
+extract_QR(file, x, thresholds = getOption("JDCruncheR.thresholds"), ...)
 }
 \arguments{
 \item{file}{the csv file containing the diagnostics matrix. This argument

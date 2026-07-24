@@ -152,7 +152,7 @@ NULL
 extract_QR <- function(
     file,
     x,
-    thresholds = getOption("jdc_thresholds"),
+    thresholds = getOption("JDCruncheR.thresholds"),
     ...
 ) {
     if (missing(x) && missing(file)) {

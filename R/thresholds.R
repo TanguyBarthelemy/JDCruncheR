@@ -21,7 +21,7 @@
 #' seuls les seuils du test \code{test_name} seront mis à jour avec les valeurs
 #' spécifiées dans \code{thresholds}.
 #'
-#' Cette fonction met à jour l'option `jdc_thresholds`.
+#' Cette fonction met à jour l'option `JDCruncheR.thresholds`.
 #'
 #' @examples
 #'
@@ -63,7 +63,7 @@ NULL
 #' the thresholds of the test \code{test_name} are updated with the value
 #' \code{thresholds}.
 #'
-#' This function updates the option `jdc_thresholds`.
+#' This function updates the option `JDCruncheR.thresholds`.
 #'
 #' @examples
 #'
@@ -93,7 +93,7 @@ set_thresholds <- function(test_name, thresholds) {
             all_thresholds[[test_name]] <- thresholds
         }
     }
-    options(jdc_thresholds = all_thresholds)
+    options(JDCruncheR.thresholds = all_thresholds)
     return(invisible(all_thresholds))
 }
 
@@ -111,7 +111,7 @@ set_thresholds <- function(test_name, thresholds) {
 #' @details
 #' Si \code{test_name} est manquant, tous les seuils seront retournés.
 #'
-#' Les seuils sont lus depuis l'option `jdc_thresholds`.
+#' Les seuils sont lus depuis l'option `JDCruncheR.thresholds`.
 #'
 #' @examples
 #'
@@ -142,7 +142,7 @@ NULL
 #' @details
 #' If \code{test_name} is missing, all threshold will be returned.
 #'
-#' The thresholds are read from the option `jdc_thresholds`.
+#' The thresholds are read from the option `JDCruncheR.thresholds`.
 #'
 #' @examples
 #'
@@ -196,7 +196,7 @@ get_thresholds <- function(test_name, default = TRUE) {
     if (default) {
         thresholds <- default_thresholds
     } else {
-        thresholds <- getOption("jdc_thresholds")
+        thresholds <- getOption("JDCruncheR.thresholds")
     }
 
     if (missing(test_name)) {

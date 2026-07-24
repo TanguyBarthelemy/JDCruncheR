@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* the option `jdc_thresholds` is renamed `rjd3qr.thresholds` (discussed [here](https://github.com/coatless-rpkg/checktor/issues/8#issuecomment-5061167784))
 * In JVS, Trend filters and D7 filters are now displayed starting with a "H"
 * In JVS, Leap year and Easter variables are displayed as "Yes" or "No" variables
 * In JVS, we apply a threshold of 0.05 to stat_Q between Good and Bad

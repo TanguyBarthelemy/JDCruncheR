@@ -18,7 +18,7 @@
   na.rm = TRUE,
   n_contrib_score = NULL,
   conditional_indicator = NULL,
-  thresholds = getOption("jdc_thresholds"),
+  thresholds = getOption("JDCruncheR.thresholds"),
   ...
 )
 
