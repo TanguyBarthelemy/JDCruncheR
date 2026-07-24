@@ -301,14 +301,21 @@ extractLeaster <- function(demetra_m) {
     return(leaster)
 }
 
-extractAutoCorr <- function(demetra_m) {
-    auto_corr <- find_variable(
-        demetra_m,
-        pattern = "(^diagnostics\\.seas\\.sa\\.ac1$)|(^seas\\.sa\\.ac1$)",
-        type = "double",
-        variable = "diagnostics.seas-sa-ac1"
-    )
-    return(auto_corr)
+extractAutoCorr <- function(sa) {
+    auto_corr <- apply(
+        X = sa[, -1L, drop = FALSE],
+        MARGIN = 2L,
+        FUN = \(.sa) {
+            dsa <- diff(na.omit(.sa))
+            .auto_corr <- acf(
+                x = dsa,
+                lag.max = 1L,
+                plot = FALSE,
+                na.action = na.pass
+            )
+            return(.auto_corr$acf[2L])
+        })
+    return(list(values = auto_corr))
 }
 
 extractSeasCombined <- function(demetra_m) {
@@ -385,8 +392,8 @@ extractTDFTest <- function(demetra_m) {
 }
 
 #' @importFrom stats pnorm
-extractNormal <- function(demetra_m) {
-    ac1 <- extractAutoCorr(demetra_m)
+extractNormal <- function(demetra_m, sa) {
+    ac1 <- extractAutoCorr(sa)
     nb_obs <- extractNobs(demetra_m)
     val <- stats::pnorm(ac1$values * sqrt(nb_obs$values))
     return(list(

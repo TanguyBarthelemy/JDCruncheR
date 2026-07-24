@@ -214,8 +214,8 @@ extract_JVS <- function(
     d7_trend_filter <- extractStage2TrendFilter(demetra_m)
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
-    auto_corr <- extractAutoCorr(demetra_m)
-    normal_test <- extractNormal(demetra_m)
+    auto_corr <- extractAutoCorr(sa)
+    normal_test <- extractNormal(demetra_m, sa)
     standard_deviation <- extractStandardDeviation(sa - t)
     max_adj <- extractMaxAdj_allseries(y, sa)
 
