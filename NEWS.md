@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* The `write` method for `JVS_matrix` object now works with a `file` argument instead of `export_dir` and `format`.
 * ARIMA model is now displayed with space instead of commas
 * {JDCruncheR} becomes {rjd3qr}
 * The option `jdc_thresholds` is renamed `rjd3qr.thresholds` to avoid conflict with other packages.

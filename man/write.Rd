@@ -13,9 +13,9 @@ write(x, ...)
 
 \method{write}{JVS_matrix}(
   x,
-  format = c("csv", "xlsx"),
-  export_dir = tempdir(),
+  file = file.path(tempdir(), "JobVacancySurveyQR.csv"),
   overwrite = TRUE,
+  verbose = TRUE,
   ...
 )
 
@@ -43,8 +43,8 @@ created.}
 \item{overwrite}{Boolean. Should an existing file be overwritten?
 By default, \code{overwrite = TRUE}.}
 
-\item{format}{Character string defining the output format. Possible choices
-are \code{"csv"} (default) or \code{"xlsx"}.}
+\item{verbose}{Boolean indicating whether to print additional information.
+Default is \code{TRUE}.}
 
 \item{export_dir}{Path to the directory that will contain the exported files.}
 

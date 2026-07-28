@@ -15,9 +15,6 @@ fichier que l'on veut créer}
 \item{auto_format}{booléen indiquant s'il faut formatter la sortie
 (\code{auto_format = TRUE} par défaut).}
 
-\item{format}{Chaîne de caractère qui défini le format d'output. Les choix
-possibles sont \code{"csv"} (par défault) ou \code{"xlsx"}.}
-
 \item{layout_file}{paramètre d'export. Par défaut,
 (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par
 composante de la matrice bilan qualité (matrice des modalités ou des
@@ -30,6 +27,9 @@ fichier avec 2 feuilles par bilan qualité (\code{Values} et
 
 \item{overwrite}{Booléen. Est ce qu'un fichier existant doit être ré-écrit ?
 Par défaut, \code{overwrite = TRUE}.}
+
+\item{verbose}{Booleen. Est ce que des informations supplémentaires doivent
+être affichées ? Valeur par défaut, \code{TRUE}.}
 
 \item{...}{Autre argument non utilisé.}
 }

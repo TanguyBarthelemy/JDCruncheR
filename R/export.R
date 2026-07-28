@@ -185,8 +185,6 @@ apply_BQ_style <- function(
 #' @param export_dir Chemin vers le dossier qui contiendra les exports.
 #' @param auto_format booléen indiquant s'il faut formatter la sortie
 #' (\code{auto_format = TRUE} par défaut).
-#' @param format Chaîne de caractère qui défini le format d'output. Les choix
-#'   possibles sont `"csv"` (par défault) ou `"xlsx"`.
 #' @param layout_file paramètre d'export. Par défaut,
 #' (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par
 #' composante de la matrice bilan qualité (matrice des modalités ou des
@@ -198,6 +196,8 @@ apply_BQ_style <- function(
 #' \code{Modalities}).
 #' @param overwrite Booléen. Est ce qu'un fichier existant doit être ré-écrit ?
 #'   Par défaut, `overwrite = TRUE`.
+#' @param verbose Booleen. Est ce que des informations supplémentaires doivent
+#'   être affichées ? Valeur par défaut, `TRUE`.
 #' @param ... Autre argument non utilisé.
 #'
 #' @returns
@@ -266,8 +266,6 @@ NULL
 #' @param export_dir Path to the directory that will contain the exported files.
 #' @param auto_format Boolean indicating whether to format the output
 #'   (\code{auto_format = TRUE} by default).
-#' @param format Character string defining the output format. Possible choices
-#'   are `"csv"` (default) or `"xlsx"`.
 #' @param layout_file Export parameter. By default,
 #'   (\code{layout_file = "ByComponent"}) and an Excel file is exported for
 #'   each component of the quality report matrix (modalities or values matrix),
@@ -278,6 +276,8 @@ NULL
 #'   sheets per quality report (\code{Values} and \code{Modalities}).
 #' @param overwrite Boolean. Should an existing file be overwritten?
 #'   By default, \code{overwrite = TRUE}.
+#' @param verbose Boolean indicating whether to print additional information.
+#'   Default is `TRUE`.
 #' @param ... Other unused arguments.
 #'
 #' @returns
@@ -420,26 +420,45 @@ write.QR_matrix <- function(
 #' @export
 write.JVS_matrix <- function(
     x,
-    format = c("csv", "xlsx"),
-    export_dir = tempdir(),
+    file = file.path(tempdir(), "JobVacancySurveyQR.csv"),
     overwrite = TRUE,
+    verbose = TRUE,
     ...
 ) {
-    format <- match.arg(format)
-    outfile <- file.path(export_dir, paste0("JobVacancySurveyQR.", format))
+    if (dir.exists(file)) {
+        file <- file.path(file, "JobVacancySurveyQR.csv")
+    } else if (!dir.exists(dirname(path = file))) {
+        dir.create(dataset_dir, recursive = TRUE)
+    }
 
-    if (file.exists(outfile) && !overwrite) {
-        warning(
-            sprintf("The file '%s' already exists.", outfile),
-            call. = FALSE
-        )
+    extension <- tools::file_ext(file)
+    if (!nzchar(extension)) {
+        file <- paste0(file, ".csv")
+        extension <- "csv"
+    } else if (!extension %in% c("csv", "xlsx")) {
+        stop(extension, " is not accepted. ",
+             "Only .csv and .xlsx format are accepted.")
+    }
+
+    if (file.exists(file) && !overwrite) {
+        if (verbose) {
+            warning("The file already exists. ",
+                    "To overwrite it, use the argument `overwrite = TRUE`.")
+        }
         return(invisible(x))
     }
 
-    if (format == "csv") {
+    if (verbose) {
+        message("The JVS report will be exported to ", file, ".")
+        if (file.exists(file)) {
+            message("The file already exists and will be overwritten.")
+        }
+    }
+
+    if (extension == "csv") {
         utils::write.table(
             x = x,
-            file = outfile,
+            file = file,
             sep = ";",
             dec = ",",
             quote = FALSE,
@@ -448,7 +467,7 @@ write.JVS_matrix <- function(
             fileEncoding = "utf-8",
             na = ""
         )
-    } else {
+    } else if (extension == "xlsx") {
         wb_jvs <- openxlsx::createWorkbook(title = "JVSQR")
         openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS")
         openxlsx::writeData(
@@ -460,9 +479,11 @@ write.JVS_matrix <- function(
 
         openxlsx::saveWorkbook(
             wb = wb_jvs,
-            file = outfile,
+            file = file,
             overwrite = overwrite
         )
+    } else {
+        stop("Wrong extension.")
     }
     return(invisible(x))
 }
