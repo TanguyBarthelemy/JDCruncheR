@@ -162,13 +162,19 @@ L'objet JVS est un dataframe contenant notre rapport JVS. pour l'enregistrer il 
 Pour exporter le rapport de qualité JVS, vous devez utiliser la fonction `write`. Le rapport peut être exporté sous forme de fichier .csv :
 
 ```{r, echo = TRUE, eval = FALSE}
-write(JVS, format = "csv", export_dir = "chemin/vers/le/répertoire/d'export", overwrite = TRUE)
+write(JVS, file = "chemin/vers/le/répertoire/d'export", overwrite = TRUE)
 ```
 
-Le rapport peut être exporté sous forme de fichier .xlsx :
+Par défaut, le fichier s'appellera "JobVacancySurveyQR.csv". Pour lui donner un nom spécifique, il est possible de l'indiquer dans le chemin de l'argument file :
 
 ```{r, echo = TRUE, eval = FALSE}
-write(JVS, format = "xlsx", export_dir = "chemin/vers/le/répertoire/d'export", overwrite = TRUE)
+write(JVS, file = "chemin/vers/le/répertoire/d'export/nom_fichier.csv", overwrite = TRUE)
+```
+
+Le rapport peut être exporté sous forme de fichier .xlsx. Pour cela, il est nécessaire de l'indiquer dans le nom du fichier dans l'argument file :
+
+```{r, echo = TRUE, eval = FALSE}
+write(JVS, export_dir = "chemin/vers/le/répertoire/d'export/nom_fichier.xlsx", overwrite = TRUE)
 ```
 
 
