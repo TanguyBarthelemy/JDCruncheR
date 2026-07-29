@@ -5,18 +5,12 @@
 \alias{fr-extract_QR}
 \title{Extraction d'un bilan qualité}
 \arguments{
-\item{matrix_output_file}{Chaîne de caracère. Chemin vers le fichier CSV
-contenant la matrice des diagnostics.}
-
-\item{file}{Chaîne de caracère. Chemin vers le fichier CSV contenant la
+\item{file}{Chaîne de caractères. Chemin vers le fichier CSV contenant la
 matrice des diagnostics. Cet argument remplace l'argument
 \code{matrix_output_file}.}
 
-\item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut
-\code{sep = ";"})}
-
-\item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut
-\code{dec = ","})}
+\item{x}{un data.frame contenant la matrice de diagnostiques. Si manquante,
+on va lire la matrice à l'emplacement de \code{file}.}
 
 \item{thresholds}{\code{list} de vecteurs numériques. Seuils appliqués aux
 différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
@@ -24,6 +18,11 @@ différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
 Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
 Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
 doit ressemble l'objet \code{thresholds}.}
+
+\item{...}{D'autres paramètres pour la fonction \code{read_demetra_m} comme \code{sep},
+séparateur de caractères utilisé dans le fichier csv (par défaut
+\code{sep = ";"}) et \code{dec} séparateur décimal utilisé dans le fichier csv
+(par défaut \code{dec = ","}).}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}}.

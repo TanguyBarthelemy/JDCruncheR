@@ -1,8 +1,53 @@
-#' Set values for thresholds
+#' @title Définir les valeurs des seuils
+#'
+#' @param test_name Chaîne de caractères. Le nom du test à mettre à jour.
+#' @param thresholds Vecteur numérique nommé. Les valeurs supérieures de chaque
+#'   seuil d'un test.
+#'
+#' @returns Renvoie de manière invisible la liste de tous les seuils
+#' actuellement en vigueur (donc mis à jour). C'est une liste d'item avec les
+#' différentes modalités ("Good", "Uncertain", "Bad", "Severe", "Poor"...) et
+#' leur seuils associés.
+#'
+#' @details
+#' Si \code{test_name} est manquant, l'argument \code{thresholds} n'est pas
+#' utilisé et tous les seuils seront réinitialisés à leurs valeurs par défaut.
+#'
+#' Si \code{test_name} est fourni mais que l'argument \code{thresholds} est
+#' manquant, seuls les seuils du test \code{test_name} seront réinitialisés
+#' à leurs valeurs par défaut.
+#'
+#' Enfin, si \code{test_name} et \code{thresholds} sont tous deux fournis,
+#' seuls les seuils du test \code{test_name} seront mis à jour avec les valeurs
+#' spécifiées dans \code{thresholds}.
+#'
+#' @examples
+#'
+#' # Définir les seuils pour le test "m7"
+#' set_thresholds(
+#'     test_name = "m7",
+#'     thresholds = c(Bon = 0.8, Mauvais = 1.4, Sévère = Inf)
+#' )
+#'
+#' # Réinitialiser les seuils du test "oos_mean" à leurs valeurs par défaut
+#' set_thresholds(test_name = "oos_mean")
+#'
+#' # Réinitialiser tous les seuils à leurs valeurs par défaut
+#' set_thresholds()
+#'
+#' @keywords internal
+#' @name fr-set_thresholds
+NULL
+#> NULL
+
+#' @title Set values for thresholds
 #'
 #' @param test_name String. The name of the test to update.
 #' @param thresholds Named vector of numerics. The upper values of
 #' each break of a threshold.
+#'
+#' @returns Returns invisibly all the current (updated) thresholds. It's a list
+#' of item with grade ("Good", "Uncertain", "Bad", "Severe", "Poor"...).
 #'
 #' @details
 #' If \code{test_name} is missing, the argument \code{thresholds} is not used
@@ -16,7 +61,6 @@
 #' the thresholds of the test \code{test_name} are updated with the value
 #' \code{thresholds}.
 #'
-#' @export
 #' @examples
 #'
 #' # Set "m7"
@@ -30,7 +74,9 @@
 #'
 #' # Set all thresholds to default
 #' set_thresholds()
+#' @export
 #'
+#' @seealso [Traduction française][fr-set_thresholds()]
 set_thresholds <- function(test_name, thresholds) {
     default_thresholds <- get_thresholds(default = TRUE)
     if (missing(test_name)) {
@@ -47,17 +93,49 @@ set_thresholds <- function(test_name, thresholds) {
     return(invisible(all_thresholds))
 }
 
-#' Get all (default) thresholds
+#' @title Obtenir tous les seuils (par défaut)
+#'
+#' @param test_name Chaîne de caractères. Le nom du test pour lequel obtenir
+#'   les seuils.
+#' @param default Booléen. (par défaut, TRUE)
+#'   Si TRUE, les seuils par défaut seront retournés.
+#'   Si FALSE, les seuils actuellement utilisés seront retournés.
+#'
+#' @returns Renvoie de manière invisible les seuils de `test_name`. Si
+#' `test_name` est manquant, la fonction retourne tous les seuils.
+#'
+#' @details
+#' Si \code{test_name} est manquant, tous les seuils seront retournés.
+#'
+#' @examples
+#'
+#' # Obtenir tous les seuils par défaut
+#' get_thresholds(default = TRUE)
+#'
+#' # Obtenir tous les seuils actuellement utilisés
+#' get_thresholds(default = FALSE)
+#'
+#' # Obtenir les seuils actuellement utilisés pour le test "oos_mean"
+#' get_thresholds(test_name = "oos_mean", default = FALSE)
+#'
+#' @keywords internal
+#' @name fr-get_thresholds
+NULL
+#> NULL
+
+#' @title Get all (default) thresholds
 #'
 #' @param test_name String. The name of the test to get.
 #' @param default Boolean. (default is TRUE)
 #' If TRUE, the default threshold will be returned.
 #' If FALSE the current used thresholds.
 #'
+#' @returns Returns invisibly the thresholds of the chosen item. If test_name
+#' is missing, it returns all the current thresholds.
+#'
 #' @details
 #' If \code{test_name} is missing, all threshold will be returned.
 #'
-#' @export
 #' @examples
 #'
 #' # Get all default thresholds
@@ -68,7 +146,9 @@ set_thresholds <- function(test_name, thresholds) {
 #'
 #' # Get all current thresholds
 #' get_thresholds(test_name = "oos_mean", default = FALSE)
+#' @export
 #'
+#' @seealso [Traduction française][fr-get_thresholds()]
 get_thresholds <- function(test_name, default = TRUE) {
     def1 <- c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf)
     def2 <- c(Bad = 0.01, Uncertain = 0.1, Good = Inf)

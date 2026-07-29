@@ -12,6 +12,10 @@ set_thresholds(test_name, thresholds)
 \item{thresholds}{Named vector of numerics. The upper values of
 each break of a threshold.}
 }
+\value{
+Returns invisibly all the current (updated) thresholds. It's a list
+of item with grade ("Good", "Uncertain", "Bad", "Severe", "Poor"...).
+}
 \description{
 Set values for thresholds
 }
@@ -40,5 +44,7 @@ set_thresholds(test_name = "oos_mean")
 
 # Set all thresholds to default
 set_thresholds()
-
+}
+\seealso{
+\link[=fr-set_thresholds]{Traduction française}
 }

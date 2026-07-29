@@ -4,6 +4,9 @@
 \name{QR_matrix}
 \alias{QR_matrix}
 \alias{mQR_matrix}
+\alias{mQR_matrix.QR_matrix}
+\alias{mQR_matrix.mQR_matrix}
+\alias{mQR_matrix.default}
 \alias{is.QR_matrix}
 \alias{is.mQR_matrix}
 \title{Quality report objects}
@@ -11,6 +14,12 @@
 QR_matrix(modalities = NULL, values = NULL, score_formula = NULL)
 
 mQR_matrix(x = list(), ...)
+
+\method{mQR_matrix}{QR_matrix}(x = QR_matrix(), ...)
+
+\method{mQR_matrix}{mQR_matrix}(x = mQR_matrix.default(), ...)
+
+\method{mQR_matrix}{default}(x = list(), ...)
 
 is.QR_matrix(x)
 
@@ -57,6 +66,49 @@ frequency, the ARIMA model, etc).
 score (once the calculus is done).
 }
 }
+\examples{
+modalities <- data.frame(
+    Quality = c("Good", "Uncertain", "Bad"),
+    Seasonality = c("Good", "Good", "Bad")
+)
+
+values <- data.frame(
+    Quality = c(0.95, 0.75, 0.02),
+    Seasonality = c(0.80, 0.60, 0.01),
+    Period = c(12L, 12L, 12L)
+)
+
+# Create two quality report objects
+QR1 <- QR_matrix(
+    modalities = modalities,
+    values = values
+)
+
+QR2 <- QR_matrix(
+    modalities = modalities,
+    values = values
+)
+
+# Test whether an object is a quality report
+is.QR_matrix(QR1)
+
+# Create a list of quality reports
+mQR <- mQR_matrix(QR1, QR2)
+
+# Test whether an object is a list of quality reports
+is.mQR_matrix(mQR)
+
+}
 \seealso{
 \link[=fr-QR_matrix]{Traduction française}
+
+Other QR_matrix functions:
+\code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=print.QR_matrix]{print.QR_matrix()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link{sort}},
+\code{\link[=weighted_score]{weighted_score()}},
+\code{\link[=write.QR_matrix]{write.QR_matrix()}},
+\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
+\concept{QR_matrix functions}

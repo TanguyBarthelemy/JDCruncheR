@@ -1,7 +1,7 @@
 Type: Package
 Package: JDCruncheR
 Title: 'JDemetra+' Quality Report Generator
-Version: 0.4.0
+Version: 0.4.1
 Authors@R: c(
     person(given = "Tanguy", 
            family = "Barthelemy", 
@@ -28,9 +28,9 @@ Description: Tool for generating quality reports from cruncher outputs
     can be downloaded here:
     <https://github.com/jdemetra/jwsacruncher/releases>.
 License: EUPL
-URL: https://github.com/InseeFr/JDCruncheR,
-    https://inseefr.github.io/JDCruncheR/
-BugReports: https://github.com/InseeFr/JDCruncheR/issues
+URL: https://github.com/InseeFr/rjd3qr,
+    https://inseefr.github.io/rjd3qr/
+BugReports: https://github.com/InseeFr/rjd3qr/issues
 Depends:
     R (>= 4.1)
 Imports:

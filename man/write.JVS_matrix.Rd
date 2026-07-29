@@ -15,12 +15,13 @@
 \arguments{
 \item{x}{a \code{\link{JVS_matrix}} object to export.}
 
-\item{format}{output format. One of \code{"csv"} or \code{"xlsx"}. The default is \code{"csv"}.}
+\item{format}{output format. One of \code{"csv"} or \code{"xlsx"}. The default is
+\code{"csv"}.}
 
 \item{export_dir}{export directory.}
 
-\item{overwrite}{logical indicating whether to create a CSV or Excel file if it
-doesn't exist yet (\code{create = TRUE} by default)}
+\item{overwrite}{logical indicating whether to create a CSV or Excel file if
+it doesn't exist yet (\code{overwrite = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }
@@ -37,14 +38,27 @@ To export several quality reports in CSV or Excel files
 \item csv files will be exported with the package 'utils'.
 }
 }
-\seealso{
-Other QR_matrix functions:
-\code{\link[=extract_QR]{extract_QR()}},
-\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
-\code{\link{sort}},
-\code{\link[=weighted_score]{weighted_score()}},
-\code{\link[=write]{write()}},
-\code{\link[=write.QR_matrix]{write.QR_matrix()}},
-\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
+\examples{
+# Path leading to the needed CSV files demetra_m and series
+dir_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/WS_world/Output/SAProcessing-1"
+)
+
+# Extract the JVS report from the CSV files
+JVS <- extract_JVS(dir = dir_path)
+
+# Export of the JVS report in an Excel file
+write(JVS, format = "xlsx", export_dir = tempdir(), overwrite = TRUE)
+
+# Export of the JVS report in a CSV file
+write(JVS, format = "csv", export_dir = tempdir(), overwrite = TRUE)
+
 }
-\concept{QR_matrix functions}
+\seealso{
+\link[=fr-write.JVS_matrix]{Traduction française}
+
+Other JVS_matrix functions:
+\code{\link[=extract_JVS]{extract_JVS()}}
+}
+\concept{JVS_matrix functions}
