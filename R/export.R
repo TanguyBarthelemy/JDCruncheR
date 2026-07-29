@@ -428,7 +428,7 @@ write.JVS_matrix <- function(
     if (dir.exists(file)) {
         file <- file.path(file, "JobVacancySurveyQR.csv")
     } else if (!dir.exists(dirname(path = file))) {
-        dir.create(dataset_dir, recursive = TRUE)
+        dir.create(dirname(path = file), recursive = TRUE)
     }
 
     extension <- tools::file_ext(file)

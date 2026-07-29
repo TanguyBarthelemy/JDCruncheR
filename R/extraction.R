@@ -301,6 +301,9 @@ extractLeaster <- function(demetra_m) {
     return(leaster)
 }
 
+#' @importFrom stats acf
+#' @importFrom stats na.omit
+#' @importFrom stats na.pass
 extractAutoCorr <- function(sa) {
     auto_corr <- apply(
         X = sa[, -1L, drop = FALSE],
