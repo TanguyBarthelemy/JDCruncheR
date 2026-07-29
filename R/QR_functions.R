@@ -1430,7 +1430,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             FUN = function(x) {
                 if (!is.QR_matrix(x)) {
                     stop(
-                        "All arguments of this function must be QR_matrix objects",
+                        "All arguments of this function must be",
+                        " QR_matrix objects",
                         call. = FALSE
                     )
                 }
