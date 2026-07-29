@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-07-29
+
 ### Changed
 
 * The `write` method for `JVS_matrix` object now works with a `file` argument instead of `export_dir` and `format`.
@@ -35,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * New vignette (in English and in French) to illustrate the JVS plug-in functionnalities
 * New documentation, now also available in French: write functions (generic and specific), JVS classes, `get_thresholds`, `set_thresholds`
 * New documentation, available in French and in English: `extract_JVS`
-
 
 ## [0.4.0] - 2026-06-15
 
@@ -194,7 +195,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
 * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
 
-[Unreleased]: https://github.com/InseeFr/rjd3qr/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/InseeFr/rjd3qr/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/InseeFr/rjd3qr/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/InseeFr/rjd3qr/compare/v0.3.6...v0.4.0
 [0.3.6]: https://github.com/InseeFr/rjd3qr/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/InseeFr/rjd3qr/compare/v0.3.4...v0.3.5
