@@ -214,31 +214,11 @@ For the tests:
 - Presence of TD effects
 - Residual Seasonality in SA Series F-test
 - Residual TD Effect
+- Quality for TS
 
 Very slight differences due to different thresholds between the interface and the cruncher.
 
 
-### Log transformation, ARIMA Model, Leapyear, MovingHoliday, NbTD, Noutliers, Outlier1, Outlier2, Outlier3, Q-stat for X13, Stage 2 Henderson Filter, Final Henderson Filter, Seasonal.Filter
-
-No differences.
-
-
-### Irregular Standard Deviation
-
-There are slight differences between v3 (which uses the correct number of degrees of freedom) and the R code, which uses `df = 1` (with the `sd()` function).
-In future versions of the JVS plug-in, the results will be identical.
-
-
-### Quality for TS, Max adj, Autocorrelation of order 1 of the SA series
-
-No differences.
-
-
-### Normal test
-
-The test is carried out using base R and may show slight differences (to within 10**4).
-
-
-### Negative and significant autocorrelation
+### Log transformation, ARIMA Model, Leapyear, MovingHoliday, NbTD, Noutliers, Outlier1, Outlier2, Outlier3, Q-stat for X13, Stage 2 Henderson Filter, Final Henderson Filter, Seasonal.Filter, Irregular Standard Deviation, Max adj, Autocorrelation of order 1 of the SA series, Normal test, Negative and significant autocorrelation
 
 No differences.
