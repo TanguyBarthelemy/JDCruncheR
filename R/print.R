@@ -143,12 +143,13 @@ print.QR_matrix <- function(
         }
         cat("\n")
         if (length(names_var_values_sup) > 1L) {
+            pat <- ngettext(
+                length(names_var_values_sup),
+                "There's no additionnal variable in the values matrix",
+                "The variables exclusively found in the values matrix are:\n%s"
+            )
             cat(sprintf(
-                ngettext(
-                    length(names_var_values_sup),
-                    "There's no additionnal variable in the values matrix",
-                    "The variables exclusively found in the values matrix are:\n%s"
-                ),
+                pat,
                 names_var_values_sup
             ))
         }
