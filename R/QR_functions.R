@@ -1,18 +1,3 @@
-recode_vec <- function(x, recode_variable) {
-    if (is.factor(x)) {
-        return(recode_vec(
-            x = as.character(x),
-            recode_variable = recode_variable
-        ))
-    }
-    for (index in seq_along(recode_variable)) {
-        values_from <- names(recode_variable)[index]
-        values_to <- recode_variable[index]
-        x[x == values_from] <- values_to
-    }
-    return(x)
-}
-
 #' @title Calcul d'un score global
 #'
 #' @description
@@ -1454,8 +1439,10 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             FUN.VALUE = character(1L)
         )
         list_formula_unique <- unique(list_formula)
-        if (length(list_formula) != length(list_QR_matrix)
-            || length(list_formula_unique) != 1L) {
+        if (
+            length(list_formula) != length(list_QR_matrix) ||
+                length(list_formula_unique) != 1L
+        ) {
             stop(
                 "All QR_matrices must have the same score formulas.",
                 call. = FALSE
@@ -1492,4 +1479,19 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         score_formula = score_formula
     )
     return(QR)
+}
+
+recode_vec <- function(x, recode_variable) {
+    if (is.factor(x)) {
+        return(recode_vec(
+            x = as.character(x),
+            recode_variable = recode_variable
+        ))
+    }
+    for (index in seq_along(recode_variable)) {
+        values_from <- names(recode_variable)[index]
+        values_to <- recode_variable[index]
+        x[x == values_from] <- values_to
+    }
+    return(x)
 }

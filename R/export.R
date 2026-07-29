@@ -1,181 +1,3 @@
-#' @importFrom openxlsx createStyle
-header_style <- openxlsx::createStyle(
-    fontColour = "#ffffff",
-    fgFill = "#4F80BD",
-    textDecoration = "Bold",
-    borderColour = "grey30"
-)
-
-#' @importFrom openxlsx createStyle
-severe_style <- openxlsx::createStyle(
-    fontColour = "#ffffff",
-    fgFill = "black",
-    bgFill = "black",
-    borderColour = "grey30",
-    border = "TopBottomLeftRight"
-)
-
-#' @importFrom openxlsx createStyle
-bad_style <- openxlsx::createStyle(
-    fontColour = "#9C0006",
-    fgFill = "#FFC7CE",
-    bgFill = "#FFC7CE",
-    borderColour = "grey30",
-    border = "TopBottomLeftRight"
-)
-
-#' @importFrom openxlsx createStyle
-good_style <- openxlsx::createStyle(
-    fontColour = "#006100",
-    fgFill = "#C6EFCE",
-    bgFill = "#C6EFCE",
-    borderColour = "grey30",
-    border = "TopBottomLeftRight"
-)
-
-#' @importFrom openxlsx createStyle
-uncertain_style <- openxlsx::createStyle(
-    fontColour = "#9c6a00",
-    fgFill = "#ffeec7",
-    bgFill = "#ffeec7",
-    borderColour = "grey30",
-    border = "TopBottomLeftRight"
-)
-
-#' @importFrom openxlsx createStyle
-border_style <- openxlsx::createStyle(
-    border = "TopBottomLeftRight",
-    borderColour = "grey30"
-)
-
-#' @importFrom openxlsx createStyle
-rowname_style <- openxlsx::createStyle(
-    fontColour = "black",
-    fgFill = "orange",
-    textDecoration = "bold"
-)
-
-#' @importFrom openxlsx conditionalFormatting
-#' @importFrom openxlsx addStyle
-apply_BQ_style <- function(
-    wb,
-    x,
-    values_sheet = NULL,
-    modalities_sheet = NULL
-) {
-    if (!is.null(modalities_sheet)) {
-        # Apply BQ style cell Modalities
-        openxlsx::conditionalFormatting(
-            wb = wb,
-            sheet = modalities_sheet,
-            rule = '=="Bad"',
-            style = bad_style,
-            cols = seq_len(ncol(x[["modalities"]])),
-            rows = 1L + seq_len(nrow(x[["modalities"]]))
-        )
-        openxlsx::conditionalFormatting(
-            wb = wb,
-            sheet = modalities_sheet,
-            rule = '=="Good"',
-            style = good_style,
-            cols = seq_len(ncol(x[["modalities"]])),
-            rows = 1L + seq_len(nrow(x[["modalities"]]))
-        )
-        openxlsx::conditionalFormatting(
-            wb = wb,
-            sheet = modalities_sheet,
-            rule = '=="Uncertain"',
-            style = uncertain_style,
-            cols = seq_len(ncol(x[["modalities"]])),
-            rows = 1L + seq_len(nrow(x[["modalities"]]))
-        )
-        openxlsx::conditionalFormatting(
-            wb = wb,
-            sheet = modalities_sheet,
-            rule = '=="Severe"',
-            style = severe_style,
-            cols = seq_len(ncol(x[["modalities"]])),
-            rows = 1L + seq_len(nrow(x[["modalities"]]))
-        )
-
-        # Appliquer les styles aux bordures
-        openxlsx::addStyle(
-            wb = wb,
-            sheet = modalities_sheet,
-            style = border_style,
-            cols = seq_len(ncol(x[["modalities"]])),
-            rows = 1L + seq_len(nrow(x[["modalities"]])),
-            gridExpand = TRUE
-        )
-
-        # Appliquer les styles aux noms de ligne (1ère colonne)
-        openxlsx::addStyle(
-            wb = wb,
-            sheet = modalities_sheet,
-            style = rowname_style,
-            cols = 1L,
-            rows = 1L + seq_len(nrow(x[["modalities"]])),
-            gridExpand = TRUE
-        )
-    }
-
-    if (!is.null(values_sheet)) {
-        # Appliquer les styles aux bordures
-        openxlsx::addStyle(
-            wb = wb,
-            sheet = values_sheet,
-            style = border_style,
-            cols = seq_len(ncol(x[["values"]])),
-            rows = 1L + seq_len(nrow(x[["values"]])),
-            gridExpand = TRUE
-        )
-
-        # Apply BQ style cell Modalities
-        for (id_col in seq_len(ncol(x[["values"]]))) {
-            name_col <- colnames(x[["values"]])[id_col]
-            if (name_col %in% colnames(x[["modalities"]])) {
-                for (id_row in seq_len(nrow(x[["values"]]))) {
-                    cell_value <- as.character(x[["modalities"]][
-                        id_row,
-                        name_col
-                    ])
-                    cell_style <- switch(
-                        cell_value,
-                        Bad = bad_style,
-                        Good = good_style,
-                        Uncertain = uncertain_style,
-                        Severe = severe_style,
-                        NULL
-                    )
-                    if (!is.null(cell_style)) {
-                        openxlsx::addStyle(
-                            wb = wb,
-                            sheet = values_sheet,
-                            style = cell_style,
-                            rows = id_row + 1L,
-                            cols = id_col,
-                            gridExpand = FALSE
-                        )
-                    }
-                }
-            }
-        }
-
-        # Appliquer les styles aux noms de ligne (1ère colonne)
-        openxlsx::addStyle(
-            wb = wb,
-            sheet = values_sheet,
-            style = rowname_style,
-            cols = 1L,
-            rows = 1L + seq_len(nrow(x[["values"]])),
-            gridExpand = TRUE
-        )
-    }
-
-    return(wb)
-}
-
-
 #' @title Ecriture de bilans qualités dans des fichiers
 #'
 #' @param x Objet de classe \code{\link{JVS_matrix}}, \code{\link{QR_matrix}} ou
@@ -436,14 +258,21 @@ write.JVS_matrix <- function(
         file <- paste0(file, ".csv")
         extension <- "csv"
     } else if (!extension %in% c("csv", "xlsx")) {
-        stop(extension, " is not accepted. ",
-             "Only .csv and .xlsx format are accepted.")
+        stop(
+            extension,
+            " is not accepted. ",
+            "Only .csv and .xlsx format are accepted.",
+            call. = FALSE
+        )
     }
 
     if (file.exists(file) && !overwrite) {
         if (verbose) {
-            warning("The file already exists. ",
-                    "To overwrite it, use the argument `overwrite = TRUE`.")
+            warning(
+                "The file already exists. ",
+                "To overwrite it, use the argument `overwrite = TRUE`.",
+                call. = FALSE
+            )
         }
         return(invisible(x))
     }
@@ -483,7 +312,7 @@ write.JVS_matrix <- function(
             overwrite = overwrite
         )
     } else {
-        stop("Wrong extension.")
+        stop("Wrong extension.", call. = FALSE)
     }
     return(invisible(x))
 }
@@ -642,4 +471,181 @@ write.mQR_matrix <- function(
     }
 
     return(invisible(x))
+}
+
+#' @importFrom openxlsx createStyle
+header_style <- openxlsx::createStyle(
+    fontColour = "#ffffff",
+    fgFill = "#4F80BD",
+    textDecoration = "Bold",
+    borderColour = "grey30"
+)
+
+#' @importFrom openxlsx createStyle
+severe_style <- openxlsx::createStyle(
+    fontColour = "#ffffff",
+    fgFill = "black",
+    bgFill = "black",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+
+#' @importFrom openxlsx createStyle
+bad_style <- openxlsx::createStyle(
+    fontColour = "#9C0006",
+    fgFill = "#FFC7CE",
+    bgFill = "#FFC7CE",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+
+#' @importFrom openxlsx createStyle
+good_style <- openxlsx::createStyle(
+    fontColour = "#006100",
+    fgFill = "#C6EFCE",
+    bgFill = "#C6EFCE",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+
+#' @importFrom openxlsx createStyle
+uncertain_style <- openxlsx::createStyle(
+    fontColour = "#9c6a00",
+    fgFill = "#ffeec7",
+    bgFill = "#ffeec7",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+
+#' @importFrom openxlsx createStyle
+border_style <- openxlsx::createStyle(
+    border = "TopBottomLeftRight",
+    borderColour = "grey30"
+)
+
+#' @importFrom openxlsx createStyle
+rowname_style <- openxlsx::createStyle(
+    fontColour = "black",
+    fgFill = "orange",
+    textDecoration = "bold"
+)
+
+#' @importFrom openxlsx conditionalFormatting
+#' @importFrom openxlsx addStyle
+apply_BQ_style <- function(
+    wb,
+    x,
+    values_sheet = NULL,
+    modalities_sheet = NULL
+) {
+    if (!is.null(modalities_sheet)) {
+        # Apply BQ style cell Modalities
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Bad"',
+            style = bad_style,
+            cols = seq_len(ncol(x[["modalities"]])),
+            rows = 1L + seq_len(nrow(x[["modalities"]]))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Good"',
+            style = good_style,
+            cols = seq_len(ncol(x[["modalities"]])),
+            rows = 1L + seq_len(nrow(x[["modalities"]]))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Uncertain"',
+            style = uncertain_style,
+            cols = seq_len(ncol(x[["modalities"]])),
+            rows = 1L + seq_len(nrow(x[["modalities"]]))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Severe"',
+            style = severe_style,
+            cols = seq_len(ncol(x[["modalities"]])),
+            rows = 1L + seq_len(nrow(x[["modalities"]]))
+        )
+
+        # Appliquer les styles aux bordures
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = modalities_sheet,
+            style = border_style,
+            cols = seq_len(ncol(x[["modalities"]])),
+            rows = 1L + seq_len(nrow(x[["modalities"]])),
+            gridExpand = TRUE
+        )
+
+        # Appliquer les styles aux noms de ligne (1ère colonne)
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = modalities_sheet,
+            style = rowname_style,
+            cols = 1L,
+            rows = 1L + seq_len(nrow(x[["modalities"]])),
+            gridExpand = TRUE
+        )
+    }
+
+    if (!is.null(values_sheet)) {
+        # Appliquer les styles aux bordures
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = values_sheet,
+            style = border_style,
+            cols = seq_len(ncol(x[["values"]])),
+            rows = 1L + seq_len(nrow(x[["values"]])),
+            gridExpand = TRUE
+        )
+
+        # Apply BQ style cell Modalities
+        for (id_col in seq_len(ncol(x[["values"]]))) {
+            name_col <- colnames(x[["values"]])[id_col]
+            if (name_col %in% colnames(x[["modalities"]])) {
+                for (id_row in seq_len(nrow(x[["values"]]))) {
+                    cell_value <- as.character(x[["modalities"]][
+                        id_row,
+                        name_col
+                    ])
+                    cell_style <- switch(
+                        cell_value,
+                        Bad = bad_style,
+                        Good = good_style,
+                        Uncertain = uncertain_style,
+                        Severe = severe_style,
+                        NULL
+                    )
+                    if (!is.null(cell_style)) {
+                        openxlsx::addStyle(
+                            wb = wb,
+                            sheet = values_sheet,
+                            style = cell_style,
+                            rows = id_row + 1L,
+                            cols = id_col,
+                            gridExpand = FALSE
+                        )
+                    }
+                }
+            }
+        }
+
+        # Appliquer les styles aux noms de ligne (1ère colonne)
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = values_sheet,
+            style = rowname_style,
+            cols = 1L,
+            rows = 1L + seq_len(nrow(x[["values"]])),
+            gridExpand = TRUE
+        )
+    }
+
+    return(wb)
 }

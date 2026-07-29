@@ -317,7 +317,8 @@ extractAutoCorr <- function(sa) {
                 na.action = na.pass
             )
             return(.auto_corr$acf[2L])
-        })
+        }
+    )
     return(list(values = auto_corr))
 }
 
@@ -625,7 +626,10 @@ extractARIMA <- function(demetra_m) {
     ))
 }
 
-extractStatQ <- function(demetra_m, thresholds = getOption("rjd3qr.thresholds")) {
+extractStatQ <- function(
+    demetra_m,
+    thresholds = getOption("rjd3qr.thresholds")
+) {
     q_stat <- find_variable(
         demetra_m,
         pattern = "(^m\\.statistics\\.q$)|(^q$)",
