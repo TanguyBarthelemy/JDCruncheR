@@ -166,16 +166,16 @@ To export the JVS Quality Report, you need to use the writing function. The repo
 write(JVS, file = "path/to/the/export/directory", overwrite = TRUE)
 ```
 
-By default, the file is names "JobVacancySurveyQR.csv". To change it, you can specify a name in the path of the file argument:
+By default, the file is names "JobVacancySurveyQR.csv". To change it, you can specify a name in the path of the `file` argument:
 
 ```{r, echo = TRUE, eval = FALSE}
-write(JVS, export_dir = "path/to/the/export/directory/file_name.csv", overwrite = TRUE)
+write(JVS, file = "path/to/the/export/directory/file_name.csv", overwrite = TRUE)
 ```
 
-The report can also be exported as a .xlsx file. In this case, it is necessary to specify it in the file argument:
+The report can also be exported as a .xlsx file. In this case, it is necessary to specify it in the `file` argument:
 
 ```{r, echo = TRUE, eval = FALSE}
-write(JVS, export_dir = "path/to/the/export/directory/file_name.xlsx", overwrite = TRUE)
+write(JVS, file = "path/to/the/export/directory/file_name.xlsx", overwrite = TRUE)
 ```
 
 
