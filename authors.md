@@ -22,12 +22,12 @@ Source:
 
 Barthelemy T, Delaune E, Quartier-la-Tente A, Smyk A (2026).
 *JDCruncheR: 'JDemetra+' Quality Report Generator*. R package version
-0.4.1, <https://github.com/InseeFr/rjd3qr>.
+0.4.1.9000, <https://github.com/InseeFr/rjd3qr>.
 
     @Manual{,
       title = {JDCruncheR: 'JDemetra+' Quality Report Generator},
       author = {Tanguy Barthelemy and Eulalie Delaune and Alain Quartier-la-Tente and Anna Smyk},
       year = {2026},
-      note = {R package version 0.4.1},
+      note = {R package version 0.4.1.9000},
       url = {https://github.com/InseeFr/rjd3qr},
     }
